@@ -1,0 +1,12 @@
+<h1>Tutu</h1>
+<nav>
+	<ul>
+    <% if current_passanger %>
+      <% if current_passanger.admin? %>
+        <li><%= link_to 'Админка', admin_path %></li>
+      <% end %>
+      <li><%= link_to 'Мои билеты', tickets_path %></li>
+    <% end %>
+		<li><%= link_to 'Поиск Билета', search_path %></li>
+	</ul>
+</nav>
