@@ -1,6 +1,6 @@
 #<================== Родительский класс Поезд: ========================================================================>
 
-require_relative "module_manufacturer.rb"
+require_relative 'modules.rb'
 # include Manufacturer
 # Manufacturer.hi("Melissandra")
 

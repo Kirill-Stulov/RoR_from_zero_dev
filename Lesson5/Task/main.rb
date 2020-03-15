@@ -1,4 +1,5 @@
-﻿require_relative 'train.rb'
+﻿require_relative 'modules'
+require_relative 'train.rb'
 require_relative 'train_passenger.rb'
 require_relative 'train_cargo.rb'
 
