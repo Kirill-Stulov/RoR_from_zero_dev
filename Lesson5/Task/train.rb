@@ -17,13 +17,13 @@ class Train
   @@train_to_delete_wagon = @@tr_names.select{|obj| obj.number == tr_input}
 
 
-	def initialize(number, type)                               # Имеет, тип type, который указывается при создании: грузовой, пассажирский и номер number.
+	def initialize(number, type, manufacturer)                               # Имеет, тип type, который указывается при создании: грузовой, пассажирский и номер number.
 		@type = type
 		@number = number.to_i
 		@speed = 0
 		@wagon = []                                              # также при создании объекта класса train будет инициализироваться массив вагонов поезда @wagon
 		@route = []                                                # и массив маршрутов поезда @route
-    @manufacturer = ""
+    @manufacturer = manufacturer                                 # производитель для метода из modules.rb, который будет позволять указывать и менять это значение
 		puts "Собран новый поезд №#{@number}, типа #{@type}"
 	end
 

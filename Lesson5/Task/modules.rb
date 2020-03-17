@@ -7,10 +7,10 @@ module Manufacturer
 		puts "Hi dear #{name}!"
 	end
 
-	def set                               # КАК ЭТОТ МЕТОД ИСПОЛЬЗОВАТЬ В main_temp.rb !??? (в решении от Thinknetika по уроку 5 этот метод нигде не использван, хотя сам модуль подключен)      # метод для указания производтеля - используем в initialize train.rb и в initialize wagon.rb
+	def set_manufacturer                              # КАК ЭТОТ МЕТОД ИСПОЛЬЗОВАТЬ В main_temp.rb !??? (в решении от Thinknetika по уроку 5 этот метод нигде не использван, хотя сам модуль подключен)      # метод для указания производтеля - используем в initialize train.rb и в initialize wagon.rb
 		puts "Укажите название производителя"
-		@manuf_name = gets.chomp.to_s
-		puts "Указано название производителя - #{@manuf_name}"
+		@manufacturer = gets.chomp.to_s
+		puts "Указано название производителя - #{@manufacturer}"
 	end
 
 
