@@ -103,11 +103,11 @@ loop do
 		if train_type == 1 && @@tr_names.empty? #== true   # если выбрано 1 и это первый поезд, т.е в массиве @@tr_names еще нет ни одной записи. Убрал true - это излишне.
 			@@tr_names << Train.new(1, :passenger, @manuf_name)            # то просто закидываем в массив пассажирский поезд под номером 1
 		elsif train_type == 1 && !@@tr_names.empty? #== false 	 # если выбрано 1 и в массиве уже не пусто. Заменил false на ! перед выражением  @@tr_names.empty. ! означет not
-			@@tr_names << Train.new(@@tr_names.last.number + 1, :passenger)   # то закидывем в массив пассажирский поезд, создавая ему номер на основе номера последнего поезда в массиве +1. номер поезда вывел с помощью attr_accessor :number в шапке файла train.rb 
+			@@tr_names << Train.new(@@tr_names.last.number + 1, :passenger, @manuf_name)   # то закидывем в массив пассажирский поезд, создавая ему номер на основе номера последнего поезда в массиве +1. номер поезда вывел с помощью attr_accessor :number в шапке файла train.rb 
 		elsif train_type == 2 && @@tr_names.empty? == true                   # здесь бы proc запилить чтоб не повторяться, но это не критично вродь
-			@@tr_names << Train.new(1, :cargo)
+			@@tr_names << Train.new(1, :cargo, @manuf_name)
 		elsif train_type == 2 && @@tr_names.empty? == false
-			@@tr_names << Train.new(@@tr_names.last.number + 1, :cargo)
+			@@tr_names << Train.new(@@tr_names.last.number + 1, :cargo, @manuf_name)
 		elsif train_type == 3
 			break                                   #возвращаемся в основное меню
 		else
@@ -119,7 +119,23 @@ loop do
 
 	while choice == 4
 			puts "<================ Добавлнение/обновление производителя поезда ================>"
-			
+			puts "1 -> Добавить или обновить производителя поезда"
+			puts "2 -> Назад в основное меню"
+			reply = gets.chomp.to_i
+			if reply == 1 && @@tr_names.empty?
+				puts "Еще не создано ни одного поезда!"
+			elsif reply == 1 && !@@tr_names.empty?
+				puts "Выберите поезд из списка, чтобы добавить производителя"
+				@@tr_names.map{|obj| obj.type_full}  							# показываем список поездов по номеру и типу. Метод type из train.rb
+				tr_input == gets.chomp.to_i
+
+				# IMPLEMENT SELECTION OF TRAIN AND set_manufacturer METHOD FROM modules.rb
+			elsif reply == 2
+				break
+			else
+				puts "Можно выбрать только 1 или 2 "
+			end
+		end
 
 	while choice == 5
 			puts "<================ Добавлнение/удаление вагона к поезду ================>"
