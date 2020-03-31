@@ -1,4 +1,4 @@
-﻿require_relative 'modules'
+﻿# require_relative 'modules.rb'
 require_relative 'train.rb'
 require_relative 'train_passenger.rb'
 require_relative 'train_cargo.rb'
@@ -13,6 +13,7 @@ require_relative 'wagon_passenger.rb'
 # <============================================== Интерфейс пользователя! ==========================================================>
 class Menu < Train
 # include Manufacturer  он уже подключен в Train, от которого наследует Menu
+  include Manufacturer
 @st_names = []                #1 stations_names массив в котором храним объекты с именами станций при выборе 1
 @@tr_names = []                #3 массив в котором храним объекты с именами поездов при выборе 3
 #@@st_and_tr = []               #6 массив хешей содержащий станции и поезда
@@ -120,17 +121,29 @@ loop do
 	while choice == 4
 			puts "<================ Добавлнение/обновление производителя поезда ================>"
 			puts "1 -> Добавить или обновить производителя поезда"
-			puts "2 -> Назад в основное меню"
+			puts "2 -> Показать поезда и производителей"
+			puts "3 -> Назад в основное меню"
 			reply = gets.chomp.to_i
 			if reply == 1 && @@tr_names.empty?
 				puts "Еще не создано ни одного поезда!"
 			elsif reply == 1 && !@@tr_names.empty?
-				puts "Выберите поезд из списка, чтобы добавить производителя"
-				@@tr_names.map{|obj| obj.type_full}  							# показываем список поездов по номеру и типу. Метод type из train.rb
-				tr_input == gets.chomp.to_i
-
-				# IMPLEMENT SELECTION OF TRAIN AND set_manufacturer METHOD FROM modules.rb
-			elsif reply == 2
+				set_manufacturer
+				# puts "Выберите поезд из списка, чтобы добавить производителя"
+				# @@tr_names.map{|obj| obj.type_full}  							# показываем список поездов по номеру и типу. Метод type из train.rb
+				# @tr_input = gets.chomp.to_i
+				# @@choosen_tr = @@tr_names.select{|obj| obj.number == @tr_input} # выбранный пользователем поезд находим в массиве @@tr_names по аналогии меню №5 где добавляем вагон к поезду. Находить поезд нужно т.к tr_input это не тот объект с которым можно работать, а по сути ссылка, по которой находим объект.
+				# puts "Выбран поезд №#{@tr_input}"
+				# puts "Введите название производителя:"
+				# @manuf_input = gets.chomp
+				# @@choosen_tr.collect{|obj| obj.manufacturer = @manuf_input }
+				# puts "Поезду №#{@tr_input} установлен производитель -> #{@manuf_input}"
+				# p @@choosen_tr
+				# !!!!!!!!теперь вынесем это (строка с 131 по 140) в метод set_manufacturer в modules.rb   # 
+			elsif reply == 2 && @@tr_names.empty?
+				puts "Еще не создано ни одного поезда!"
+			elsif reply == 2 && !@@tr_names.empty?
+				@@tr_names.map{|obj| obj.type_full}
+			elsif reply == 3
 				break
 			else
 				puts "Можно выбрать только 1 или 2 "
@@ -187,7 +200,7 @@ loop do
 					# wagon1 = Wagon.new(55, :passenger)                                            # !!! мне тут вагоны нужно автоматически создавать через Wagon.new и класть их в @@wg_names
 					@@wg_input = gets.chomp.to_i
 					@@wagon_to_add = @@wg_names.select{|obj| obj.number == @@wg_input}              # это дублируется в train # если уберу этот дубликат тут, то не сработает @@train_to_add_wagon[0].add_wagon(@@wagon_to_add[0])   # присваиваем переменной wagon_to_add значение объекта из массива с поездами, объект находим по аттрибуту -number 
-					@@train_to_add_wagon = @@tr_names.select{|obj| obj.number == @@tr_input}  	    # это дублируется в train # если уберу этот дубликат тут, то не сработает @@train_to_add_wagon[0].add_wagon(@@wagon_to_add[0])      # присваиваем переменной train_to_add_wagon значение объекта из массива с поездами, объект находим по аттрибуту -number                 # ТУТ ВМЕСТО @@tr_input получаю объект из массива с поездами (@@@tr_names) в котором есть обЪект с именем равным @@@tr_input! Это новая переменная @@train_to_add_wagon. Далее на нем используем метод add_wagon из train.rb											
+					@@train_to_add_wagon = @@tr_names.select{|obj| obj.number == @@tr_input}  	    # это дублируется в train # если уберу этот дубликат тут, то не сработает @@train_to_add_wagon[0].add_wagon(@@wagon_to_add[0])      # присваиваем переменной train_to_add_wagon значение объекта из массива с поездами, объект находим по аттрибуту -number                 # ТУТ ВМЕСТО @@tr_input получаю объект из массива с поездами (@@@tr_names) в котором есть обЪект с именем равным @@@tr_input! Это новая переменная @@train_to_add_wagon. Далее на нем используем метод add_wagon из train.rb
 					if !@@train_to_add_wagon.any?{|obj| obj.wagon.include?(@@wg_input)}					# проверка что поезд не содержит вагон, который мы пытаемся добавить,т.е защита от добавления того же номера вагона
 						@@train_to_add_wagon[0].add_wagon(@@wagon_to_add[0])						    # т.к он заключен в массив, использовать нужно через [0], сам объект тут является первым и единственным эелементом массива
 					else
