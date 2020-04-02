@@ -1,4 +1,4 @@
-﻿# require_relative 'modules.rb'
+﻿require_relative 'modules.rb'
 require_relative 'train.rb'
 require_relative 'train_passenger.rb'
 require_relative 'train_cargo.rb'
@@ -100,7 +100,7 @@ loop do
 		puts "2 -> грузовой"
 		puts "3 -> назад в основное меню"
 		train_type = gets.chomp.to_i
-		# Manufacturer.set # тут вызываем метод set из модуля Manufacturer файла module_manufacturer.rb   !!! ЭТО ДОЛЖНО БЫЬТ В train.rb а не тут
+		Manufacturer.set_manufacturer # тут вызываем метод set из модуля Manufacturer файла module_manufacturer.rb   !!! ЭТО ДОЛЖНО БЫЬТ В train.rb а не тут
 		if train_type == 1 && @@tr_names.empty? #== true   # если выбрано 1 и это первый поезд, т.е в массиве @@tr_names еще нет ни одной записи. Убрал true - это излишне.
 			@@tr_names << Train.new(1, :passenger, @manuf_name)            # то просто закидываем в массив пассажирский поезд под номером 1
 		elsif train_type == 1 && !@@tr_names.empty? #== false 	 # если выбрано 1 и в массиве уже не пусто. Заменил false на ! перед выражением  @@tr_names.empty. ! означет not
@@ -127,7 +127,13 @@ loop do
 			if reply == 1 && @@tr_names.empty?
 				puts "Еще не создано ни одного поезда!"
 			elsif reply == 1 && !@@tr_names.empty?
-				set_manufacturer
+				puts "Выберите поезд из списка, чтобы добавить производителя"
+				@@tr_names.map{|obj| obj.type_full}  							
+				@tr_input = gets.chomp.to_i
+				@@choosen_tr = @@tr_names.select{|obj| obj.number == @tr_input}
+				@@choosen_tr.set_manufacturer
+
+				# Manufacturer.set_manufacturer
 				# puts "Выберите поезд из списка, чтобы добавить производителя"
 				# @@tr_names.map{|obj| obj.type_full}  							# показываем список поездов по номеру и типу. Метод type из train.rb
 				# @tr_input = gets.chomp.to_i
