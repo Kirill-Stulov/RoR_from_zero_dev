@@ -13,7 +13,7 @@ require_relative 'wagon_passenger.rb'
 # <============================================== Интерфейс пользователя! ==========================================================>
 class Menu < Train
 # include Manufacturer  он уже подключен в Train, от которого наследует Menu
-  include Manufacturer
+   # include Manufacturer
 @st_names = []                #1 stations_names массив в котором храним объекты с именами станций при выборе 1
 @@tr_names = []                #3 массив в котором храним объекты с именами поездов при выборе 3
 #@@st_and_tr = []               #6 массив хешей содержащий станции и поезда
@@ -100,7 +100,6 @@ loop do
 		puts "2 -> грузовой"
 		puts "3 -> назад в основное меню"
 		train_type = gets.chomp.to_i
-		Manufacturer.set_manufacturer # тут вызываем метод set из модуля Manufacturer файла module_manufacturer.rb   !!! ЭТО ДОЛЖНО БЫЬТ В train.rb а не тут
 		if train_type == 1 && @@tr_names.empty? #== true   # если выбрано 1 и это первый поезд, т.е в массиве @@tr_names еще нет ни одной записи. Убрал true - это излишне.
 			@@tr_names << Train.new(1, :passenger, @manuf_name)            # то просто закидываем в массив пассажирский поезд под номером 1
 		elsif train_type == 1 && !@@tr_names.empty? #== false 	 # если выбрано 1 и в массиве уже не пусто. Заменил false на ! перед выражением  @@tr_names.empty. ! означет not
@@ -128,23 +127,10 @@ loop do
 				puts "Еще не создано ни одного поезда!"
 			elsif reply == 1 && !@@tr_names.empty?
 				puts "Выберите поезд из списка, чтобы добавить производителя"
-				@@tr_names.map{|obj| obj.type_full}  							
-				@tr_input = gets.chomp.to_i
-				@@choosen_tr = @@tr_names.select{|obj| obj.number == @tr_input}
-				@@choosen_tr.set_manufacturer
-
-				# Manufacturer.set_manufacturer
-				# puts "Выберите поезд из списка, чтобы добавить производителя"
-				# @@tr_names.map{|obj| obj.type_full}  							# показываем список поездов по номеру и типу. Метод type из train.rb
-				# @tr_input = gets.chomp.to_i
-				# @@choosen_tr = @@tr_names.select{|obj| obj.number == @tr_input} # выбранный пользователем поезд находим в массиве @@tr_names по аналогии меню №5 где добавляем вагон к поезду. Находить поезд нужно т.к tr_input это не тот объект с которым можно работать, а по сути ссылка, по которой находим объект.
-				# puts "Выбран поезд №#{@tr_input}"
-				# puts "Введите название производителя:"
-				# @manuf_input = gets.chomp
-				# @@choosen_tr.collect{|obj| obj.manufacturer = @manuf_input }
-				# puts "Поезду №#{@tr_input} установлен производитель -> #{@manuf_input}"
-				# p @@choosen_tr
-				# !!!!!!!!теперь вынесем это (строка с 131 по 140) в метод set_manufacturer в modules.rb   # 
+				@@tr_names.map{|obj| obj.type_full}  				              # показываем список поездов по номеру и типу. Метод type из train.rb			
+				@tr_num = gets.chomp.to_i
+				@@choosen_tr = @@tr_names.select{|obj| obj.number == @tr_num}      # выбранный пользователем поезд находим в массиве @@tr_names по аналогии меню №5 где добавляем вагон к поезду. Находить поезд нужно т.к tr_input это не тот объект с которым можно работать, а по сути ссылка, по которой находим объект.
+				Manufacturer.set_manufacturer(@@choosen_tr, @tr_num)                 # с помощью подключенного метода класса set_manufacturer (из модуля Manufacturers) меняем пареметр manufacturer у объекта @@choosen_tr. А @number передаем т.к у нас его нет в методе в модуле 
 			elsif reply == 2 && @@tr_names.empty?
 				puts "Еще не создано ни одного поезда!"
 			elsif reply == 2 && !@@tr_names.empty?
@@ -157,7 +143,7 @@ loop do
 		end
 
 	while choice == 5
-			puts "<================ Добавлнение/удаление вагона к поезду ================>"
+			puts "<================ Добавление/удаление вагона к поезду ================>"
 			puts "1 -> Показать поезда с вагонами"
 			puts "2 -> Создать вагон"
 			puts "3 -> Добавить вагон к поезду (или несколько)"

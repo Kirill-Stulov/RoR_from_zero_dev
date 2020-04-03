@@ -1,12 +1,12 @@
 #<================== Родительский класс Поезд: ========================================================================>
 
-require_relative 'modules.rb'
+# require_relative 'modules.rb'
 # include Manufacturer
 # Manufacturer.hi("Melissandra")
 
 class Train
-  include Manufacturer
-	attr_accessor :speed, :wagon, :type, :route, :station, :number, :name 
+  # include Manufacturer
+	attr_accessor :speed, :wagon, :type, :route, :station, :number, :name, :manufacturer 
 
   @@st_and_tr = {}                                                         # @@st_and_tr переменная класса Train, хранит массив всех хешей метода move_to_st. @@ class variable to use it within whole class, not just instances. Because there’s only one copy of a class variable shared by all instances of a class
   @@tr_names = []                                                          # 3 массив в котором храним объекты с именами поездов при выборе 3
