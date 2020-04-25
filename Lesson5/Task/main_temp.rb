@@ -30,7 +30,7 @@ loop do
 	puts "3 -> Создать поезд \n"                # возможен вариант с типом и количеством поездов
 	puts "4 -> Добавить или обновить производителя поезда"
 	puts "5 -> Добавить или отцепить вагон \n"      # может показать существующие поезда (номер, тип и на какой станции ) на всех станциях
-	puts "6 -> Добавить или обновить производителя поезда"
+	puts "6 -> Добавить или обновить производителя вагона"
 	puts "7 -> Перегнать поезд на станцию \n"
 	puts "8 -> Показать список станций с поездами \n"
 	puts "9 -> Выход \n"   
@@ -95,6 +95,7 @@ loop do
 
 
 	while choice == 3
+		puts "<===================== Создание поезда =========================>"
 		puts "Какой тип поезда необходимо создать?"
 		puts "1 -> пассажирский"
 		puts "2 -> грузовой"
@@ -127,10 +128,10 @@ loop do
 				puts "Еще не создано ни одного поезда!"
 			elsif reply == 1 && !@@tr_names.empty?
 				puts "Выберите поезд из списка, чтобы добавить производителя"
-				@@tr_names.map{|obj| obj.type_full}  				              # показываем список поездов по номеру и типу. Метод type из train.rb			
+				@@tr_names.map{|obj| obj.type_full}  				              # показываем список поездов по номеру и типу. Метод type_full из train.rb			
 				@tr_num = gets.chomp.to_i
 				@@choosen_tr = @@tr_names.select{|obj| obj.number == @tr_num}      # выбранный пользователем поезд находим в массиве @@tr_names по аналогии меню №5 где добавляем вагон к поезду. Находить поезд нужно т.к tr_input это не тот объект с которым можно работать, а по сути ссылка, по которой находим объект.
-				Manufacturer.set_manufacturer(@@choosen_tr, @tr_num)                 # с помощью подключенного метода класса set_manufacturer (из модуля Manufacturers) меняем пареметр manufacturer у объекта @@choosen_tr. А @number передаем т.к у нас его нет в методе в модуле 
+				Manufacturer.set_tr_manuf(@@choosen_tr, @tr_num)                 # с помощью подключенного метода класса set_manufacturer (из модуля Manufacturers) меняем пареметр manufacturer у объекта @@choosen_tr. А @number передаем т.к у нас его нет в методе в модуле 
 			elsif reply == 2 && @@tr_names.empty?
 				puts "Еще не создано ни одного поезда!"
 			elsif reply == 2 && !@@tr_names.empty?
@@ -164,13 +165,13 @@ loop do
 					wagon_type = gets.chomp.to_i
 					break if wagon_type == 3
 					if wagon_type == 1 && @@wg_names.empty?  											# если выбрано 1 и это первый вагон, т.е в массиве @@wg_names еще нет ни одной записи.
-						@@wg_names << Wagon.new(1, :passenger)            								# то просто закидываем в массив пассажирский вагон под номером 1
+						@@wg_names << Wagon.new(1, :passenger, @manuf_name)            					# то просто закидываем в массив пассажирский вагон под номером 1
 					elsif wagon_type == 1 && !@@wg_names.empty? 	 									# если выбрано 1 и в массиве уже не пусто. Заменил false на ! перед выражением  @@tr_names.empty. ! означет not
-						@@wg_names << Wagon.new(@@wg_names.last.number + 1, :passenger)   				# то закидывем в массив пассажирский поезд, создавая ему номер на основе номера последнего поезда в массиве +1. номер поезда вывел с помощью attr_accessor :number в шапке файла train.rb 
+						@@wg_names << Wagon.new(@@wg_names.last.number + 1, :passenger, @manuf_name)    # то закидывем в массив пассажирский поезд, создавая ему номер на основе номера последнего поезда в массиве +1. номер поезда вывел с помощью attr_accessor :number в шапке файла train.rb 
 					elsif wagon_type == 2 && @@wg_names.empty?                   						# здесь бы proc запилить чтоб не повторяться, но это не критично вродь
-						@@wg_names << Wagon.new(1, :cargo)
+						@@wg_names << Wagon.new(1, :cargo, @manuf_name)
 					elsif wagon_type == 2 && !@@wg_names.empty?
-						@@wg_names << Wagon.new(@@wg_names.last.number + 1, :cargo)
+						@@wg_names << Wagon.new(@@wg_names.last.number + 1, :cargo, @manuf_name)
 					elsif wagon_type == 3
 						break                                   										#возвращаемся в предыдущее меню
 					else
@@ -227,6 +228,50 @@ loop do
 				puts "Выберите 1, 2, 3, или 4"	
 			end
 	end
+
+	while choice == 6
+		puts "<================ Добавлнение/обновление производителя вагона ================>"
+		puts "1 -> Добавить или обновить производителя вагона"
+		puts "2 -> Показать вагоны поездов с наименованием производителей"
+		puts "3 -> Назад в основное меню"
+		reply = gets.chomp.to_i
+		if ((reply == 1) || (reply == 2)) && @@tr_names.empty?
+			puts "Еще не создано ни одного поезда. Создайте поезд, вагон и добавьте вагон к поезду!"
+		elsif reply == 1 && !@@tr_names.empty?
+			puts "Выберите поезд, чтобы добавить его вагону производителя"
+			@@tr_names.map{|obj| obj.type_full}
+			tr_num = gets.chomp.to_i
+			if  @@tr_names.any?{|obj| obj.number == tr_num}  													# если в массиве с объектами поездов есть введенный нами номер поезда
+				@@choosen_tr = @@tr_names.select{|obj| obj.number == tr_num}                                   #!!!КОГДА ЗАКОНЧУ с №6, @@choosen_tr нужно обязательно завести в proc!!!      # выбранный пользователем поезд находим в массиве @@tr_names по аналогии меню №5 где добавляем вагон к поезду. Находить поезд нужно т.к tr_input это не тот объект с которым можно работать, а по сути ссылка, по которой находим объект.
+				if !@@choosen_tr.any?{|obj| obj.wagon.empty?} 												# если у поезда вообще есть вагон или вагоны	# если параметр/массив @wagon (который внутри массива @@choosen_tr) не пустой. Т.е если у поезда есть вагон или вагоны 
+					puts "У поезда №#{tr_num} доступны следующие вагоны:"
+					@@choosen_tr.each{|obj| p obj.wagon.join(", №")}
+					puts "Выберите вагон чтобы добавить/обновить производителя"
+					@wg_num = gets.chomp.to_i
+					if @@choosen_tr.any?{|obj| obj.wagon.include?(@wg_num)}                                 # если у поезда есть именно этот вагон, т.е проверка от ввода не существующего номера вагона
+						@@choosen_wg = @@wg_names.select{|obj| obj.number == @wg_num}
+						p @@choosen_wg
+						Manufacturer.set_wg_manuf(@@choosen_wg, @wg_num)                                # теперь нужно воспользоваться методом обновляющим производителя вагона
+					else 
+						puts "Такого вагона не существует!"
+					end
+				else
+					puts "У поезда №#{tr_num} нет ни одного вагона! Сначала добавьте ему вагон!"
+				end
+			else 
+				puts "Такого поезда не существует!"
+			end
+		elsif reply == 2 && !@@tr_names.empty?
+			puts "Поезда:"
+			@@tr_names.map{|obj| obj.type_full}
+			@@wg_names.map{|obj| obj.type_full}
+		elsif reply == 3 
+			break
+		else
+			puts "Выберите 1, 2 или 3"
+		end
+	end 
+
 
 	while choice == 7
 		puts "<===================== Перегон поездов =========================>"

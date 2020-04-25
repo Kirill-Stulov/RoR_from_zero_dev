@@ -2,14 +2,15 @@
 
 	attr_accessor :number, :type
 
-	def initialize(number, type)
+	def initialize(number, type, manufacturer)
 		@number = number
 		@type = type
+		@manufacturer = "RJD"
 		puts "Создан вагон №#{@number} типа #{@type}"
 	end
 
 	def type_full
-		puts "Вагон №#{@number} типа #{@type}"
+		puts "Вагон №#{@number} типа #{@type}. Производитель: #{@manufacturer}"
 	end
 
 	def list
