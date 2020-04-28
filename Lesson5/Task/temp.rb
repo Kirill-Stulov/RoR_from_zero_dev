@@ -175,6 +175,7 @@ add_train_number_2   #вызываем метод
 =end
 
 
+=begin
 #<================== Проверка while choice == 4 Добавлнение вагона к поезду из main_temp.rb ===================>
 require_relative 'train.rb'
 require_relative 'train_passenger.rb'
@@ -279,6 +280,8 @@ end
     # end
 # wagon_1 = Wagon.new(1, :passenger)
 # train1.add_wagon(wagon1)
+=end
+
 
 #<================== Проверка while choice == 6 Перегон поездов из main_temp.rb ===================>
 =begin
@@ -909,3 +912,57 @@ def next_st_name  # метод для перемещения в массиве @
 =end
 
 
+# можно при создании объекта через initialize, сразу складывать только что созданный объект в массив.
+# для этого этот массив нужно объявить тут-же, присвоив переменной класса @@stantions = [], и дальше складывать  @@stantions таким образом избавлюсь от кучи действий в main
+
+class RailwayStation
+  # include InstanceCounter
+  attr_reader :name, :trains
+  @@stations = []
+  # Имеет название, которое указывается при ее создании
+  def initialize(name)
+    @name = name
+    @trains = []
+    @@stations << self
+    # register_instance
+  end
+
+  def self.all
+  	puts "Доступны следующие станции:"
+    @@stations.each{|obj| puts obj.name}
+  end
+
+  
+  # Может принимать поезда (по одному за раз)
+  def train_arrive(train)
+    @trains << train    
+  end
+
+  # Может показывать список всех поездов на станции, находящиеся в текущий момент
+  # Может показывать список поездов на станции по типу (см. ниже): кол-во грузовых, пассажирских
+  def get_trains(type=nil)
+    
+    if type.nil?
+      @trains.each do |train|
+        puts train
+      end
+    else
+      @trains.each do |train|
+        puts train if train.class == type
+      end
+    end
+  end
+
+  # Может отправлять поезда (по одному за раз, при этом, поезд удаляется из списка поездов, находящихся на станции).
+  def train_leave(train)
+    @trains.delete(train)
+end
+  
+  
+end
+
+st = RailwayStation.new("Tash")
+st2 = RailwayStation.new("Yangiyul")
+# puts st
+
+RailwayStation.all

@@ -1,13 +1,23 @@
 ﻿#<================ Станция: ===========================================================================>
 require_relative 'train.rb'
-class RailwayStation < Train         # Наследуем из train, потому как используем его метод count_hash_dublicate
-	attr_accessor :name
+class RailwayStation < Train         			# Наследуем из train, потому как используем его метод count_hash_dublicate
+	# attr_accessor :name
 
-	def initialize(name)             # Имеет название, которое указывается при ее создании
+	@@stations = []
+
+	def initialize(name)             			# Имеет название, которое указывается при ее создании
 		@name = name
 		@trains = {}
+		@@stations << self                      # можно при создании объекта через initialize, сразу складывать только что созданный объект в массив.
 		puts "Станция #{@name} создана \n"
 	end
+
+	def self.all 												# метод класса all, который выводит список всех станций, созданных на данный момент. Отображет только названия
+		puts "Всего станций создано: #{@@stations.length}"    # здесь покажем количество значений всех хешей массива @st_names(не получалось эту и следующую строки вывести в одной строке, надо попробоваать чере)
+    	@@stations.each{|obj| puts obj.name}
+  	end                    			
+	
+	
 
 	def list
 		puts "На станции #{@name} сейчас #{@trains.length} поездов"

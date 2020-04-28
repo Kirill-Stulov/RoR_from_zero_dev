@@ -12,7 +12,7 @@ module Manufacturer
 
 
     # метод для Menu, while choice == 4
-	def self.set_tr_manuf(train, number)                                             # self тут означает что это метод класса. Без self нужно будет писать Manufacturer.set_manufacturer
+	def self.set_tr_manuf(train, number)                                             # self тут означает что это метод класса. Без self нужно будет писать Manufacturer.set_tr_manuf
 		@train = train                                                                 # значения кототрые берем из @train и @number сидят в @@choosen_tr и @tr_num соответственно (main файл )
 		@number = number     
 		puts "Выбран поезд №#{@number}"
@@ -26,7 +26,7 @@ module Manufacturer
 
 	 # метод для Menu, while choice == 6	
 	def self.set_wg_manuf(wagon, number)
-		@wagon = wagon
+		@wagon = wagon																	# значения кототрые берем из @wagon и @number сидят в @@choosen_wg и @wg_num соответственно (main файл )
 		@number = number
 		puts "Выбран вагон №#{@number}"
 		puts "Введите название производителя:"

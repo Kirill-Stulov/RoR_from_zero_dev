@@ -14,7 +14,7 @@ require_relative 'wagon_passenger.rb'
 class Menu < Train
 # include Manufacturer  он уже подключен в Train, от которого наследует Menu
    # include Manufacturer
-@st_names = []                #1 stations_names массив в котором храним объекты с именами станций при выборе 1
+@st_names = []                #1 stations_names массив в котором храним объекты с именами станций при выборе 1  # эту функцию дублирует метод all из railway_station.rb, как использовать что-то одно, в примерах пятого урока thinknetika пока нет 
 @@tr_names = []                #3 массив в котором храним объекты с именами поездов при выборе 3
 #@@st_and_tr = []               #6 массив хешей содержащий станции и поезда
 #@routes_names = []           # 2 
@@ -49,8 +49,11 @@ loop do
 			puts "Станция с именем #{station_name_input} уже существует! \n"
 		else 
 			@st_names << RailwayStation.new(station_name_input)   # добавляем в массив @st_names станцию, объект которой каждый раз новый, имя станции зависит от ввода пользователя
-			puts "Всего станций создано: #{@st_names.length}"      # здесь покажем количество значений всех хешей массива @st_names(не получалось эту и следующую строки вывести в одной строке, надо попробоваать чере)
-			@st_names.map{ |obj| puts obj.name }                    # имя станции вывел с помощью attr_accessor :name в шапке файла railway_station.rb   Читать можно тут: https://www.ruby-lang.org/ru/documentation/quickstart/3/
+			## тут есть два варианта как это вывести
+			# puts "Всего станций создано: #{@st_names.length}"      # здесь покажем количество значений всех хешей массива @st_names(не получалось эту и следующую строки вывести в одной строке, надо попробоваать чере)
+			# @st_names.map{ |obj| puts obj.name }                    # имя станции вывел с помощью attr_accessor :name в шапке файла railway_station.rb   Читать можно тут: https://www.ruby-lang.org/ru/documentation/quickstart/3/
+			## или
+			RailwayStation.all                                     # или выводим с помощью метода класса all из railway_station.rb. В этом случае attr_accessor :name в шапке файла railway_station.rb не нужен, значение берется из @@stations
 		end
 	end
 
