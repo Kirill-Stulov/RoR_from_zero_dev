@@ -27,7 +27,11 @@ class Train
 		puts "Собран новый поезд №#{@number}, типа #{@type}"
 	end
 
-  
+  def self.find(num)                                        # метод класса find, который принимает номер поезда и возвращает объект поезда по номеру или nil, если поезд с таким номером не найден.
+    @result = @@tr_names.select{|obj| obj.number == num}
+    puts "это объект: #{@result}"
+  end 
+
 	def type_full
 		puts "Поезд №#{@number} типа #{@type}. Производитель: #{@manufacturer}. Вагоны: № #{@wagon.join(", №")} "
 	end
