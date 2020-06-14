@@ -10,7 +10,6 @@ module Manufacturer
 		puts "Hi #{name}!"
 	end
 
-
     # метод для Menu, while choice == 4
 	def self.set_tr_manuf(train, number)                                             # self тут означает что это метод класса. Без self нужно будет писать Manufacturer.set_tr_manuf
 		@train = train                                                                 # значения кототрые берем из @train и @number сидят в @@choosen_tr и @tr_num соответственно (main файл )
@@ -35,5 +34,25 @@ module Manufacturer
 		puts "Вагону №#{@number} установлен производитель -> #{@manuf_input}"
 	end
 
+
+end
+
+module InstanceCounter
+
+
+	# def self.included(base)
+ #    	base.extend ClassMethods
+ #    	base.send :include, InstanceMethods
+ #    end
+
+	module ClassMethods
+		
+		attr_accessor :inst 
+		
+		def self.instances                               #!!! метод класса для вывода посчитанных экзепмляров класса, через счетчик @@instances += 1 в initialize train или railwaystation В СОСТАВЕ ПОДМОДУЛЯ ClassMethods, МОДУЛЯ InstanceCounter, подключается в train.rb или любой другой  
+			@@inst											# чтобы считал, должен иметь изначальное значение @@instances = 0 (прим train.rb)
+		end
+	
+	end
 
 end

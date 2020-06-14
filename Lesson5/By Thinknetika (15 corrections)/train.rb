@@ -4,7 +4,7 @@ class Train
   attr_reader :speed, :wagons, :current_station
 
   @@trains = {}
-  @@inst = 0
+  @@inst = 0                        #переменная класса, счетчик количества экземпляров класса Train. Начальное значение 0
   
   def initialize(wagons, station)
     @speed = 0

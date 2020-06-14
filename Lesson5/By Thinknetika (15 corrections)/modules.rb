@@ -21,7 +21,7 @@ module InstanceCounter
     
     attr_accessor :inst
 
-    def instances
+    def instances                # Метод класса instances, возвращает кол-во экземпляров класса. Подключен в train.rb и railwaystation.rb. используется в конце main.rb 
       @inst
     end
 

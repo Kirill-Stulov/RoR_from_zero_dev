@@ -11,7 +11,7 @@ require_relative 'wagon_cargo.rb'
 require_relative 'wagon_passenger.rb'
 
 # <============================================== Интерфейс пользователя! ==========================================================>
-class Menu < Train
+class Menu #< Train
 # include Manufacturer  он уже подключен в Train, от которого наследует Menu
    # include Manufacturer
 @st_names = []                #1 stations_names массив в котором храним объекты с именами станций при выборе 1  # эту функцию дублирует метод all из railway_station.rb, как использовать что-то одно, в примерах пятого урока thinknetika пока нет 
@@ -34,10 +34,11 @@ loop do
 	puts "7  -> Перегнать поезд на станцию \n"
 	puts "8  -> Показать список станций с поездами \n"
 	puts "9  -> Показать объект поезда по номеру"
-	puts "10 -> Выход \n"   
+	puts "10 -> Показать количество экземпляров объектов класса Поезд или Станция"
+	puts "11 -> Выход \n"   
 	puts "\n"
 	choice = gets.chomp.to_i
-	break if choice == 10    
+	break if choice == 11    
 
 	while choice == 1                          # Позже нужно реализовать возможность удаления станции
 		puts "<===================== Создание/просмотр станций =========================>"
@@ -357,6 +358,27 @@ loop do
 			puts "Выберите 1 или 2" 
 		end
 	end
+
+	while choice == 10
+		puts "1 -> Показать количество экземпляров объектов класса Поезд"
+		puts "2 -> Показать количество экземпляров объектов класса Станция"
+		puts "3 -> Назад в основное меню"
+		input = gets.chomp.to_i
+		if input == 1 && @@tr_names.empty?
+			puts "Еще не создано ни одного объекта класса Поезд!"
+		elsif input == 1 && !@@tr_names.empty?
+			puts "Экземпляров класса поезд: #{InstanceCounter.Train.instances}"
+		elsif input == 2 && @st_names.empty?
+			puts "Еще не создано ни одного объекта класса Станция!"
+		elsif input == 2 && !@st_names.empty?
+			puts "Экземпляров класса Станция: #{InstanceCounter.RailwayStation.instances}"	
+		elsif input == 3
+			break
+		else
+			puts "Выберите 1, 2 или 3" 
+		end
+	end
+
 
 end
 end

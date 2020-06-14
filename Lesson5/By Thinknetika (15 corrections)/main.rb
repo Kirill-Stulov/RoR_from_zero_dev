@@ -206,5 +206,5 @@ puts Train.find(1)
 puts RailwayStation.all
 
 puts "_________________________________"
-puts "Всего поездов #{Train.instances}"
+puts "Всего поездов #{Train.instances}"                  # метод instances из modules.rb  пожалуй так считать поезда и станции правильнее, в своем варианте, я считал по кол-ву в массиве.
 puts "Всего станций #{RailwayStation.instances}"

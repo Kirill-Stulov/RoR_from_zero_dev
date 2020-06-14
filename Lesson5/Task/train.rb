@@ -1,11 +1,12 @@
 #<================== Родительский класс Поезд: ========================================================================>
 
-# require_relative 'modules.rb'
+require_relative 'modules.rb'
 # include Manufacturer
 # Manufacturer.hi("Melissandra")
 
 class Train
   # include Manufacturer
+  include InstanceCounter
 	attr_accessor :speed, :wagon, :type, :route, :station, :number, :name, :manufacturer 
 
   @@st_and_tr = {}                                                         # @@st_and_tr переменная класса Train, хранит массив всех хешей метода move_to_st. @@ class variable to use it within whole class, not just instances. Because there’s only one copy of a class variable shared by all instances of a class
@@ -16,6 +17,7 @@ class Train
   @@train_to_add_wagon = @@tr_names.select{|obj| obj.number == @@tr_input}   # это дублируется в main в пункте while choice == 4 # если уберу этот дубликат, то не сработает метод wagon_such_train?(wagon)# присваиваем переменной train_to_add_wagon значение объекта из массива с поездами, объект находим по аттрибуту -number                 # ТУТ ВМЕСТО @@tr_input нужно получать объект из массива с поездами (@@tr_names) в котором есть обЪект с именем равным @@@tr_input! ЭТО obj.id???? брать его из @@tr_names после строки с проверкой# то используем метод move (из train.rb)  для перегона на соответствующую станцию                      
   @@train_to_delete_wagon = @@tr_names.select{|obj| obj.number == tr_input}
 
+  @@inst = 0
 
 	def initialize(number, type, manufacturer)                               # Имеет, тип type, который указывается при создании: грузовой, пассажирский и номер number.
 		@type = type
@@ -24,7 +26,8 @@ class Train
 		@wagon = []                                              # также при создании объекта класса train будет инициализироваться массив вагонов поезда @wagon
 		@route = []                                                # и массив маршрутов поезда @route
     @manufacturer = "RJD"                                 # производитель для метода из modules.rb, который будет позволять указывать и менять это значение. По умолчанию -RJD
-		puts "Собран новый поезд №#{@number}, типа #{@type}"
+		@@inst += 1
+    puts "Собран новый поезд №#{@number}, типа #{@type}"
 	end
 
   def self.find(num)                                        # метод класса find, который принимает номер поезда и возвращает объект поезда по номеру или nil, если поезд с таким номером не найден.
