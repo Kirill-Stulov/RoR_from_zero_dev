@@ -1,7 +1,7 @@
 class TrainPassenger < Train
 
-	def initialize(number, type = :passenger)
-		super
+	def initialize(number, type = :passenger)    #переопределили метод initialize родительского класса c помощью super, добавив к нему тип cargo по умолчанию
+		super									#super вызывает оригинальную имплементацию метода
 	end
 
 private

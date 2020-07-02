@@ -911,7 +911,7 @@ def next_st_name  # метод для перемещения в массиве @
 #@st_names = @st_names_arr.map { |name| StName.new(name) }    #st_names - переменная  
 =end
 
-
+=begin
 # можно при создании объекта через initialize, сразу складывать только что созданный объект в массив.
 # для этого этот массив нужно объявить тут-же, присвоив переменной класса @@stantions = [], и дальше складывать  @@stantions таким образом избавлюсь от кучи действий в main
 
@@ -966,3 +966,28 @@ st2 = RailwayStation.new("Yangiyul")
 # puts st
 
 RailwayStation.all
+=end
+
+class Train
+	attr_reader :speed, :wagons, :current_station
+
+	@@trains = {}
+	@@inst = 0
+
+	def initialize_wagins
+		@wagons  << 
+
+	def initialize(wagons, station)
+		@speed = 0
+		@wagons = []
+
+		wagons.times{initialize_wagons}
+		@current_station = station
+		station.train_arrive(self)
+		@@trains[@@trains.length + 1] = self
+
+		register_instance 
+	end 
+end
+
+tr1 = Train.new(1, 'VOZ')

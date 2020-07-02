@@ -3,15 +3,18 @@ require_relative 'train.rb'
 class RailwayStation < Train         			# Наследуем из train, потому как используем его метод count_hash_dublicate
 	# attr_accessor :name
 
+	include InstanceCounter
+
 	@@stations = []
-	@@inst = 0
+	# @@inst = 0
 
 	def initialize(name)             			# Имеет название, которое указывается при ее создании
 		@name = name
 		@trains = {}
 		@@stations << self                      # можно при создании объекта через initialize, сразу складывать только что созданный объект в массив.
-		@@inst += 1
+		# @@inst += 1
 		puts "Станция #{@name} создана \n"
+		register_instance						# метод для вывода количества экземпляров класса RailwayStation. Используется в main_temp.rb пункт 10 и 8 
 	end
 
 	def self.all 												# метод класса all, который выводит список всех станций, созданных на данный момент. Отображет только названия

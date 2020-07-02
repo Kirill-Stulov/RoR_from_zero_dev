@@ -1,7 +1,7 @@
 class PassangerTrain < Train
 
   def add_wagon(wagon = PassangerWagon.new)
-    super                                     #super вызывает оригинальную имплементацию метода
+    super
   end
 
   protected

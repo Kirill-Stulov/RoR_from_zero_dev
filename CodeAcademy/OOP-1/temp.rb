@@ -237,12 +237,12 @@ end
 #<======================================================================================>
 
 #<================== Проверка while choice == 2 Создание маршрута из main_temp.rb ===================>
-require_relative 'C:\Users\gz7n3r\Desktop\PROGS\work\RoR_from_zero\Lesson4\Task\route.rb'
-require_relative 'C:\Users\gz7n3r\Desktop\PROGS\work\RoR_from_zero\Lesson4\Task\train.rb'
-require_relative 'C:\Users\gz7n3r\Desktop\PROGS\work\RoR_from_zero\Lesson4\Task\railway_station.rb'
+# require_relative 'C:\Users\gz7n3r\Desktop\PROGS\work\RoR_from_zero\Lesson4\Task\route.rb'
+# require_relative 'C:\Users\gz7n3r\Desktop\PROGS\work\RoR_from_zero\Lesson4\Task\train.rb'
+# require_relative 'C:\Users\gz7n3r\Desktop\PROGS\work\RoR_from_zero\Lesson4\Task\railway_station.rb'
 
-@routes_names = []
-#@st_names = []
+# @routes_names = []
+# #@st_names = []
 #@routes = []
 #@st_names << RailwayStation.new("A")
 #@st_names << RailwayStation.new("B")
@@ -289,24 +289,24 @@ Route.hi
 =end
 
 #<================================== Перегон поездов Проверка while choice 6  move to station method ==================================================================>
-@st_names = []
-@routes = []
-@tr_names = []	
+# @st_names = []
+# @routes = []
+# @tr_names = []	
 
-	@st_names << RailwayStation.new('A')
-	@st_names << RailwayStation.new('B')
-	@routes << Route.new(['A', 'B'])
-	@tr_names << Train.new(1, :passenger)
-	@tr_names << Train.new(2, :passenger)
-	@tr_input = 2
-	p @routes
-	#p @tr_names
-	#p @tr_names.select{ |obj| obj.number == @tr_input}
-	train_to_move = @tr_names.select{ |obj| obj.number == @tr_input}
+# 	@st_names << RailwayStation.new('A')
+# 	@st_names << RailwayStation.new('B')
+# 	@routes << Route.new(['A', 'B'])
+# 	@tr_names << Train.new(1, :passenger)
+# 	@tr_names << Train.new(2, :passenger)
+# 	@tr_input = 2
+# 	p @routes
+# 	#p @tr_names
+# 	#p @tr_names.select{ |obj| obj.number == @tr_input}
+# 	train_to_move = @tr_names.select{ |obj| obj.number == @tr_input}
     
 
-    #train_to_move[0].move_to_st('A')                                       # индекс [0] пришлось использовать потому как select возвращает объект а не массив находящийся в объекте
-    train_to_move[0].move('B')
+#     #train_to_move[0].move_to_st('A')                                       # индекс [0] пришлось использовать потому как select возвращает объект а не массив находящийся в объекте
+#     train_to_move[0].move('B')
 
 
 
@@ -381,4 +381,41 @@ def next_st_name  # метод для перемещения в массиве @
 #@st_names = @st_names_arr.map { |name| StName.new(name) }    #st_names - переменная  
 =end
 
+############################
+# class Book
 
+# 	@@instances = 0
+
+# 	def self.instances
+# 		@@instances
+# 	end
+
+# 	def initialize
+# 		@@instances += 1
+# 	end
+
+# end
+
+# b1 = Book.new
+# b2 = Book.new
+# p Book.instances
+##############################
+
+class Car
+
+	@@instances = 0
+
+
+	def self.instances
+		@@instances
+	end
+
+	def initialize
+		@@instances += 1
+	end 
+
+end
+
+
+c1 = Car.new
+p Car.instances

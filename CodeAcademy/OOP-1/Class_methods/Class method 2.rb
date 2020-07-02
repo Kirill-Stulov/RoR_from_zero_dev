@@ -43,7 +43,7 @@ class Car
 	end
 
 	def start_engine!                       
-		self.current_rpm = initial_rpm
+		self.current_rpm = initial_rpm      # без self переменная current_rpm будет просто локальной переменной, нам же нужно менять инстанс переменную @current_rpm Ruby on Rails c нуля (2015) [Базовый]\Занятие 04. Интерфейсы, наследование и полиморфизм 0:10:05
 	end
 
 end

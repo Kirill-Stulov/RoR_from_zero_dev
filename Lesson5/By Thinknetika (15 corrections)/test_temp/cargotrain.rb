@@ -1,7 +1,14 @@
 class CargoTrain < Train
+  # include InstanceCounter
+
+  # @@inst = 0  
+
+  # def initialize(wagons, station)
+  #   register_instance
+  # end
 
   def add_wagon(wagon = CargoWagon.new)
-    super                                 #super вызывает оригинальную имплементацию метода
+    super
   end
 
   protected

@@ -9,6 +9,9 @@ class Train
   include InstanceCounter
 	attr_accessor :speed, :wagon, :type, :route, :station, :number, :name, :manufacturer 
 
+# Переменные класса можно использовать в методах класса (в инстанс методах класса), 
+# но их отличие в том, инстанс переменные содержат данные доступные внутри класса, но не разделяются между объектами 
+# переменная класса разделяется между самим классом, т.е к какому бы классу или подклассу мы не обратились, эта переменная будет иметь общее значение для них всех!
   @@st_and_tr = {}                                                         # @@st_and_tr переменная класса Train, хранит массив всех хешей метода move_to_st. @@ class variable to use it within whole class, not just instances. Because there’s only one copy of a class variable shared by all instances of a class
   @@tr_names = []                                                          # 3 массив в котором храним объекты с именами поездов при выборе 3
   @@wg_names = []                                                          # 4 массив в котором храним объекты с именами вагонов при выборе 4
@@ -17,7 +20,7 @@ class Train
   @@train_to_add_wagon = @@tr_names.select{|obj| obj.number == @@tr_input}   # это дублируется в main в пункте while choice == 4 # если уберу этот дубликат, то не сработает метод wagon_such_train?(wagon)# присваиваем переменной train_to_add_wagon значение объекта из массива с поездами, объект находим по аттрибуту -number                 # ТУТ ВМЕСТО @@tr_input нужно получать объект из массива с поездами (@@tr_names) в котором есть обЪект с именем равным @@@tr_input! ЭТО obj.id???? брать его из @@tr_names после строки с проверкой# то используем метод move (из train.rb)  для перегона на соответствующую станцию                      
   @@train_to_delete_wagon = @@tr_names.select{|obj| obj.number == tr_input}
 
-  @@inst = 0
+  # @@inst = 0
 
 	def initialize(number, type, manufacturer)                               # Имеет, тип type, который указывается при создании: грузовой, пассажирский и номер number.
 		@type = type
@@ -26,13 +29,14 @@ class Train
 		@wagon = []                                              # также при создании объекта класса train будет инициализироваться массив вагонов поезда @wagon
 		@route = []                                                # и массив маршрутов поезда @route
     @manufacturer = "RJD"                                 # производитель для метода из modules.rb, который будет позволять указывать и менять это значение. По умолчанию -RJD
-		@@inst += 1
+		# @@inst += 1
     puts "Собран новый поезд №#{@number}, типа #{@type}"
+    register_instance
 	end
 
   def self.find(num)                                        # метод класса find, который принимает номер поезда и возвращает объект поезда по номеру или nil, если поезд с таким номером не найден.
-    @result = @@tr_names.select{|obj| obj.number == num}
-    puts "это объект: #{@result}"
+    @result = @@tr_names.select{|obj| obj.number == num}   
+    puts "это объект: #{@result[0]}"
   end 
 
 	def type_full

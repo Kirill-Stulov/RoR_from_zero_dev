@@ -3,10 +3,6 @@ class Train
   include InstanceCounter
   attr_reader :speed, :wagons, :current_station
 
-
-# Переменные класса можно использовать в методах класса (в инстанс методах класса), 
-# но их отличие в том, инстанс переменные содержат данные доступные внутри класса, но не разделяются между объектами 
-# переменная класса разделяется между самим классом, т.е к какому бы классу или подклассу мы не обратились, эта переменная будет иметь общее значение для них всех!
   @@trains = {}
   @@inst = 0                        #переменная класса, счетчик количества экземпляров класса Train. Начальное значение 0
   
@@ -14,12 +10,13 @@ class Train
     @speed = 0
     @wagons = []
     
-    wagons.times {initialize_wagons}        #wagons - это параметр передаваемый во время создания поезда. Если в нем к примеру 5, то метод initialize_wagons (это метод из cargotrain.rb или passengertrain.rb) отрабатывает 5 раз
+    wagons.times {initialize_wagons}        #wagons - это параметр (из def initialize(wagons, station))передаваемый во время создания поезда. Если в нем к примеру 5, то метод initialize_wagons (это метод из cargotrain.rb или passengertrain.rb) отрабатывает 5 раз
     @current_station = station                #и создает 5 вагонов соответствующего типа
-    station.train_arrive(self)              
+    station.train_arrive(self)
     @@trains[@@trains.length + 1] = self    #В хеш @@trains таким методом добавляется пара ключ-значение (тут номер-объект). Ключом будет порядковый номер объекта (объект поезд), а значением сам объект (поезд)   
-                                              #номер создается через @@trains.length + 1  , а ключ берется из self   
+                                              #номер создается через @@trains.length + 1  , а ключ берется из self
     register_instance
+    # puts "показываю содержимое @@trains: #{@@trains}"
 
   end
 
@@ -30,6 +27,7 @@ class Train
   def self.all
     @@trains
   end
+
 
   def start
     @speed = 50

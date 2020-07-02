@@ -34,25 +34,41 @@ module Manufacturer
 		puts "Вагону №#{@number} установлен производитель -> #{@manuf_input}"
 	end
 
-
 end
 
-module InstanceCounter
+
+# модуль InstanceCounter, содержащий следующие методы класса и инстанс-методы, которые подключаются автоматически 
+#  # при вызове include в классе:
+#  	#    Методы класса:
+#  	#        instances, который возвращает кол-во экземпляров данного класса
+#  	#    Инастанс-методы:
+#  	#        register_instance, который увеличивает счетчик кол-ва экземпляров класса и который можно вызвать из конструктора. 
+#  	# 		  При этом, данный метод не должен быть публичным.
+module InstanceCounter                     # этот родительский модуль InstanceCounter 
 
 
-	# def self.included(base)
- #    	base.extend ClassMethods
- #    	base.send :include, InstanceMethods
- #    end
+	def self.included(base)
+    	base.extend ClassMethods					# включаем подмодуль ClassMethods в родительский InstanceCounter 
+    	base.send :include, InstanceMethods			# включаем подмодуль InstanceMethods в родительский InstanceCounter 
+    end
 
 	module ClassMethods
 		
 		attr_accessor :inst 
 		
-		def self.instances                               #!!! метод класса для вывода посчитанных экзепмляров класса, через счетчик @@instances += 1 в initialize train или railwaystation В СОСТАВЕ ПОДМОДУЛЯ ClassMethods, МОДУЛЯ InstanceCounter, подключается в train.rb или любой другой  
-			@@inst											# чтобы считал, должен иметь изначальное значение @@instances = 0 (прим train.rb)
+		def instances                               #!!! ЭТОТ МЕТОД ВЫЗЫВАЕТСЯ НА КЛАССЕ И ВЫВОДИТ КОЛИЧЕСТВО ОБЪЕКТОВ КЛАССА, КОТОРЫЕ ПОСЧИТАНЫ МЕТОДОМ register_instance    В СОСТАВЕ ПОДМОДУЛЯ ClassMethods, МОДУЛЯ InstanceCounter 
+			@inst											
 		end
-	
+	end
+
+
+	module InstanceMethods
+		protected
+
+		def register_instance			#метод увеличивает счетчик кол-ва экземпляров класса, вызваем его из конструктора на каком либо классе
+			self.class.inst ||= 0    # как это работает?  или равно 0? Посмотреть в видосе
+			self.class.inst += 1     # как это работает?
+		end
 	end
 
 end

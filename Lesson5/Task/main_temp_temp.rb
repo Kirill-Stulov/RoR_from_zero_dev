@@ -42,11 +42,31 @@
 
 require_relative 'modules.rb'
 require_relative 'train.rb'
+require_relative 'train_passenger.rb'
+require_relative 'train_cargo.rb'
 
-class Menu < Train
-	include Manufacturer                
- 	@@tr_names = []               
-	@@tr_names << Train.new(1, :passenger, 'MGM')    			# добавляю новый поезд в массив @@tr_names
+require_relative 'route.rb'
+require_relative 'railway_station.rb'
 
-	Manufacturer.set_manufacturer
-end
+require_relative 'wagon.rb'
+require_relative 'wagon_cargo.rb'
+require_relative 'wagon_passenger.rb'
+
+
+tr1 = Train.new(1, :cargo, "RJD")
+tr2 = TrainCargo.new(2, :cargo, "SM")
+tr3 = Train.new(3, :cargo, "OM")
+st1 = RailwayStation.new("GM")
+puts "_________________________________"
+puts "Всего поездов #{Train.instances}"
+puts "Всего Cargo поездов #{TrainCargo.instances}"
+puts "Всего станций #{RailwayStation.instances}"
+
+
+# class Menu < Train
+# 	include Manufacturer                
+#  	@@tr_names = []               
+# 	@@tr_names << Train.new(1, :passenger, 'MGM')    			# добавляю новый поезд в массив @@tr_names
+
+# 	Manufacturer.set_manufacturer
+# end

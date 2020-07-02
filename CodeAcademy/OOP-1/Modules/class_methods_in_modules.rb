@@ -1,6 +1,7 @@
 # методы класса вынесены в модуль 
 # Ruby on Rails c нуля (2015) [Базовый]\Занятие 05. Методы класса, Модули и объектная модель Ruby 0:29:40
 # остальное описание кода этого примера смотри в "Class method 3.rb" и "modules(Name_space_Mixin_Kernel).rb"
+# тут еще подсчет количества экземпляров класса через Initialize
 
 module FuelTank                
 	def fill_tank(level)		
@@ -11,7 +12,7 @@ module FuelTank
 		p self.fuel_tank
 	end
 
-	protected
+	protected                        # тут protected а не private, потому что выше обращаемся к методу fuel_tank через self
 	attr_accessor :fuel_tank
 end	
 
@@ -34,7 +35,7 @@ class Car
 	debug 'Start interface'	        # вызываем метод класса debag, передавая строку в качестве параметра (подробное описание в Class method 3.rb)			
 	def initialize
 		@current_rpm = 0
-		@@instances += 1              
+		@@instances += 1             # переменная класса. разделяется между самим классом, т.е к какому бы классу или подклассу мы не обратились, эта переменная будет иметь общее значение для них всех!
 	end
 
 	def start_engine	
@@ -73,7 +74,7 @@ car.fuel_level
 bike.fill_tank(10)     
 bike.fuel_level
 
-p Car.instances
+p Car.instances					
 MotorBike.debug "Yeah boy!"
 
 

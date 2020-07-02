@@ -1,4 +1,4 @@
-﻿require_relative 'modules.rb'
+require_relative 'modules.rb'
 require_relative 'train.rb'
 require_relative 'train_passenger.rb'
 require_relative 'train_cargo.rb'
@@ -11,11 +11,12 @@ require_relative 'wagon_cargo.rb'
 require_relative 'wagon_passenger.rb'
 
 # <============================================== Интерфейс пользователя! ==========================================================>
-class Menu #< Train
+class Menu < Train
+	include InstanceCounter
 # include Manufacturer  он уже подключен в Train, от которого наследует Menu
    # include Manufacturer
 @st_names = []                #1 stations_names массив в котором храним объекты с именами станций при выборе 1  # эту функцию дублирует метод all из railway_station.rb, как использовать что-то одно, в примерах пятого урока thinknetika пока нет 
-@@tr_names = []                #3 массив в котором храним объекты с именами поездов при выборе 3
+# @@tr_names = []                #3 массив в котором храним объекты с именами поездов при выборе 3. В main его быть не должно, он должен быть 
 #@@st_and_tr = []               #6 массив хешей содержащий станции и поезда
 #@routes_names = []           # 2 
 @routes = []                  # 2
@@ -333,6 +334,7 @@ loop do
 		break
 		else
 			puts "Всего доступно #{@st_names.length} следующих станций:"
+			# puts "Всего доступно #{RailwayStation.instances} следующих станций"        # другой способ вывода - через количество экземпляров класса RailwayStation 
 			@@st_and_tr.each{ |key, value| puts "Станция: #{key}, Поезда: #{value} "} # показываем все станции с поездами из хеша @@st_and_tr. Где станция ключ, номер поезда - значение, поменя вместо вывода значения нп свое черезжопное решение tr_type, которым показыва номер поезда и тип  
 			@@tr_names.map{|obj| obj.type }
 		    puts "Введите 1 -> для возврата в основное меню \n"
@@ -367,11 +369,11 @@ loop do
 		if input == 1 && @@tr_names.empty?
 			puts "Еще не создано ни одного объекта класса Поезд!"
 		elsif input == 1 && !@@tr_names.empty?
-			puts "Экземпляров класса поезд: #{InstanceCounter.Train.instances}"
+			puts "Экземпляров класса поезд: #{Train.instances}"
 		elsif input == 2 && @st_names.empty?
 			puts "Еще не создано ни одного объекта класса Станция!"
 		elsif input == 2 && !@st_names.empty?
-			puts "Экземпляров класса Станция: #{InstanceCounter.RailwayStation.instances}"	
+			puts "Экземпляров класса Станция: #{RailwayStation.instances}"	
 		elsif input == 3
 			break
 		else

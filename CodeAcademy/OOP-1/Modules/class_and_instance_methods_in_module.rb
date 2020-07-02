@@ -12,7 +12,7 @@ module FuelTank
 		p self.fuel_tank
 	end
 
-	protected
+	protected								# тут protected а не private, потому что выше обращаемся к методу fuel_tank через self
 	attr_accessor :fuel_tank
 end	
 
@@ -25,7 +25,7 @@ module Debagger                         	#1. чтобы в модуле разд
 
 	module InstanceMethods                  #2. в этот подмодуль InstanceMethods поместим методы инстанса
 		def debug(log)                     		# сделали instance метод debug
-			self.class.debug(log)					# он вызывает метод класса через self.class и передпет туда тот же аргумент log
+			self.class.debug(log)					# он вызывает метод класса через self.class и передпет туда тот же аргумент log   (подробнее смотри Сall_class_method_from_instance_method.rb)
 		end  											# когда мы подключим это в класс, то сможем вызывать debug и на уровне instance и на уровне класса 		
 
 		def print_class						#3. и еще метод print_class который просто выводит имя класса. При этом self является указателем на объект того класса в который включен модуль

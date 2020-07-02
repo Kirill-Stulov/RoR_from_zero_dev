@@ -12,7 +12,7 @@ module FuelTank
 		p self.fuel_tank
 	end
 
-	protected
+	protected									# тут protected а не private, потому что выше обращаемся к методу fuel_tank через self
 	attr_accessor :fuel_tank
 end	
 

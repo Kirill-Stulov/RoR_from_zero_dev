@@ -195,11 +195,20 @@ require_relative 'cargowagon'
 # railway.ui
 
 rs = RailwayStation.new "First"
+rs2 = RailwayStation.new "Second"
 
+tr1 = CargoTrain.new(2, rs)
+tr2 = PassangerTrain.new(3, rs2)
 
-tr = Train.new 1, rs
-tr2 = Train.new 1, rs
-tr3 = CargoTrain.new(2, rs)
+# p tr1
+
+# tr = []
+
+# tr << CargoTrain.new(4, rs)
+# p tr
+
+# tr = Train.new 1, rs
+# tr2 = Train.new 1, rs
 
 
 # puts Train.all
