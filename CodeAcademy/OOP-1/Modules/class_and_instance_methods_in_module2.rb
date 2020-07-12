@@ -22,14 +22,14 @@ module Debagger                         	#10. 0:35:50   теперь модул�
 		base.send :include, InstanceMethods              # чтобы подключить instance методы (из модуля InstanceMethods) подробно здесь 0:38:25
 	end 													# в двух словах base.extend вызывает extend и подключает ClassMethods, base.send :include вызывает include и подключает методы экземпляра из модуля InstanceMethods   
 	module ClassMethods                   		
-		def debug(log) 							
+		def debug(log) 							# метод класса debug
 			puts "!!!DEBUG: #{log} !!!"		
 		end
 	end
 
 	module InstanceMethods                  
 		def debug(log)                     	
-			self.class.debug(log)			
+			self.class.debug(log)			#!!! для того чтобы вызвать из инстанс метода метод класса (метод класса debug) нужно писать self затем class затем метод класса	
 		end  								
 
 		def print_class						

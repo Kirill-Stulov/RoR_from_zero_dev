@@ -25,7 +25,7 @@ module Debagger                         	#1. чтобы в модуле разд
 
 	module InstanceMethods                  #2. в этот подмодуль InstanceMethods поместим методы инстанса
 		def debug(log)                     		# сделали instance метод debug
-			self.class.debug(log)					# он вызывает метод класса через self.class и передпет туда тот же аргумент log   (подробнее смотри Сall_class_method_from_instance_method.rb)
+			self.class.debug(log)					# он вызывает метод класса через self.class и передает туда тот же аргумент log   (подробнее смотри Сall_class_method_from_instance_method.rb)
 		end  											# когда мы подключим это в класс, то сможем вызывать debug и на уровне instance и на уровне класса 		
 
 		def print_class						#3. и еще метод print_class который просто выводит имя класса. При этом self является указателем на объект того класса в который включен модуль
@@ -43,8 +43,8 @@ end
 
 
 class Car
-	include FuelTank
-	extend Debagger:: ClassMethods  		#4. Теперь можно сделать так - подключаем 
+	include FuelTank                                                  					#!!! include подключает методы которые есть в модуле как инстанс методы
+	extend Debagger:: ClassMethods  		#4. Теперь можно сделать так - подключаем 	#!!! включает методы которые есть в модуле как методы класса
 	include Debagger:: InstanceMethods			                     
 	
 	attr_reader :current_rpm

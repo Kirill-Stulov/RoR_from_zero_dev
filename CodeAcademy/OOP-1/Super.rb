@@ -1,5 +1,7 @@
 # КУРСЫ\1. Ruby on Rails c нуля (2015) [Базовый]\Занятие 04. Интерфейсы, наследование и полиморфизм\Занятие 04. Интерфейсы, наследование и полиморфизм\
 
+# !!! super вызывает оригинальную имплементацию метода 
+
 # Ruby on Rails c нуля (2015) [Базовый]\Занятие 04. Интерфейсы, наследование и полиморфизм\
 class Car
 	attr_reader :current_rpm, :name
@@ -46,7 +48,7 @@ class Truck < Car
 end
 
 class SportCar < Car
-	def start_engine           # переопределили метод start_engine родительского класса и добавили wrooom с помощью super
+	def start_engine           # переопределили метод start_engine родительского класса и добавили wrooom, super же вызывает оригинальную имплементацию метода start_engine из базового класса Car  
 		super
 		puts "WroooooOOom!"
 	end

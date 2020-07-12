@@ -9,12 +9,11 @@ module Manufacturer
   end
 end
 
-module InstanceCounter
-  
+module InstanceCounter                                        # Ruby on Rails c нуля (2015) [Базовый]\Занятие 05. Методы класса, Модули и объектная модель Ruby 0:31:20
+                                                              #!!! НЕОБХОДИМОСТЬ СОВМЕСТИТЬ В ОДНОМ МОДУЛЕ МЕТОДЫ КЛАССА И МЕТОДЫ ЭКЗЕМПЛЯРА КЛАССА Т.Е ИНСТАНС МЕТОДЫ. потому тут в модуле InstanceCounter два подмодуля ClassMethods и InstanceMethods
   def self.included(base)
-    base.extend ClassMethods
-    base.send :include, InstanceMethods
-    
+    base.extend ClassMethods                                    #!!! include подключает методы которые есть в модуле как инстанс методы   0:35:00
+    base.send :include, InstanceMethods                         #!!! extend включает методы которые есть в модуле как методы класса
   end
 
   module ClassMethods

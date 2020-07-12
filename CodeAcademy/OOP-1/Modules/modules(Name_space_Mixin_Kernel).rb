@@ -35,7 +35,7 @@ module FuelTank                            	# 6. Создадим этот mixin
 	end
 
 	protected
-	attr_accessor :fuel_tank
+	attr_accessor :fuel_tank                    # тут protected а не private, потому что выше обращаемся к методу fuel_tank через self
 end	
 
 class Car
