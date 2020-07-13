@@ -1,6 +1,9 @@
 class Train
   include Manufacturer
-  include InstanceCounter
+  include InstanceCounter                           #когда вызываем include InstanceCounter, в самом модуле InstanceCounter (из modules.rb) срабатывает метод included. В качестве аргумента (base) туда передается класс Train. 
+                                                      #У класса Train вызываем extend чтобы подключить методы класса из модуля ClassMethods 
+                                                        # затем вызываем include через send и подключаем туда методы из модуля InstanceMethods (внутренний модуль) как методы экземпляра класса
+                                                          # Ruby on Rails c нуля (2015) [Базовый]\Занятие 05. Методы класса, Модули и объектная модель Ruby 0:39:40
   attr_reader :speed, :wagons, :current_station
 
 
