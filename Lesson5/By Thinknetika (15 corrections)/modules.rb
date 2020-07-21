@@ -1,3 +1,6 @@
+# толково используем модуль Вынесли сюда и инстанс методы и методы класса.
+
+
 module Manufacturer
   @manufacturer = ""
   def set_manufacturer(man)
@@ -31,9 +34,9 @@ module InstanceCounter                                        # Ruby on Rails c 
   module InstanceMethods
     protected
     
-    def register_instance
-      self.class.inst ||= 0
-      self.class.inst += 1 
+    def register_instance         #метод считает кол-во экземпляров класса, вызваем его из конструктора на каком либо классе
+      self.class.inst ||= 0         # self.class нужно чтобы вызывать переменную экземпляра @inst из инстанс метода   !!! В этой строке присваиваем переменной изначальное значение равное своему значению или 0
+      self.class.inst += 1            # далее увеличиваем значение переменной экземпляра @inst при вызове.
     end
   end
 

@@ -58,9 +58,11 @@ tr2 = TrainCargo.new(2, :cargo, "SM")
 tr3 = Train.new(3, :cargo, "OM")
 st1 = RailwayStation.new("GM")
 puts "_________________________________"
-puts "Всего поездов #{Train.instances}"
-puts "Всего Cargo поездов #{TrainCargo.instances}"
+puts "Всего поездов #{Train.instances} именно #{tr3.manufacturer}"
+puts "Всего Cargo поездов #{TrainCargo.instances} а именно номер #{tr2.number} производитель #{tr2.manufacturer}"
 puts "Всего станций #{RailwayStation.instances}"
+
+puts Train.protected_instance_methods
 
 
 # class Menu < Train

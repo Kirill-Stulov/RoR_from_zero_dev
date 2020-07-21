@@ -1,3 +1,5 @@
+# Пример с методами класса в 
+
 # class_and_instance_methods_in_module2.rb
 # Продолжение от class_and_instance_methods_in_module
 # Ruby on Rails c нуля (2015) [Базовый]\Занятие 05. Методы класса, Модули и объектная модель Ruby 0:34:50
