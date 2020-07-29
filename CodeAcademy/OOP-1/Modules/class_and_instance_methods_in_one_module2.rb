@@ -7,7 +7,7 @@
 
 module FuelTank                
 	def fill_tank(level)		
-		self.fuel_tank = level 
+		self.fuel_tank = level                #!!!! здесь у метода fuel_tank нужен self чтобы не было путаницы с инстанс переменной fuel_tank, т.е self тут говорит что используем метод fuel_tank, который создан ниже через attr_accessor
 	end
 
 	def fuel_level 								
