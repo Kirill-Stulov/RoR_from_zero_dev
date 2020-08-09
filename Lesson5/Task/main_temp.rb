@@ -21,6 +21,7 @@ class Menu < Train
 #@routes_names = []           # 2 
 @routes = []                  # 2
 @@wg_names = []               # 4
+get = Proc.new {gets.chomp.strip.to_s} # этот прок чтобы каждый раз не писать длинное  #gets.chomp.strip.to_s      # strip отсекает пробелы, теперь не нужно городить проверку ввода пробела ниже
 
  
 loop do
@@ -44,7 +45,7 @@ loop do
 	while choice == 1                          # Позже нужно реализовать возможность удаления станции
 		puts "<===================== Создание/просмотр станций =========================>"
 		puts "Введите название станции, или 1 -> для возврата в основное меню \n"
-		station_name_input = gets.chomp.strip.to_s      # strip отсекает пробелы, теперь не нужно городить проверку ввода пробела ниже
+		station_name_input = get.call
 		break if station_name_input == "1"
 		if (station_name_input.empty? == true) # проверяем что ввод не пуст
 			puts "Имя не может быть пустым!"
@@ -74,9 +75,9 @@ loop do
 			puts '<===========================>'
 			st_names_only = []                                 # новый локальный массив специально для имен станций
 			@st_names.each{|obj| st_names_only << obj.name}     # перекидываем имена объектов массива @st_names в новый массив st_names_only. Т.е st_names_only будет содержать только имена, чтобы ниже было легко проверять содежржимое одного массива в другом
-			station_name_input_1 = gets.chomp.strip.to_s               # !!! Нужно изменить на произвольное колл-во станций в маршруте, вместо двух
+			station_name_input_1 = get.call               # !!! Нужно изменить на произвольное колл-во станций в маршруте, вместо двух
 			break if station_name_input_1 == '3'
-			station_name_input_2 = gets.chomp.strip.to_s                # проверка ввода количества станций у нас есть в методе initialize файла route.rb
+			station_name_input_2 = get.call                # проверка ввода количества станций у нас есть в методе initialize файла route.rb
 			break if station_name_input_2 == '3'						
 			if @routes.any?{|obj| obj.stations == [station_name_input_1, station_name_input_2]}  # проверка того, что пользователь не создает уже существующий маршрут. Заглядываем в каждый объект в массиве @routes, нас интересует там вложенный массив @stations, который является частью каждого объекта и содержит имена станций (2 шт) 
 				puts "Такой маршрут уже существует!"
