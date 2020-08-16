@@ -1,0 +1,1 @@
+http://rubylearning.com/satishtalim/ruby_exceptions.html

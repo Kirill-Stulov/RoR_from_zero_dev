@@ -12,3 +12,14 @@ end
 
 puts 'After exception'         # блок rescue обработал исключение и прога не вылетает а продолжает работать дальше
 									# если убрать блок rescue то 13 строка не выполнится
+
+
+# еще пример
+# begin  
+#   raise 'A test exception.'  
+# rescue StandardError => e  
+#   puts e.message  				# The message method returns a string that may provide human-readable details about what went wrong. 
+#   puts e.backtrace.inspect  		# The other important method is backtrace. This method returns an array of strings that represent the call stack at the point that the exception was raised.
+# end 
+
+
