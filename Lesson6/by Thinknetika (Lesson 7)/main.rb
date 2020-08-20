@@ -15,7 +15,7 @@ rs = RailwayStation.new "first"
 
 
 # tr = Train.new "12aa", 1, rs
-tr2 = Train.new '12123', 0, rs
+tr2 = Train.new '12123', 2, rs
 
 
 # puts Train.all
@@ -29,5 +29,6 @@ puts "_________________________________"
 puts "Поезд валидный?  #{tr2.valid?}"
 puts "Станция валидная?  #{rs.valid?}"
 
-puts rs.trains
-# puts tr2.wagons
+# puts rs.trains
+ p tr2.wagons[0]
+ puts tr2.methods

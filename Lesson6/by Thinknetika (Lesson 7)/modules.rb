@@ -40,10 +40,10 @@ end
 
 module Validator
 
-  def valid?
-    self.validate!
+  def valid?            #метод применяется в main (стр. 29 и 30 проверка валидности поезда и станции)  метод valid? возвращает true, если объект валидный и false - в противном случае
+    self.validate!       # для провеки на валидность, используется метод validate! self указывает, что обращение идет к методу validate! который указан в initialize этого класса (посмотри к примеру tr2.methods)
   rescue
-    false
+    false                   # если в блоке над rescue вылетает ошибка (одна из raise), то на вывод идет то, что под rescue, а именно false
   end
 
   protected 
@@ -51,7 +51,7 @@ module Validator
   NUMBER_PATTERN = /(.|\d){3}-*(.|\d){2}/i
   RAILWAYSTATION_NAME_PATTERN = /[a-zA-Z]{4,}/
 
-  def validate!
+  def validate!              # метод помещен в protected, т.к вызывается при инициализации, а в protected его нельзя будет вызвать напрямую 00:54:00
     if self.class == Train
       raise "Wrong Number format [aaaaa, 11111, aaa-11, 111-aa]" if @number !~ NUMBER_PATTERN  #Допустимый формат: три буквы или цифры в любом порядке, необязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса.
       raise "Wrong number of wagons" if @wagons[0].nil? || @wagons.length > 682 # самый длиный поезд в мире :)
