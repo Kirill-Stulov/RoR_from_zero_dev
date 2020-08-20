@@ -14,8 +14,8 @@ require_relative 'cargowagon'
 rs = RailwayStation.new "first"
 
 
-tr = Train.new "12aa", 1, rs
-tr2 = Train.new '12123', 1, rs
+# tr = Train.new "12aa", 1, rs
+tr2 = Train.new '12123', 0, rs
 
 
 # puts Train.all
@@ -26,7 +26,8 @@ puts "_________________________________"
 # puts "Всего поездов #{Train.instances}"
 # puts "Всего станций #{RailwayStation.instances}"
 
-puts "Поезд валидный?  #{tr.valid?}"
+puts "Поезд валидный?  #{tr2.valid?}"
 puts "Станция валидная?  #{rs.valid?}"
 
-# puts rs.trains
+puts rs.trains
+# puts tr2.wagons
