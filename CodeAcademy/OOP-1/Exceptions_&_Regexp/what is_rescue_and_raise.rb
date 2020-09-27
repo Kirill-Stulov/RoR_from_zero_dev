@@ -20,7 +20,7 @@
 	rescue StandardError => e
 		puts 'Error!!!'
 		raise                   # raise без аргументов, значит будет выброшено тоже исключение повторно и отловлено блоком rescue не будет
-	rescue NoMemoryError => e
+	rescue NoMemoryError => e     # т.е все что было после блока begin end - не выполнилось
 		puts "No memory!!!"
 	end
 

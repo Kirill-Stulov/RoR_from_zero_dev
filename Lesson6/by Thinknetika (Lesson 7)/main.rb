@@ -30,5 +30,6 @@ puts "Поезд валидный?  #{tr2.valid?}"
 puts "Станция валидная?  #{rs.valid?}"
 
 # puts rs.trains
- p tr2.wagons[0]
- puts tr2.methods
+ p tr2.wagons#[0]
+  p tr2#.manufacturer
+ # puts tr2.methods

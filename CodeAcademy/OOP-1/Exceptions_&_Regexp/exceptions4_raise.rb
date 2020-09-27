@@ -17,9 +17,9 @@
 
 
 
-def method_with_error              # 00:25:45
+def method_with_error              # 00:25:40
 	#....
-	raise 'Oh god, you piss me off!'
+	raise 'Oh god, you piss me off!'    # если указываем просто сообщение, то в блоке begin rescue будет выброшено исключение типа RintimeError с этим сообщением 
 end
 
 # обработчик ошибок для метода method_with_error
