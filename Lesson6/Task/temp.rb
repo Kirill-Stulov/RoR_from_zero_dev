@@ -968,27 +968,50 @@ st2 = RailwayStation.new("Yangiyul")
 RailwayStation.all
 =end
 
-class Train
-	attr_reader :speed, :wagons, :current_station
+# class Train
+# 	attr_reader :speed, :wagons, :current_station
 
-	@@trains = {}
-	@@inst = 0
+# 	@@trains = {}
+# 	@@inst = 0
 
-	def initialize_wagons
-		@wagons  << Wagon.new
-	end  
+# 	def initialize_wagons
+# 		@wagons  << Wagon.new
+# 	end  
 
-	def initialize(wagons, station)
-		@speed = 0
-		@wagons = []
+# 	def initialize(wagons, station)
+# 		@speed = 0
+# 		@wagons = []
 
-		wagons.times{initialize_wagons}
-		@current_station = station
-		station.train_arrive(self)
-		@@trains[@@trains.length + 1] = self
+# 		wagons.times{initialize_wagons}
+# 		@current_station = station
+# 		station.train_arrive(self)
+# 		@@trains[@@trains.length + 1] = self
 
-		register_instance 
-	end 
-end
+# 		register_instance 
+# 	end 
+# end
 
-tr1 = Train.new(1, 'VOZ')
+# tr1 = Train.new(1, 'VOZ')
+
+
+# иной метод работы с объектом
+	# class Computers
+
+	# 	def self.description
+	# 		puts "Laptop"
+	# 	end
+	# end
+
+
+	# # nettop = Computers.new
+	# # nettop.description
+
+	# Computers.description
+
+# тернарный оператор
+	a,b,c = 1,2,3     #параллельное присваивание
+	# p a,b,c
+
+	p a ? b : c  
+
+
