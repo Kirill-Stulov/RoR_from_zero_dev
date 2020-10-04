@@ -1009,9 +1009,9 @@ RailwayStation.all
 	# Computers.description
 
 # тернарный оператор
-	a,b,c = 1,2,3     #параллельное присваивание
+	a,b,c = nil,2,3     #параллельное присваивание
 	# p a,b,c
 
-	p a ? b : c  
+	p a ? b : c  #если a true то верни b иначе верни с
 
 
