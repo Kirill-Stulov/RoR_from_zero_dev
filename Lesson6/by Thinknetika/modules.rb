@@ -30,7 +30,7 @@ module InstanceCounter
   module InstanceMethods
     protected
     
-    def register_instance
+    def register_instance       # как работает разложено в \RoR_from_zero\Lesson5\By Thinknetika (15 corrections)\modules.rb
       self.class.inst ||= 0
       self.class.inst += 1 
     end
@@ -48,20 +48,20 @@ module Validator
 
   protected 
 
-  NUMBER_PATTERN = /(.|\d){3}-*(.|\d){2}/i
-  RAILWAYSTATION_NAME_PATTERN = /[a-zA-Z]{4,}/
+  NUMBER_PATTERN = /(.|\d){3}-*(.|\d){2}/i       # константа с допустимым форматом номера  (три буквы или цифры в любом порядке, необязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса) /i делает выражение нечувствительным к регистру
+  RAILWAYSTATION_NAME_PATTERN = /[a-zA-Z]{4,}/   # константа с допустимым форматом имени станции. Шаблон - любые четыре строчные или прописные латинские буквы
 
   def validate!              # метод помещен в protected, т.к вызывается при инициализации, а в protected его нельзя будет вызвать напрямую 00:54:00
-    if self.class == Train
+    if self.class == Train    # если это объект класса Train
       raise "Wrong Number format [aaaaa, 11111, aaa-11, 111-aa]" if @number !~ NUMBER_PATTERN  #Допустимый формат: три буквы или цифры в любом порядке, необязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса.
       raise "Wrong number of wagons" if @wagons[0].nil? || @wagons.length > 682 # самый длиный поезд в мире :)
-      raise "Wrong RailwayStation" if @current_station.class != RailwayStation
+      raise "Wrong RailwayStation" if @current_station.class != RailwayStation   # что такая станция существует
       true                                                                       # если ни один из raise не сработал (т.е если все условия удовлеторены), то будет выведено true
-    elsif self.class == RailwayStation
-      raise "Wrong name, min 4 symb and just letters" if @name !~ RAILWAYSTATION_NAME_PATTERN
+    elsif self.class == RailwayStation # если объект класса RailwayStation
+      raise "Wrong name, min 4 symb and just letters" if @name !~ RAILWAYSTATION_NAME_PATTERN  # выводим строку "Wrong name..., если переменная @name содержит строку не соответвтующую шаблону в константе RAILWAYSTATION_NAME_PATTERN (а именно, проверяем что имя станции соответствует шаблону в RAILWAYSTATION_NAME_PATTERN)
       true                                                                                    # если требование к имени станции удовлетворено, будет выведено true
-    elsif self.class == Route
-      raise "ОШИБКА: Хотя бы одна их указанных станций не существует" unless start_point.class == RailwayStation && end_point.class == RailwayStation
+    elsif self.class == Route   # если объект класса Route
+      raise "ОШИБКА: Хотя бы одна их указанных станций не существует" unless start_point.class == RailwayStation && end_point.class == RailwayStation  # выводит exception до тех пор пока обе - начальная и конечная станция не созданы
       true
     else
       true

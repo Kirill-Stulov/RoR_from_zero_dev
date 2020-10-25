@@ -19,6 +19,7 @@ class Train
     
     wagons.times {initialize_wagons}        #wagons - это параметр передаваемый во время создания поезда. Если в нем к примеру 5, то метод initialize_wagons (это метод из cargotrain.rb или passengertrain.rb) отрабатывает 5 раз
     @current_station = station                #и создает 5 вагонов соответствующего типа
+    
     station.train_arrive(self)              
     @@trains[@@trains.length + 1] = self    #В хеш @@trains таким методом добавляется пара ключ-значение (тут номер-объект). Ключом будет порядковый номер объекта (объект поезд), а значением сам объект (поезд)   
                                               #номер создается через @@trains.length + 1  , а ключ берется из self   
@@ -26,7 +27,7 @@ class Train
 
   end
 
-  def self.find(number)
+  def self.find(number)                   # метод класса, выводит поезд по номеру из хеша @@trains 
     @@trains[number]
   end
 

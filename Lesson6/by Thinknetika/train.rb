@@ -10,22 +10,28 @@ class Train
     
     @speed = 0
     @wagons = []
-    @number = number.to_s
+    @number = number.to_s         # добавился аттрибут - номер поезда
 
-    wagons.times {initialize_wagons}
+    wagons.times {initialize_wagons} 
     @current_station = station
 
-    validate!
+    validate!                     # метод из modules, при создании объекта этого класса проверяет формат номера поезда, кол-во вагонов, что станция существует    
 
-    station.train_arrive(self)
-    raise "Train with number \"#{@number}\" already exist" unless self.class.find(@number).nil?
-    @@trains[@number] = self
+    station.train_arrive(self)      # station - это параметр передаваемый во время создания поезда (имя станции)                       
+    raise "Train with number \"#{@number}\" already exist" unless self.class.find(@number).nil?  # self.class обозначет что обращаемся к классу этого объекта????
+    @@trains[@number] = self        # в хеш @@trains добавляется пара: номер поезда (@numer) ключ, сам объект (поезд self) значение                                                                  # В хеш @@trains таким методом добавляется пара ключ-значение. Ключом будет номер объекта (номер станции), а значением сам объект (станция)
 
     register_instance
 
   end
 
-  def self.find(number)
+
+  def description
+    puts "Это экземпляр класса #{self.class}"
+  end
+
+  def self.find(number)              # метод класса, выводит поезд по номеру из хеша @@trains
+    # raise "Train number #{number} is not present!" unless @@trains[number] == nil?
     @@trains[number]
   end
 

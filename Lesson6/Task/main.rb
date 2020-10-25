@@ -10,6 +10,8 @@ require_relative 'wagon.rb'
 require_relative 'wagon_cargo.rb'
 require_relative 'wagon_passenger.rb'
 
+# !!!!!!!!!!!! как правильно нужно было сделать это меню смотри в \RoR_from_zero\Lesson5\By Thinknetika (15 corrections)\main.rb #
+
 # <============================================== Интерфейс пользователя! ==========================================================>
 class Menu < Train
 # эти переменные можно создать в методах!!!!

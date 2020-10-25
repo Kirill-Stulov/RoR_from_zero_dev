@@ -1009,9 +1009,28 @@ RailwayStation.all
 	# Computers.description
 
 # тернарный оператор
-	a,b,c = nil,2,3     #параллельное присваивание
-	# p a,b,c
+	# a,b,c = nil,2,3     #параллельное присваивание
+	# # p a,b,c
 
-	p a ? b : c  #если a true то верни b иначе верни с
+	# p a ? b : c  #если a true то верни b иначе верни с
 
+# a = (1..5)
+# puts a.class
 
+# for index in a
+# 	puts index
+# end
+
+# # a.each{|num| puts num}
+
+# if "nnnice" !~ /\d/         # если в строке нет ни одной цифры
+# 	puts "There is no digit"
+# else 
+# 	puts 'there is a digit'
+# end
+
+# p 'h' =~ /[hello]/
+
+# /hello/.match 'hello'
+
+p /[a-zA-Z]{4}/ =~ 'abcdv'

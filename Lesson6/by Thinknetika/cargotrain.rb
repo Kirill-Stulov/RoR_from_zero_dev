@@ -1,7 +1,7 @@
 class CargoTrain < Train
 
   def add_wagon(wagon = CargoWagon.new)
-    super
+    super                                 #super вызывает оригинальную имплементацию метода
   end
 
   protected
