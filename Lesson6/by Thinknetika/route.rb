@@ -1,6 +1,6 @@
 class Route
   include Validator
-  attr_reader :stations
+  attr_reader :stations, :start_point, :end_point
 
   def initialize(start_point, end_point)
       @stations = [start_point, end_point]

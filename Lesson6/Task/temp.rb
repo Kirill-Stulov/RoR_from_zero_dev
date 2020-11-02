@@ -1033,4 +1033,40 @@ RailwayStation.all
 
 # /hello/.match 'hello'
 
-p /[a-zA-Z]{4}/ =~ 'abcdv'
+# p /[a-zA-Z]{4}/ =~ 'abcdv'
+
+# class Speak
+
+# 	def hi_and_bye
+# 		hello
+# 		self.so_long
+# 	end
+
+# 	def hello
+# 		puts 'hi'
+# 	end
+
+# 	def so_long
+# 		puts 'bye'
+# 	end
+
+# end
+
+# Speak.new.hi_and_bye
+
+class Comp
+ attr_accessor :type, :name
+
+ def initialize(type, name)
+ 	@name = name
+ 	@type = type
+ end
+
+	# def inspect
+	# 	puts "Comp id: #{object_id} - type: #{type} - name: #{name}"
+	# end
+end
+
+p Comp.new("desktop","my_comp")
+
+
