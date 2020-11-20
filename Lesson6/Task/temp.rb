@@ -24,10 +24,10 @@ p motorola.make
 p motorola.owner
 =end
 
-=begin
+
 a = ["a", "b", "c"]
 p a.index("c")
-=end
+
 
 =begin
 class Car
@@ -1054,19 +1054,33 @@ RailwayStation.all
 
 # Speak.new.hi_and_bye
 
-class Comp
- attr_accessor :type, :name
+# class Comp
+#  attr_accessor :type, :name
 
- def initialize(type, name)
- 	@name = name
- 	@type = type
- end
+#  def initialize(type, name)
+#  	@name = name
+#  	@type = type
+#  end
 
-	# def inspect
-	# 	puts "Comp id: #{object_id} - type: #{type} - name: #{name}"
-	# end
-end
+# 	# def inspect
+# 	# 	puts "Comp id: #{object_id} - type: #{type} - name: #{name}"
+# 	# end
+# end
 
-p Comp.new("desktop","my_comp")
+# p Comp.new("desktop","my_comp")
 
 
+# route = 2
+# # p route < 10
+# # p route.class
+
+# case route == 2
+# 	when route < 10
+# 		puts "route is less than 10"
+# 	when route > 4
+# 		puts "route is bigger than 5"
+# 	else
+# 		puts "unknown number!"
+# end
+
+# puts route < 10

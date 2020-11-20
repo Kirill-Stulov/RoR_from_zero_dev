@@ -1,18 +1,10 @@
 class Route
-  include Validator
-  attr_accessor :stations, :start_point, :end_point
+  # include Validator
+  attr_reader :stations
 
-  # @@stations = []
-  
   def initialize(start_point, end_point)
-      @start_point = start_point
-      @end_point = end_point
-     @stations = [@start_point, @end_point]    #!!! 'это не работало, пока я не сделал stations переменной класса'!
-      # p @@stations
-      # puts start_point.class
-      # puts end_point.class
-      # puts '-= initialize end =-'
-      validate!
+      @stations = [start_point, end_point]
+      # validate!
   end
 
   def add_station(station)
