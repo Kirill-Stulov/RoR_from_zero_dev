@@ -25,8 +25,8 @@ p motorola.owner
 =end
 
 
-a = ["a", "b", "c"]
-p a.index("c")
+# a = ["a", "b", "c"]
+# p a.index("c")
 
 
 =begin
@@ -1084,3 +1084,53 @@ RailwayStation.all
 # end
 
 # puts route < 10
+
+=begin
+TR_NUM_PATTERN =  /(.|\d){3}-*(.|\d){2}/i       # три буквы или цифры в любом порядке, необязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса
+RS_NAME_PATTERN = /[a-zA-Z]{4}/       # любые четыре строчные или прописные латинские буквы
+
+p !!("ooo-ss" =~ TR_NUM_PATTERN) 
+p !!('slkK' =~ RS_NAME_PATTERN)
+=end
+
+# regexp = /[a-zA-Z]{4}/
+
+# def goahead(name)
+# 	if name =~  /^[a-zA-Z]{4}$/ #and name.length == 4    #{4} обозначает допустимое количество повторений подшаблона !!!! в случае диапозона, если нужно ровно 4 символа не больне ни меньше, то указываем что 4 с начала и 4 с конца. ^ начало $ конец
+# 	   puts "ok"
+# 	   puts name.length
+# 	else
+# 		puts "nok"
+# 		puts name.length
+# 	end
+# end
+
+# goahead('blas')
+
+
+# name = 
+
+# if 'abcd' =~ /^[a-z]{4}$/ #and 
+# 	puts "ok"
+# else
+# 	puts "notok"
+# end
+
+p 'abcnnnnnnbn' =~ /^[a-z]{4,10}$/
+
+
+# reg = /^[a-z]{4}$/    #
+# text = 'abcd'
+
+# p text =~ reg
+
+# #варианты которые накидали в чате
+# /.{4}/
+# /^.{4}$/
+
+# str = " "
+
+# str << 'new string'
+# str << "!!!"
+
+# puts str

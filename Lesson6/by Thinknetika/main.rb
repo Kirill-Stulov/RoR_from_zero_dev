@@ -26,15 +26,13 @@ rs3 = RailwayStation.new("third")
  # Route.show_stations
 
 
- # p route1.end_point.class           #!!!! почему у меня в start_point и end_point  было nil?  вместо first и second соответственно. Потому что массив @stations (из route.rb) должен принадлежать классу,а не экземпляру, т.е @@stations 
 # tr = Train.new "12aa", 1, rs
 tr1 = Train.new "12123", 1, rs1
 puts route1.stations
 
 # puts route1.methods
 
- tr1.set_route(route1)         #!!! теперь тут была проблема, исправил в train.rb строка 97 на .start_point 
-
+ tr1.set_route(route1)        
 p "Текущая станция -" 
 p tr1.current_station.name 
 p "Следующая станция -"

@@ -1,3 +1,9 @@
+# Self is the “current” or “default” object, a role typically assigned to many objects in sequence (though only one at a time) as a program runs. The
+# self object in Ruby is like the first person or I of the program. As in a book with multiple first-person
+# narrators, the I role can get passed around. There’s always one self, but what object it is will vary.
+
+
+
 # How to understand what it's referencing. self can refer to different things depending on where it is used.
 
 #1. We use self to allow Ruby to disambiguate between initializing a local variable and calling a setter method.
