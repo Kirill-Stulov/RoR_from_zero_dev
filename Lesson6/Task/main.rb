@@ -97,13 +97,16 @@ loop do
 		puts "3 -> назад в основное меню"
 		train_type = gets.chomp.to_i
 		if train_type == 1 && @@tr_names.empty? #== true   										# если выбрано 1 и это первый поезд, т.е в массиве @@tr_names еще нет ни одной записи. Убрал true - это излишне.
-			@@tr_names << Train.new(1, :passenger)            									# то просто закидываем в массив пассажирский поезд под номером 1
-		elsif train_type == 1 && !@@tr_names.empty? #== false 	 								# если выбрано 1 и в массиве уже не пусто. Заменил false на ! перед выражением  @@tr_names.empty. ! означет not
-			@@tr_names << Train.new(@@tr_names.last.number + 1, :passenger)   					# то закидывем в массив пассажирский поезд, создавая ему номер на основе номера последнего поезда в массиве +1. номер поезда вывел с помощью attr_accessor :number в шапке файла train.rb 
-		elsif train_type == 2 && @@tr_names.empty? == true                   					# здесь бы proc запилить чтоб не повторяться, но это не критично вродь
-			@@tr_names << Train.new(1, :cargo)
-		elsif train_type == 2 && @@tr_names.empty? == false
-			@@tr_names << Train.new(@@tr_names.last.number + 1, :cargo)
+			puts "Введите номер поезда"
+			number = gets.chomp 			#!!!!!!!!!!!!!!!!!!!!!!				    #!!!!!! обновить тут комменты !!!!!!
+			p number.class
+			@@tr_names << Train.new(number, :passenger, @manufacturer)            									# то просто закидываем в массив пассажирский поезд под номером 1
+		# elsif train_type == 1 && !@@tr_names.empty? #== false 	 								# если выбрано 1 и в массиве уже не пусто. Заменил false на ! перед выражением  @@tr_names.empty. ! означет not
+		# 	@@tr_names << Train.new(@@tr_names.last.number + 1, :passenger, @manufacturer)   					# то закидывем в массив пассажирский поезд, создавая ему номер на основе номера последнего поезда в массиве +1. номер поезда вывел с помощью attr_accessor :number в шапке файла train.rb 
+		# elsif train_type == 2 && @@tr_names.empty? == true                   					# здесь бы proc запилить чтоб не повторяться, но это не критично вродь
+		# 	@@tr_names << Train.new(@number, :cargo, @manufacturer)
+		# elsif train_type == 2 && @@tr_names.empty? == false
+		# 	@@tr_names << Train.new(@@tr_names.last.number + 1, :cargo, @manufacturer)
 		elsif train_type == 3
 			break                                   #возвращаемся в основное меню
 		else

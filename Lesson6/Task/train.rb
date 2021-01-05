@@ -3,6 +3,7 @@
 require_relative 'modules.rb'
 # include Manufacturer
 # Manufacturer.hi("Melissandra")
+include Validator
 
 class Train
   # include Manufacturer
@@ -24,11 +25,12 @@ class Train
 
 	def initialize(number, type, manufacturer)                               # Имеет, тип type, который указывается при создании: грузовой, пассажирский и номер number.
 		@type = type
-		@number = number.to_i
+		@number = number#.to_s
 		@speed = 0
 		@wagon = []                                              # также при создании объекта класса train будет инициализироваться массив вагонов поезда @wagon
 		@route = []                                                # и массив маршрутов поезда @route
     @manufacturer = "RJD"                                 # производитель для метода из modules.rb, который будет позволять указывать и менять это значение. По умолчанию -RJD
+    validate!
 		# @@inst += 1
     puts "Собран новый поезд №#{@number}, типа #{@type}"
     register_instance

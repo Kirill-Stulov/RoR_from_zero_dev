@@ -85,10 +85,28 @@ module Validator
 	end
 
 	protected
-
-	TR_NUM_PATTERN =   /(.|\d){3}*-(.|\d){2}/ # три буквы или цифры в любом порядке, необязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса
+                       
+	TR_NUM_PATTERN =   /(.|\d){3}-*(.|\d){2}/ # три буквы или цифры в любом порядке, необязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса
 	RS_NAME_PATTERN =  /^[a-zA-Z]{4,12}$/      # от 4 до 12 любых строчных или прописных латинских букв. От 4 до 12 от начала строки ^ и от конца строки $. От начала и от конца нужно чтобы шаблон не позволял вбивать больше 12
 
 # по заданию
 # метод valid? который возвращает true, если объект валидный и false - в противном случае.
 	def validate!
+		if self.class == Train 
+			puts @number.class
+			raise "Wrong Number format [aaaaa, 11111, aaa-11, 111-aa]" if @number !~ TR_NUM_PATTERN
+			raise "Wrong number of wagons" if @wagon[0].nil? || @wagons.length > 666                  # в моем варианте массива с вагонами в initialize wagon, а не wagons
+			raise "Wrong RailwayStation" if @current_station.class != RailwayStation
+			true
+		elsif self.class == RailwayStation
+			raise "Wrong name, min 4 symb, max 12 symb and just letters" if @name !~ RS_NAME_PATTERN
+			true
+		elsif self.class == Route
+			raise "ERROR: At least one of this stations does not exist" unless (start_point.class || end_point.class) != RailwayStation
+			true
+		else
+			true
+		end
+	end
+
+end

@@ -1085,13 +1085,21 @@ RailwayStation.all
 
 # puts route < 10
 
-=begin
+#=begin
 TR_NUM_PATTERN =  /(.|\d){3}-*(.|\d){2}/i       # три буквы или цифры в любом порядке, необязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса
 RS_NAME_PATTERN = /[a-zA-Z]{4}/       # любые четыре строчные или прописные латинские буквы
 
-p !!("ooo-ss" =~ TR_NUM_PATTERN) 
-p !!('slkK' =~ RS_NAME_PATTERN)
-=end
+test = gets.chomp
+puts test.class
+
+raise "Wrong format!!" if test !~ TR_NUM_PATTERN
+puts  "true"
+
+
+# p !!(test =~ TR_NUM_PATTERN)
+# p !!("ooo-ss" =~ TR_NUM_PATTERN) 
+# p !!('slkK' =~ RS_NAME_PATTERN)
+#=end
 
 # regexp = /[a-zA-Z]{4}/
 
@@ -1116,7 +1124,13 @@ p !!('slkK' =~ RS_NAME_PATTERN)
 # 	puts "notok"
 # end
 
-p 'abcnnnnnnbn' =~ /^[a-z]{4,10}$/
+# p 'abcnnnnnnbn' =~ /^[a-z]{4,10}$/
+
+# begin
+# 	puts 1 / 0
+# rescue
+# 	puts "do not devide by zero man!"
+# end
 
 
 # reg = /^[a-z]{4}$/    #

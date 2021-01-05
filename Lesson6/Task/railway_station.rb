@@ -4,6 +4,7 @@ class RailwayStation < Train         			# Наследуем из train, пот�
 	# attr_accessor :name
 
 	include InstanceCounter
+	include Validator
 
 	@@stations = []
 	# @@inst = 0
@@ -12,6 +13,7 @@ class RailwayStation < Train         			# Наследуем из train, пот�
 		@name = name
 		@trains = {}
 		@@stations << self                      # можно при создании объекта через initialize, сразу складывать только что созданный объект в массив.
+		validate!
 		# @@inst += 1
 		puts "Станция #{@name} создана \n"
 		register_instance						# метод для вывода количества экземпляров класса RailwayStation. Используется в main_temp.rb пункт 10 и 8 

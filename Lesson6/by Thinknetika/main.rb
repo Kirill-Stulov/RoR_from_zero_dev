@@ -14,11 +14,13 @@ require_relative 'cargowagon'
 rs1 = RailwayStation.new("first")
 rs2 = RailwayStation.new("second")
 rs3 = RailwayStation.new("third")
+# rs4 = RailwayStation.new("fif5")
 
 
 # p rs1.valid?
 # p rs2.valid?
  route1 = Route.new(rs1, rs2)
+ route2 = Route.new(1, rs2)
  # p route1.stations
  # p route1.end_point
  #route1.show_stations
@@ -26,6 +28,7 @@ rs3 = RailwayStation.new("third")
  # Route.show_stations
 
 
+=begin
 # tr = Train.new "12aa", 1, rs
 tr1 = Train.new "12123", 1, rs1
 puts route1.stations
@@ -33,9 +36,9 @@ puts route1.stations
 # puts route1.methods
 
  tr1.set_route(route1)        
-p "Текущая станция -" 
-p tr1.current_station.name 
-p "Следующая станция -"
+p "Текущая станция - #{tr1.current_station.name}" 
+
+puts "Следующая станция -"
 tr1.next_station 
 
 p "Текущая станция"
@@ -112,4 +115,4 @@ puts "_________________________________"
 # puts 'поезда на станции rs1'
 # p rs1.trains
 
-
+=end

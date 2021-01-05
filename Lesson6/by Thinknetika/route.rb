@@ -7,7 +7,7 @@ class Route
   def initialize(start_point, end_point)
       @start_point = start_point
       @end_point = end_point
-     @stations = [@start_point, @end_point]    #!!! 'это не работало, пока я не сделал stations переменной класса'!
+     @stations = [@start_point, @end_point]    #!!! 'это не работало, пока я не сделал stations переменной класса'!  _> старый и неверный коммент, у меня была где-то ошибка и потому это не рабтало, а не потому что у thinknetika были проблемы
       # p @@stations
       # puts start_point.class
       # puts end_point.class
