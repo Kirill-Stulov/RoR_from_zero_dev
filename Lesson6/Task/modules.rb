@@ -93,10 +93,11 @@ module Validator
 # метод valid? который возвращает true, если объект валидный и false - в противном случае.
 	def validate!
 		if self.class == Train 
-			puts @number.class
+			# if @number !~ TR_NUM_PATTERN
+				
 			raise "Wrong Number format [aaaaa, 11111, aaa-11, 111-aa]" if @number !~ TR_NUM_PATTERN
-			raise "Wrong number of wagons" if @wagon[0].nil? || @wagons.length > 666                  # в моем варианте массива с вагонами в initialize wagon, а не wagons
-			raise "Wrong RailwayStation" if @current_station.class != RailwayStation
+			#raise "Wrong number of wagons" if @wagon[0].nil? || @wagon.length > 666                  # мне не нужна проверка наличия вагонов при создании поезда или их критического количества, вагоны добавляются к поездам в отдельном меню. в моем варианте массива с вагонами в initialize wagon, а не wagons
+			# raise "Wrong RailwayStation" if @current_station.class != RailwayStation					# мне не нужно проверять при создании поезда, что такая станция существует, станции создаются в отдельном меню
 			true
 		elsif self.class == RailwayStation
 			raise "Wrong name, min 4 symb, max 12 symb and just letters" if @name !~ RS_NAME_PATTERN

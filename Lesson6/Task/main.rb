@@ -89,24 +89,26 @@ loop do
 		end
 	end
 
-	while choice == 3
+	while choice == 3          # сначала тут был счетик (урок 5), увеличивавший номер поезда на 1 при каждом создании, теперь есть шаблон номера поезда который проверяем, потом убрал опцию увеличения номера поезда                                    
 		puts "<================ Создание поезда ================>"
 		puts "Какой тип поезда необходимо создать?"
 		puts "1 -> пассажирский"
 		puts "2 -> грузовой"
 		puts "3 -> назад в основное меню"
 		train_type = gets.chomp.to_i
-		if train_type == 1 && @@tr_names.empty? #== true   										# если выбрано 1 и это первый поезд, т.е в массиве @@tr_names еще нет ни одной записи. Убрал true - это излишне.
+		if train_type == 1  										
 			puts "Введите номер поезда"
-			number = gets.chomp 			#!!!!!!!!!!!!!!!!!!!!!!				    #!!!!!! обновить тут комменты !!!!!!
-			p number.class
-			@@tr_names << Train.new(number, :passenger, @manufacturer)            									# то просто закидываем в массив пассажирский поезд под номером 1
-		# elsif train_type == 1 && !@@tr_names.empty? #== false 	 								# если выбрано 1 и в массиве уже не пусто. Заменил false на ! перед выражением  @@tr_names.empty. ! означет not
-		# 	@@tr_names << Train.new(@@tr_names.last.number + 1, :passenger, @manufacturer)   					# то закидывем в массив пассажирский поезд, создавая ему номер на основе номера последнего поезда в массиве +1. номер поезда вывел с помощью attr_accessor :number в шапке файла train.rb 
-		# elsif train_type == 2 && @@tr_names.empty? == true                   					# здесь бы proc запилить чтоб не повторяться, но это не критично вродь
-		# 	@@tr_names << Train.new(@number, :cargo, @manufacturer)
-		# elsif train_type == 2 && @@tr_names.empty? == false
-		# 	@@tr_names << Train.new(@@tr_names.last.number + 1, :cargo, @manufacturer)
+			number = gets.chomp 			                         #  сделал чтобы прога не вылетала в случае если неверный шаблон, а просто выдавала то что в rescue 
+			add_train(number, :passenger, @manufacturer)	
+				# @@tr_names << Train.new(number, :passenger, @manufacturer) # !!!!!!!!!!!!!!!!!!!!!!!! вместо этого сдесь сделал через метод add_train
+		elsif train_type == 2 
+		  	puts "Введите номер поезда"
+			number = gets.chomp
+			# begin
+		    Train.new(number, :cargo, @manufacturer)  #!!!! добавление в массив только что созданного объекта класса нужно делать в initialize класса этого объекта 
+			# rescue															# тут костыль...
+				# puts "Wrong Number format [aaaaa, 11111, aaa-11, 111-aa]"
+			# end
 		elsif train_type == 3
 			break                                   #возвращаемся в основное меню
 		else
@@ -117,7 +119,7 @@ loop do
 #=begin
 
 	while choice == 4
-			puts "<================ Добавлнение/удаление вагона к поезду ================>"
+			puts "<================ Добавлнение/удаление вагона к поезду ================>"  # Решил что ВАГОНЫ ЛУЧШЕ СОЗДАВАТЬ ЧЕРЕЗ INITIALIZE ВМЕСТЕ С ПОЕЗДОМ СРАЗУ
 			puts "1 -> Показать поезда с вагонами"
 			puts "2 -> Создать вагон"
 			puts "3 -> Добавить вагон к поезду (или несколько)"
@@ -138,13 +140,13 @@ loop do
 					wagon_type = gets.chomp.to_i
 					break if wagon_type == 3
 					if wagon_type == 1 && @@wg_names.empty?  											# если выбрано 1 и это первый вагон, т.е в массиве @@wg_names еще нет ни одной записи.
-						@@wg_names << Wagon.new(1, :passenger)            								# то просто закидываем в массив пассажирский вагон под номером 1
+						@@wg_names << Wagon.new(1, :passenger, "N/A")            								# то просто закидываем в массив пассажирский вагон под номером 1
 					elsif wagon_type == 1 && !@@wg_names.empty? 	 									# если выбрано 1 и в массиве уже не пусто. Заменил false на ! перед выражением  @@tr_names.empty. ! означет not
-						@@wg_names << Wagon.new(@@wg_names.last.number + 1, :passenger)   				# то закидывем в массив пассажирский поезд, создавая ему номер на основе номера последнего поезда в массиве +1. номер поезда вывел с помощью attr_accessor :number в шапке файла train.rb 
+						@@wg_names << Wagon.new(@@wg_names.last.number + 1, :passenger, "N/A")   				# то закидывем в массив пассажирский поезд, создавая ему номер на основе номера последнего поезда в массиве +1. номер поезда вывел с помощью attr_accessor :number в шапке файла train.rb 
 					elsif wagon_type == 2 && @@wg_names.empty?                   						# здесь бы proc запилить чтоб не повторяться, но это не критично вродь
-						@@wg_names << Wagon.new(1, :cargo)
+						@@wg_names << Wagon.new(1, :cargo, "N/A")
 					elsif wagon_type == 2 && !@@wg_names.empty?
-						@@wg_names << Wagon.new(@@wg_names.last.number + 1, :cargo)
+						@@wg_names << Wagon.new(@@wg_names.last.number + 1, :cargo, "N/A")
 					elsif wagon_type == 3
 						break                                   										#возвращаемся в предыдущее меню
 					else
@@ -221,7 +223,7 @@ loop do
 			if !@@tr_names.empty? #== false  													# проверка, что в списке есть поезда. (if !@@tr_names.empty? означает - if @@tr_names is not empty)    #<==========================
 				puts " => выберите поезд из списка"	
 				@@tr_names.map{|obj| obj.type_full}       										# показываем список поездов по номеру и типу. Метод type из train.rb
-				@tr_input = gets.chomp.to_i   													# tr_input - пользовательский ввод
+				@tr_input = gets.chomp#.to_i   													# tr_input - пользовательский ввод
 				if @@tr_names.any?{ |obj| obj.number == @tr_input } 							# проверка, если введенный номер поезда относится к существующим поездам
 					puts "Выбран поезд #{@tr_input}"
 					puts "Выберите станцию назначения из списка ниже: "   						# ВМЕСТО ВОТ ЭТОГО ВСЕГО -НАПИСАТЬ МЕТОД И ВЫЗЫВАТЬ ЕГО!

@@ -1086,14 +1086,14 @@ RailwayStation.all
 # puts route < 10
 
 #=begin
-TR_NUM_PATTERN =  /(.|\d){3}-*(.|\d){2}/i       # три буквы или цифры в любом порядке, необязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса
-RS_NAME_PATTERN = /[a-zA-Z]{4}/       # любые четыре строчные или прописные латинские буквы
+# TR_NUM_PATTERN =  /(.|\d){3}-*(.|\d){2}/i       # три буквы или цифры в любом порядке, необязательный дефис (может быть, а может нет) и еще 2 буквы или цифры после дефиса
+# RS_NAME_PATTERN = /[a-zA-Z]{4}/       # любые четыре строчные или прописные латинские буквы
 
-test = gets.chomp
-puts test.class
+# test = gets.chomp
+# puts test.class
 
-raise "Wrong format!!" if test !~ TR_NUM_PATTERN
-puts  "true"
+# raise "Wrong format!!" if test !~ TR_NUM_PATTERN
+# puts  "true"
 
 
 # p !!(test =~ TR_NUM_PATTERN)
@@ -1148,3 +1148,50 @@ puts  "true"
 # str << "!!!"
 
 # puts str
+
+#*****************************************************************************************************************
+# тут проверю что при попытке создания объекта с неправильным именем, он создается, добавляется в массив @tr_names
+# и потом удаляется с помощью метода pop
+# require_relative 'modules.rb'
+# include Validator
+
+
+class Vehicle
+	@@br_names = []
+	BR_NAME_PATTERN = /^[a-zA-Z]{4,12}$/     # от 4 до 12 любых строчных или прописных латинских букв. От 4 до 12 от начала строки ^ и от конца строки $. От начала и от конца нужно чтобы шаблон не позволял вбивать больше 12
+
+	attr_accessor :brand, :type, :color
+
+		def initialize(brand, type, color)
+			@brand = brand
+			@type = type
+			@color = color
+
+			@@br_names << @brand
+
+			raise "wrong brand length" if @brand !~ BR_NAME_PATTERN
+			# p @@br_names
+		end
+
+		# def self.delete_wrong
+		# 	if @brand !~ BR_NAME_PATTERN
+		# 		@@br_names.pop
+		# 	else
+		# 		@@br_names << @brand
+		# 	end
+		# end
+
+		# def self.show_br_names   # метод класса Vehicle нужен чтобы чтобы смотреть содержимое @@br_names из класса Car
+		# 	p @@br_names
+		# end
+
+	 
+
+		# if @brand !~ BR_NAME_PATTERN
+		# 	@@br_names.pop
+		# else
+		# 	puts "Собрана новая машина!" 
+		# 	p @@br_names
+		# end
+
+end

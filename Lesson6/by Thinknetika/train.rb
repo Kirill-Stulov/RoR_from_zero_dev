@@ -18,7 +18,7 @@ class Train
     validate!                       # метод из modules, при создании объекта этого класса проверяет (в зависимости от класса на котором вызван): формат номера поезда, кол-во вагонов, что станция существует    
 
     station.train_arrive(self)      #!!!!!! сразу при инициализации отправляем поезд на станцию station. station - это параметр передаваемый во время создания поезда (имя станции). self это сам поезд!!!!. Метод train_arrive из railwaystation.rb                      
-    raise "Train with number \"#{@number}\" already exist" unless self.class.find(@number).nil?  # self.class нужно чтобы воспользоваться методом find (который у нас метод класса - строка 33)
+    raise "Train with number \"#{@number}\" already exist" unless self.class.find(@number).nil?  # выдает exception:- "такой номер уже есть" если self.class.find(@number).nil? не true (если в @@trains этот @number уже есть, то выражение self.class.find(@number).nil? выдаст false, т.е not nill )///  self.class нужно чтобы воспользоваться методом find (который у нас метод класса - строка 33)
     @@trains[@number] = self        # в хеш @@trains добавляется пара: номер поезда (@number) ключ, сам объект (поезд self) значение
 
     register_instance               #метод увеличивает счетчик кол-ва экземпляров класса, вызваем его из конструктора на классе train

@@ -3,11 +3,11 @@
 require_relative 'modules.rb'
 # include Manufacturer
 # Manufacturer.hi("Melissandra")
-include Validator
 
 class Train
   # include Manufacturer
   include InstanceCounter
+  include Validator
 	attr_accessor :speed, :wagon, :type, :route, :station, :number, :name, :manufacturer 
 
 # Переменные класса можно использовать в методах класса (в инстанс методах класса), 
@@ -30,11 +30,29 @@ class Train
 		@wagon = []                                              # также при создании объекта класса train будет инициализироваться массив вагонов поезда @wagon
 		@route = []                                                # и массив маршрутов поезда @route
     @manufacturer = "RJD"                                 # производитель для метода из modules.rb, который будет позволять указывать и менять это значение. По умолчанию -RJD
-    validate!
-		# @@inst += 1
-    puts "Собран новый поезд №#{@number}, типа #{@type}"
+    
+    begin
+      validate!
+		rescue RuntimeError => e     # !!!!!!!!! это rescue нужно чтобы цикл не обрывался, но из-за него поезд с неправильным именем создается 
+      puts e.inspect            # значит нужно удалять поезд, сделаю это в методе validate! Для этого удаляем последний добавленный элемент массива @@tr_names
+    end
+    
+    @@tr_names << self
+
+
+    # @@inst += 1
+    if @number !~ TR_NUM_PATTERN
+      @@tr_names.pop              ### ЭТО НЕ СРАБАТЫВАЕТ! видимо потому что у меня и тут и в main массив @@tr_names
+    else 
+      puts "Собран новый поезд №#{@number}, типа #{@type}"
+    end
+    
     register_instance
 	end
+
+  def self.add_train(num, type, manuf)                         #избавился от @@tr_names в main без этого метода!!. добавил этот метод чтобы не плодить @@tr_names в main и train и чтобы срабатывал @@tr_names.pop и тем самым чтобы поезд с неправильным именем не создавался когда происходит rescue в initialize
+    @@tr_names << Train.new(num, :passenger, @manufacturer)  #!!!! может сюда проверку включить???
+  end
 
   def self.find(num)                                        # метод класса find, который принимает номер поезда и возвращает объект поезда по номеру или nil, если поезд с таким номером не найден.
     @result = @@tr_names.select{|obj| obj.number == num}   
