@@ -16,7 +16,7 @@ require_relative 'wagon_passenger.rb'
 class Menu < Train
 # эти переменные можно создать в методах!!!!
 @st_names = []                #1 stations_names массив в котором храним объекты с именами станций при выборе 1
-@@tr_names = []               #3 массив в котором храним объекты с именами поездов при выборе 3
+# @@tr_names = []               #3 массив в котором храним объекты с именами поездов при выборе 3  этот больше не использую, использую тут @@tr_names из train.rb 
 @routes = []                  # 2
 @@wg_names = []               # 4
  
@@ -99,13 +99,13 @@ loop do
 		if train_type == 1  										
 			puts "Введите номер поезда"
 			number = gets.chomp 			                         #  сделал чтобы прога не вылетала в случае если неверный шаблон, а просто выдавала то что в rescue 
-			add_train(number, :passenger, @manufacturer)	
-				# @@tr_names << Train.new(number, :passenger, @manufacturer) # !!!!!!!!!!!!!!!!!!!!!!!! вместо этого сдесь сделал через метод add_train
+			# add_train(number, :passenger, @manufacturer)	
+			Train.new(number, :passenger, @manufacturer) # !!!!!!!!!!!!!!!!!!!!!!!! вместо можно, но не нужно сделать через метод add_train из train.rb 
 		elsif train_type == 2 
 		  	puts "Введите номер поезда"
 			number = gets.chomp
 			# begin
-		    Train.new(number, :cargo, @manufacturer)  #!!!! добавление в массив только что созданного объекта класса нужно делать в initialize класса этого объекта 
+		    Train.new(number, :cargo, @manufacturer)  #!!!! добавление в массив только что созданного объекта класса сделано в initialize класса этого объекта через @@tr_names << self 
 			# rescue															# тут костыль...
 				# puts "Wrong Number format [aaaaa, 11111, aaa-11, 111-aa]"
 			# end
