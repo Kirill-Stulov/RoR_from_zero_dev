@@ -31,7 +31,7 @@ class Train
 		@route = []                                                # и массив маршрутов поезда @route
     @manufacturer = "RJD"                                 # производитель для метода из modules.rb, который будет позволять указывать и менять это значение. По умолчанию -RJD
     
-    wagons.times{initialize_wagons}                     #wagons - это параметр передаваемый во время создания поезда. Если в нем к примеру 5, то метод initialize_wagons (это метод из cargotrain.rb или passengertrain.rb) отрабатывает 5 раз
+    #wagons.times{initialize_wagons}                     #wagons - это параметр передаваемый во время создания поезда. Если в нем к примеру 5, то метод initialize_wagons (это метод из cargotrain.rb или passengertrain.rb) отрабатывает 5 раз
                                                           #и создает 5 вагонов соответствующего типа
     begin
       validate!
