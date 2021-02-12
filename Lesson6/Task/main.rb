@@ -140,7 +140,8 @@ loop do
 					wagon_type = gets.chomp.to_i
 					break if wagon_type == 3
 					if wagon_type == 1 && @@wg_names.empty?  											# если выбрано 1 и это первый вагон, т.е в массиве @@wg_names еще нет ни одной записи.
-						@@wg_names << Wagon.new(1, :passenger, "N/A")            								# то просто закидываем в массив пассажирский вагон под номером 1
+						WagonPassenger.new(1, @type, @manufacturer)
+						# @@wg_names << Wagon.new(1, :passenger, "N/A")            								# то просто закидываем в массив пассажирский вагон под номером 1
 					elsif wagon_type == 1 && !@@wg_names.empty? 	 									# если выбрано 1 и в массиве уже не пусто. Заменил false на ! перед выражением  @@tr_names.empty. ! означет not
 						@@wg_names << Wagon.new(@@wg_names.last.number + 1, :passenger, "N/A")   				# то закидывем в массив пассажирский поезд, создавая ему номер на основе номера последнего поезда в массиве +1. номер поезда вывел с помощью attr_accessor :number в шапке файла train.rb 
 					elsif wagon_type == 2 && @@wg_names.empty?                   						# здесь бы proc запилить чтоб не повторяться, но это не критично вродь
@@ -157,19 +158,19 @@ loop do
 					puts "Еще не создано ни одного вагона!"
 			elsif reply == 3 && !@@tr_names.empty?
 				puts "Выберите поезд из списка, чтобы добавить к нему вагон:"  						# используем метод добавления вагона к поезду add_wagon из train.rb
-				@@tr_names.map{|obj| obj.type_full }
-				@@tr_input = gets.chomp.to_i
-				if @@tr_names.any?{|obj| obj.number == @@tr_input}                            		# если в массиве с объектами поездов есть введенный нами номер поезда
-					puts "Выбран поезд №#{@@tr_input}"
-					puts "Выберите вагон, который хотите добавить к поезду №#{@@tr_input}"
+					@@tr_names.map{|obj| obj.type_full }
+					tr_input = gets.chomp
+				if @@tr_names.any?{|obj| obj.number == tr_input}                            		# если в массиве с объектами поездов есть введенный нами номер поезда
+					puts "Выбран поезд №#{tr_input}"
+					puts "Выберите вагон, который хотите добавить к поезду №#{tr_input}"
 					puts "Доступны следующие вагоны: "
 					@@wg_names.map{|obj| obj.type_full}                                     		# мне пришлось переименовать метод type (который живет в wagon.rb и отвечает за вывод инфы) в метод type_full, т.к у кажого объекта уже есть есть метод type, который мне нужен для сравнения в методе wagon_such_train?.  
 					# wagon1 = Wagon.new(55, :passenger)                                            # !!! мне тут вагоны нужно автоматически создавать через Wagon.new и класть их в @@wg_names
-					@@wg_input = gets.chomp.to_i
-					@@wagon_to_add = @@wg_names.select{|obj| obj.number == @@wg_input}              # это дублируется в train # если уберу этот дубликат тут, то не сработает @@train_to_add_wagon[0].add_wagon(@@wagon_to_add[0])   # присваиваем переменной wagon_to_add значение объекта из массива с поездами, объект находим по аттрибуту -number 
-					@@train_to_add_wagon = @@tr_names.select{|obj| obj.number == @@tr_input}  	    # это дублируется в train # если уберу этот дубликат тут, то не сработает @@train_to_add_wagon[0].add_wagon(@@wagon_to_add[0])      # присваиваем переменной train_to_add_wagon значение объекта из массива с поездами, объект находим по аттрибуту -number                 # ТУТ ВМЕСТО @@tr_input получаю объект из массива с поездами (@@@tr_names) в котором есть обЪект с именем равным @@@tr_input! Это новая переменная @@train_to_add_wagon. Далее на нем используем метод add_wagon из train.rb											
-					if !@@train_to_add_wagon.any?{|obj| obj.wagon.include?(@@wg_input)}					# проверка что поезд не содержит вагон, который мы пытаемся добавить,т.е защита от добавления того же номера вагона
-						@@train_to_add_wagon[0].add_wagon(@@wagon_to_add[0])						    # т.к он заключен в массив, использовать нужно через [0], сам объект тут является первым и единственным эелементом массива
+					wg_input = gets.chomp
+					@wagon_to_add = @@wg_names.select{|obj| obj.number == wg_input}              # это дублируется в train # если уберу этот дубликат тут, то не сработает @@train_to_add_wagon[0].add_wagon(@@wagon_to_add[0])   # присваиваем переменной wagon_to_add значение объекта из массива с поездами, объект находим по аттрибуту -number 
+					@train_to_add_wagon = @@tr_names.select{|obj| obj.number == tr_input}  	    # это дублируется в train # если уберу этот дубликат тут, то не сработает @@train_to_add_wagon[0].add_wagon(@@wagon_to_add[0])      # присваиваем переменной train_to_add_wagon значение объекта из массива с поездами, объект находим по аттрибуту -number                 # ТУТ ВМЕСТО @@tr_input получаю объект из массива с поездами (@@@tr_names) в котором есть обЪект с именем равным @@@tr_input! Это новая переменная @@train_to_add_wagon. Далее на нем используем метод add_wagon из train.rb											
+					if !@train_to_add_wagon.any?{|obj| obj.wagon.include?(wg_input)}					# проверка что поезд не содержит вагон, который мы пытаемся добавить,т.е защита от добавления того же номера вагона
+						@train_to_add_wagon[0].add_wagon(@wagon_to_add[0])						    # т.к он заключен в массив, использовать нужно через [0], сам объект тут является первым и единственным эелементом массива
 					else
 						puts "Этот вагон уже добавлен к поезду!"
 					end

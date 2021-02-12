@@ -9,4 +9,9 @@ private
 		wagon.class == WagonCargo
 	end
 
+ #      def type_match?(wagon)
+ #    	wagon.class == CargoWagon
+ #  	end
+
+
 end

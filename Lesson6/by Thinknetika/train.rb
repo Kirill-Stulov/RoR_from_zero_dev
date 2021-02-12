@@ -9,7 +9,7 @@ class Train
   def initialize(number, wagons, station)
     
     @speed = 0
-    @wagons = []
+    @wagons = []                    # этот массив используется помимо этого класса еще и в cargotrain и в passengertrain
     @number = number.to_s           # добавился аттрибут - номер поезда
 
     wagons.times {initialize_wagons} # как работает разложено в \RoR_from_zero\Lesson5\By Thinknetika (15 corrections)\train.rb
