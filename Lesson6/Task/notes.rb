@@ -2,7 +2,8 @@
 # 1. убрать лишнюю @@tr_names из main. main должен наследовать @@tr_names из train.rb  (готово)
      # убрать лишнюю @@wg_names также (готово)
 # 2. исправить "такого поезда не существует" в меню -> отцепить/добавить вагон поезда (готово)
-     # решить undefined method `add_wagon' for nil:NilClass (NoMethodError)   (в процессе строка 172 в main.rb)
+     # решить undefined method `add_wagon' for nil:NilClass (NoMethodError)   (ГОТОВО)
+     # решить Нельзя присоединить этот вагон к этому поезду! (main menu 4,3 это ругается метод add_wagon(wagon) из train.rb)
 # 3. решить проблему с rescue в train initialize. Там не удаляется последний элемент массива @@tr_names через @@tr_names.pop
 
 

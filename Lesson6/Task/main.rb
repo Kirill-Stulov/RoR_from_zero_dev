@@ -140,7 +140,7 @@ loop do
 					wagon_type = gets.chomp.to_i
 					break if wagon_type == 3
 					if wagon_type == 1 && @@wg_names.empty?  											# если выбрано 1 и это первый вагон, т.е в массиве @@wg_names еще нет ни одной записи.
-						WagonPassenger.new(1, @type, @manufacturer)
+						WagonPassenger.new(1, @manufacturer)
 						# @@wg_names << Wagon.new(1, :passenger, "N/A")            								# то просто закидываем в массив пассажирский вагон под номером 1
 					elsif wagon_type == 1 && !@@wg_names.empty? 	 									# если выбрано 1 и в массиве уже не пусто. Заменил false на ! перед выражением  @@tr_names.empty. ! означет not
 						@@wg_names << Wagon.new(@@wg_names.last.number + 1, :passenger, "N/A")   				# то закидывем в массив пассажирский поезд, создавая ему номер на основе номера последнего поезда в массиве +1. номер поезда вывел с помощью attr_accessor :number в шапке файла train.rb 
