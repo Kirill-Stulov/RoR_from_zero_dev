@@ -4,8 +4,8 @@ class WagonPassenger < Wagon
 	end
 
 	private
-		def such?
-			# wagon.class == WagonPassenger
+		def type_match?(wagon)                     # это метод заменил предудущий wagon_such_train?
+			wagon.class == WagonPassenger
 		end
 
 end

@@ -8,7 +8,7 @@ class Train
   # include Manufacturer
   include InstanceCounter
   include Validator
-	attr_accessor :speed, :wagon, :type, :route, :station, :number, :name, :manufacturer 
+	attr_accessor :speed, :wagons, :type, :route, :station, :number, :name, :manufacturer 
 
 # Переменные класса можно использовать в методах класса (в инстанс методах класса), 
 # но их отличие в том, инстанс переменные содержат данные доступные внутри класса, но не разделяются между объектами 
@@ -27,7 +27,7 @@ class Train
 		@type = type
 		@number = number#.to_s
 		@speed = 0
-		@wagon = []                                              # также при создании объекта класса train будет инициализироваться массив вагонов поезда @wagon
+		@wagons = []                                              # также при создании объекта класса train будет инициализироваться массив вагонов поезда @wagon
 		@route = []                                                # и массив маршрутов поезда @route
     @manufacturer = "RJD"                                 # производитель для метода из modules.rb, который будет позволять указывать и менять это значение. По умолчанию -RJD
     
@@ -62,7 +62,7 @@ class Train
   end 
 
 	def type_full
-		puts "Поезд №#{@number} типа #{@type}. Производитель: #{@manufacturer}. Вагоны: № #{@wagon.join(", №")} "
+		puts "Поезд №#{@number} типа #{@type}. Производитель: #{@manufacturer}. Вагоны: № #{@wagons.join(", №")} "
 	end
 
   # мой метод
@@ -104,16 +104,29 @@ class Train
 	end
 
 
-  def add_wagon(wagon)   					                                                                                        #!!!! Нужно добавить проверку, что вводимый вагон существует, иначе прога вылетает с ошибкой	 		  # у thinknetika тут используется метод type_match? а не such_train                                                                                      
-		if wagon_such_train?(wagon) && speed_zero? 		                                                                         # wagon_such_train?(wagon) - метод проверяет соответствие типа вагона к типу поезда;  	                                                                            
-			@wagon << wagon.list 								                                                                                     # то добавляем номер вагона в массив @wagon 
-			puts "К поезду №#{@number} добавлен вагон №#{wagon.list}, теперь у него вагонов #{@wagon.size} шт."   
-		elsif !wagon_such_train?(wagon) && !speed_zero?  			                                                                      # если же тип вагона не принадлежит типу поезда и скорость не равна 0
-			puts "Сначала остановите поезд, чтобы добавить вагон"
-		elsif !wagon_such_train?(wagon)
-			puts "Нельзя присоединить этот вагон к этому поезду!"
-		end
-	end
+ #  def add_wagon(wagon)   					                                                                                        #!!!! Нужно добавить проверку, что вводимый вагон существует, иначе прога вылетает с ошибкой	 		  # у thinknetika тут используется метод type_match? а не such_train                                                                                      
+	# 	if wagon_such_train?(wagon) && speed_zero? 		                                                                         # wagon_such_train?(wagon) - метод проверяет соответствие типа вагона к типу поезда;  	                                                                            
+	# 		@wagon << wagon.list 								                                                                                     # то добавляем номер вагона в массив @wagon 
+	# 		puts "К поезду №#{@number} добавлен вагон №#{wagon.list}, теперь у него вагонов #{@wagon.size} шт."   
+	# 	elsif !wagon_such_train?(wagon) && !speed_zero?  			                                                                      # если же тип вагона не принадлежит типу поезда и скорость не равна 0
+	# 		puts "Сначала остановите поезд, чтобы добавить вагон"
+	# 	elsif !wagon_such_train?(wagon)
+	# 		puts "Нельзя присоединить этот вагон к этому поезду!"
+	# 	end
+	# end
+
+
+  def add_wagon(wagon)      # так реализован этот метод у thinknetika, мой метод выше был недоработан в плане elsif !wagon_such_train?(wagon) && !speed_zero?
+    if speed_zero?
+      if type_match?(wagon)
+        @wagons << wagon.list
+      else 
+        raise "Данный вагон нельзя прицеплять к данному типу поезда"
+      end
+    else
+      raise "Поезд движется, прицеплять вагоны нельзя"
+    end
+  end
 
 	def list_wagon
 		puts "У поезда сейчас вагонов #{@wagon.size} шт."
@@ -185,6 +198,11 @@ class Train
 
 	def speed_zero?
     	@speed.zero?
+  end
+
+
+  def stoped?
+    @speed == 0
   end
 
     def count_hash_dublicate(hash, value)  #метод принимает два параметра, хеш и значение. этот метод используется в railway_station
