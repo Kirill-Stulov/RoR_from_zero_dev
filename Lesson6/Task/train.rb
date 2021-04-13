@@ -118,8 +118,8 @@ class Train
 
   def add_wagon(wagon)      # так реализован этот метод у thinknetika, мой метод выше был недоработан в плане elsif !wagon_such_train?(wagon) && !speed_zero?
     if speed_zero?
-      if type_match?(wagon)
-        @wagons << wagon.list
+      if type_match?(wagon)   #!!!!!!! ЭТА ПРОВЕРКА НЕ СРАБАТЫВАла! потому что поезд у меня создавался от родительского класса train, а проверка то идет по классу вагона и поезда (passanger или cargo). Исправил создание поезда в main
+        @wagons << wagon.number     # если это не поможет, заменю на свой метод проверки типа-класса из строки 223
       else 
         raise "Данный вагон нельзя прицеплять к данному типу поезда"
       end
@@ -215,11 +215,18 @@ class Train
     	return count                         # возвращаем значение всего что насчитал счетчик
     end 
 
-    def wagon_such_train?(wagon)                             # метод проверяет принадлежность типа вагона к типу поезда. Результатом является булове значение (true или false)
+    # def wagon_such_train?(wagon)                             # метод проверяет принадлежность типа вагона к типу поезда. Результатом является булове значение (true или false)
       
-      # @@wagon_to_add[0].type == @@train_to_add_wagon[0].type      # где к примеру @@wagon_to_add[0].type => :passenger и @@train_to_add_wagon[0].type тоже => :passenger
-    end
+    #   # @@wagon_to_add[0].type == @@train_to_add_wagon[0].type      # где к примеру @@wagon_to_add[0].type => :passenger и @@train_to_add_wagon[0].type тоже => :passenger
+    # end
 
+   # def type_match?(wagon)   # замена методу wagon_such_train?
+   #   wagon.class == self.class   # если класс вагона соответсвует классу поезда
+   # end
+
+   def type_match?(wagon)    # метод для метода add_wagon. Не понятно как это работает!!!, ясно только что он ссылается на сам метод def type_match?(wagon) в подклассах passengertrain и cargotrain, или нет? Может type_match? это встроенный ruby метод?  
+    true
+   end
 
 
 end

@@ -5,13 +5,13 @@ class TrainCargo < Train
 
 private
 
-	def wagon_such_train?(wagon)
-		wagon.class == WagonCargo
-	end
+	# def wagon_such_train?(wagon)
+	# 	wagon.class == WagonCargo
+	# end
 
- #      def type_match?(wagon)
- #    	wagon.class == CargoWagon
- #  	end
+    def type_match?(wagon)
+    	wagon.class == CargoWagon
+  	end
 
 
 end

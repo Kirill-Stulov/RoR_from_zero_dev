@@ -6,7 +6,7 @@ class TrainPassenger < Train
 
 private
 
-	def wagon_such_train?(wagon)
+	def type_match?(wagon)
 		wagon.class == WagonPassenger
 	end
 
