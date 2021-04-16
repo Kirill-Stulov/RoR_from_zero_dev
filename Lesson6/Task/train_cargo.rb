@@ -9,8 +9,8 @@ private
 	# 	wagon.class == WagonCargo
 	# end
 
-    def type_match?(wagon)
-    	wagon.class == CargoWagon
+    def type_match?(wagon)              # используется в методе add_wagon в Train; методы, возвращающие логические значения, заканчиваются вопросительным знаком, это просто часть имени метода
+    	wagon.class == WagonCargo
   	end
 
 

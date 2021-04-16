@@ -3,9 +3,9 @@ class WagonPassenger < Wagon
 		super
 	end
 
-	private
-		def type_match?(wagon)                     # это метод заменил предудущий wagon_such_train?
-			wagon.class == WagonPassenger
-		end
+	# private
+	# 	def type_match?(wagon)                     # Метод уже есть в train_passenger это метод заменил предудущий wagon_such_train?; методы, возвращающие логические значения, заканчиваются вопросительным знаком, это просто часть имени метода
+	# 		wagon.class == WagonPassenger
+	# 	end
 
 end

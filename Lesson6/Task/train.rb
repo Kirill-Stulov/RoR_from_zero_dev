@@ -44,7 +44,8 @@ class Train
 
     # @@inst += 1
     if @number !~ TR_NUM_PATTERN
-      @@tr_names.pop              ### ЭТО НЕ СРАБАТЫВАЕТ! видимо потому что у меня и тут и в main массив @@tr_names
+      @@tr_names.pop              ### это не работало, потому что у меня и тут и в main дублировался массив @@tr_names
+      raise "Указан неверный формат номера поезда!"
     else 
       puts "Собран новый поезд №#{@number}, типа #{@type}"
     end
@@ -118,8 +119,8 @@ class Train
 
   def add_wagon(wagon)      # так реализован этот метод у thinknetika, мой метод выше был недоработан в плане elsif !wagon_such_train?(wagon) && !speed_zero?
     if speed_zero?
-      if type_match?(wagon)   #!!!!!!! ЭТА ПРОВЕРКА НЕ СРАБАТЫВАла! потому что поезд у меня создавался от родительского класса train, а проверка то идет по классу вагона и поезда (passanger или cargo). Исправил создание поезда в main
-        @wagons << wagon.number     # если это не поможет, заменю на свой метод проверки типа-класса из строки 223
+      if type_match?(wagon)   # type_match? подтягивается из TrainCargo или TrainPassanger в заисимости от того на каком типе поеза был вызван метод add_wagon из main  ######дальше коммент устарел эта проверка не срабатывала, потому что поезд у меня создавался от родительского класса train, а проверка то идет по классу вагона и поезда (passanger или cargo). Исправил создание поезда в main
+        @wagons << wagon.number     
       else 
         raise "Данный вагон нельзя прицеплять к данному типу поезда"
       end
@@ -224,9 +225,9 @@ class Train
    #   wagon.class == self.class   # если класс вагона соответсвует классу поезда
    # end
 
-   def type_match?(wagon)    # метод для метода add_wagon. Не понятно как это работает!!!, ясно только что он ссылается на сам метод def type_match?(wagon) в подклассах passengertrain и cargotrain, или нет? Может type_match? это встроенный ruby метод?  
-    true
-   end
+   # def type_match?(wagon)    # ЭТО ПРОСТО ЛИШНЕЕ !!!!!!!!!!!! метод для метода add_wagon. ВЫЯСНИТЬ как это работает!!!, ясно только что он ссылается на сам метод def type_match?(wagon) в подклассах passengertrain и cargotrain, или нет? Может type_match? это встроенный ruby метод?  
+   #  true                        # возлможно ответ есть в наследовании и полиморфизме
+   # end
 
 
 end
@@ -247,7 +248,7 @@ end
   #   end
   # end
 
-  # def speed_more_zero?
+  # def speed_more_zero?     
   #   @speed > 0
   # end
 
