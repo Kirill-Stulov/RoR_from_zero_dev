@@ -17,10 +17,10 @@ rs3 = RailwayStation.new("third")
 # rs4 = RailwayStation.new("fif5")
 
 
-# p rs1.valid?
+p rs1.valid?
 # p rs2.valid?
  route1 = Route.new(rs1, rs2)
- route2 = Route.new(1, rs2)
+ # route2 = Route.new(1, rs2)
  # p route1.stations
  # p route1.end_point
  #route1.show_stations
