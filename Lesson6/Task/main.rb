@@ -44,9 +44,7 @@ loop do
 		elsif @st_names.any?{|obj| obj.name == station_name_input}             				# @st_names - массив с объектами, проверяем не вводит ли пользователь имя станции, которе уже принадлежит какому либо из объектов в массиве.  тут использовано any?, а не each потому что each всегда выдает true, а нам нужно enaumerable https://stackoverflow.com/questions/57623915/ruby-lang-how-to-check-string-exists-in-name-attribute-of-objects-in-array
 			puts "Станция с именем #{station_name_input} уже существует! \n"
 		else 
-			@st_names << RailwayStation.new(station_name_input)   							# добавляем в массив @st_names станцию, объект которой каждый раз новый, имя станции зависит от ввода пользователя
-			puts "Всего станций создано: #{@st_names.length}"      							# здесь покажем количество значений всех хешей массива @st_names(не получалось эту и следующую строки вывести в одной строке, надо попробоваать чере)
-			@st_names.map{ |obj| puts obj.name }                   						 	# имя станции вывел с помощью attr_accessor :name в шапке файла railway_station.rb   Читать можно тут: https://www.ruby-lang.org/ru/documentation/quickstart/3/
+			RailwayStation.new(station_name_input)   							            # добавляем в массив @st_names станцию (через initialize), объект которой каждый раз новый, имя станции зависит от ввода пользователя
 		end
 	end
 
@@ -212,8 +210,8 @@ loop do
 		puts "4 -> Назад в основное меню"
 		reply = gets.chomp.to_i
 		if reply == 1
-			puts " => всего доступно #{@st_names.length} станций:"
-			@st_names.map{|obj| puts obj.name}
+			puts " => всего доступно #{@st_names.length} станций:"     #!!!!! сделать через instance counter
+			@st_names.map{|obj| puts obj.name}                          #!!!!! сделать через instance counter
 		elsif reply == 2
 			if @@st_and_tr.empty?
 				puts 'Пока нет ни одной станции с поездами!'

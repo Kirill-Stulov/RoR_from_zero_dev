@@ -81,7 +81,7 @@ module Validator
 
 	def valid?              # метод valid? будучи вызванный на объекте, вызывает на нем метод validate!  (метод valid? используем при инициализации в train.rb)
 		self.validate!
-	rescue RuntimeError => e             # это rescue отрабатывает и выводит сообщение из соответствующего raise от метода validate! (если условие для raise наступило)
+	rescue RuntimeError => e             # это rescue отрабатывает и выводит сообщение из соответствующего raise от метода validate! (если условие для raise наступило). сделано через RuntimeEror, потому что это базовый стандартный класс для исключения, через который выбрасываем свое исключение из validate! # Ruby on Rails c нуля (2015) [Базовый]\Занятие 06 Исключения 00:04:56
   		puts "Exception: #{e.message}"
         # false
 	end
@@ -94,7 +94,7 @@ module Validator
 # по заданию
 # метод valid? который возвращает true, если объект валидный и false - в противном случае.
 	def validate!
-		if self.class == Train || TrainPassenger || TrainCargo
+		if self.class == (TrainPassenger || TrainCargo)  # у меня в главном меню либо пассажирский, либо грузовой  
 			# if @number !~ TR_NUM_PATTERN
 			raise "Wrong Number format [aaaaa, 11111, aaa-11, 111-aa]" if @number !~ TR_NUM_PATTERN
 			#raise "Wrong number of wagons" if @wagon[0].nil? || @wagon.length > 666                  # мне не нужна проверка наличия вагонов при создании поезда или их критического количества, вагоны добавляются к поездам в отдельном меню. в моем варианте массива с вагонами в initialize wagon, а не wagons
@@ -104,7 +104,7 @@ module Validator
 			raise "Wrong name, min 4 symb, max 12 symb and just letters" if @name !~ RS_NAME_PATTERN
 			true
 		elsif self.class == Route
-			raise "ERROR: At least one of this stations does not exist" unless (start_point.class || end_point.class) != RailwayStation
+			raise "At least one of this stations does not exist" unless (start_point.class || end_point.class) != RailwayStation
 			true
 		else
 			true
