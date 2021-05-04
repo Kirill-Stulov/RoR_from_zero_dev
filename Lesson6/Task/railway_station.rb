@@ -7,7 +7,7 @@ class RailwayStation < Train         			# Наследуем из train, пот�
 	include InstanceCounter
 	include Validator
 
-	@@stations = []
+	# @@stations = []
 	# @@inst = 0
 
 	def initialize(name)             			# Имеет название, которое указывается при ее создании

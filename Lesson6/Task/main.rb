@@ -15,7 +15,7 @@ require_relative 'wagon_passenger.rb'
 # <============================================== Интерфейс пользователя! ==========================================================>
 class Menu < Train
 # эти переменные можно создать в методах!!!!
-@st_names = []                #1 stations_names массив в котором храним объекты с именами станций при выборе 1
+@st_names = []                #1 @st_names ЗАМЕНИЛ везде на @@stations!!!   stations_names массив в котором храним объекты с именами станций при выборе 1
 # @@tr_names = []               #3 массив в котором храним объекты с именами поездов при выборе 3  этот больше не использую, использую тут @@tr_names из train.rb 
 @routes = []                  # 2
 # @@wg_names = []               # 4
@@ -41,10 +41,10 @@ loop do
 		break if station_name_input == "1"
 		if  station_name_input.empty?														# проверяем что ввод не пуст
 			puts "Имя не может быть пустым!"
-		elsif @st_names.any?{|obj| obj.name == station_name_input}             				# @st_names - массив с объектами, проверяем не вводит ли пользователь имя станции, которе уже принадлежит какому либо из объектов в массиве.  тут использовано any?, а не each потому что each всегда выдает true, а нам нужно enaumerable https://stackoverflow.com/questions/57623915/ruby-lang-how-to-check-string-exists-in-name-attribute-of-objects-in-array
+		elsif @@stations.any?{|obj| obj.name == station_name_input}             				# @@stations - массив с объектами, проверяем не вводит ли пользователь имя станции, которе уже принадлежит какому либо из объектов в массиве.  тут использовано any?, а не each потому что each всегда выдает true, а нам нужно enaumerable https://stackoverflow.com/questions/57623915/ruby-lang-how-to-check-string-exists-in-name-attribute-of-objects-in-array
 			puts "Станция с именем #{station_name_input} уже существует! \n"
 		else 
-			RailwayStation.new(station_name_input)   							            # добавляем в массив @st_names станцию (через initialize), объект которой каждый раз новый, имя станции зависит от ввода пользователя
+			RailwayStation.new(station_name_input)   							            # добавляем в массив @@stations станцию (через initialize), объект которой каждый раз новый, имя станции зависит от ввода пользователя
 		end
 	end
 
@@ -58,17 +58,17 @@ loop do
 		input = gets.chomp.to_i
 		if input == 1
 			puts 'Доступны следующие станции:'
-			@st_names.map{ |obj| puts obj.name }
+			@@stations.map{ |obj| puts obj.name }
 			puts '<===========================>'
 			st_names_only = []                                 									# новый локальный массив специально для имен станций
-			@st_names.each{|obj| st_names_only << obj.name}     								# перекидываем имена объектов массива @st_names в новый массив st_names_only. Т.е st_names_only будет содержать только имена, чтобы ниже было легко проверять содежржимое одного массива в другом
+			@@stations.each{|obj| st_names_only << obj.name}     								# перекидываем имена объектов массива @@stations в новый массив st_names_only. Т.е st_names_only будет содержать только имена, чтобы ниже было легко проверять содежржимое одного массива в другом
 			station_name_input_1 = gets.chomp.strip.to_s               							# !!! Нужно изменить на произвольное колл-во станций в маршруте, вместо двух
 			break if station_name_input_1 == '3'
 			station_name_input_2 = gets.chomp.strip.to_s                						# проверка ввода количества станций у нас есть в методе initialize файла route.rb
 			break if station_name_input_2 == '3'						
 			if @routes.any?{|obj| obj.stations == [station_name_input_1, station_name_input_2]} # проверка того, что пользователь не создает уже существующий маршрут. Заглядываем в каждый объект в массиве @routes, нас интересует там вложенный массив @stations, который является частью каждого объекта и содержит имена станций (2 шт) 
 				puts "Такой маршрут уже существует!"
-			elsif st_names_only.include?(station_name_input_1 && station_name_input_2) 			# КАК ЗДЕСЬ ИСПОЛЬЗОВАТЬ @st_names вместо st_names_only?   @st_names_only - массив только с именами, проверяем что пользователь вводит существующее имя станции, которое в свою очередь принадлежит аттрибуту @name какого либо из объектов в массиве @st_names.  тут использовано any?, а не each потому что each всегда выдает true, а нам нужно enaumerable https://stackoverflow.com/questions/57623915/ruby-lang-how-to-check-string-exists-in-name-attribute-of-objects-in-array
+			elsif st_names_only.include?(station_name_input_1 && station_name_input_2) 			# КАК ЗДЕСЬ ИСПОЛЬЗОВАТЬ @@stations вместо st_names_only?   @@stations_only - массив только с именами, проверяем что пользователь вводит существующее имя станции, которое в свою очередь принадлежит аттрибуту @name какого либо из объектов в массиве @@stations.  тут использовано any?, а не each потому что each всегда выдает true, а нам нужно enaumerable https://stackoverflow.com/questions/57623915/ruby-lang-how-to-check-string-exists-in-name-attribute-of-objects-in-array
 				@routes << Route.new([station_name_input_1, station_name_input_2])                            # в качестве параметра тут передается массив с двумя станциями/ каждый новый маршрут - это новый объект
 				puts "Всего маршрутов создано: #{@routes.length}" 								# !!! Нужно добавиь проверку того что такого маршрута еще нет	
 			else
@@ -210,8 +210,8 @@ loop do
 		puts "4 -> Назад в основное меню"
 		reply = gets.chomp.to_i
 		if reply == 1
-			puts " => всего доступно #{@st_names.length} станций:"     #!!!!! сделать через instance counter
-			@st_names.map{|obj| puts obj.name}                          #!!!!! сделать через instance counter
+			puts " => всего доступно #{@@stations.length} станций:"     #!!!!! сделать через instance counter
+			@@stations.map{|obj| puts obj.name}                          #!!!!! сделать через instance counter
 		elsif reply == 2
 			if @@st_and_tr.empty?
 				puts 'Пока нет ни одной станции с поездами!'
@@ -226,9 +226,9 @@ loop do
 				if @@tr_names.any?{ |obj| obj.number == @tr_input } 							# проверка, если введенный номер поезда относится к существующим поездам
 					puts "Выбран поезд #{@tr_input}"
 					puts "Выберите станцию назначения из списка ниже: "   						# ВМЕСТО ВОТ ЭТОГО ВСЕГО -НАПИСАТЬ МЕТОД И ВЫЗЫВАТЬ ЕГО!
-					@st_names.map{|obj| puts obj.name}                    						# СТАНЦИЯМ ТОЖЕ ДОБАВИТЬ НОМЕРА ЧТОБ В МЕНЮ ИХ ВЫБИРАТЬ ПО НОМЕРАМ, КОТОРЫЕ БУДУТ ОТОБРАЖАТЬСЯ НАПРОТИВ НАЗВАНИЙ
+					@@stations.map{|obj| puts obj.name}                    						# СТАНЦИЯМ ТОЖЕ ДОБАВИТЬ НОМЕРА ЧТОБ В МЕНЮ ИХ ВЫБИРАТЬ ПО НОМЕРАМ, КОТОРЫЕ БУДУТ ОТОБРАЖАТЬСЯ НАПРОТИВ НАЗВАНИЙ
 					st_input = gets.chomp.to_s
-					if @st_names.any?{|obj| obj.name == st_input}         						# проверку станции опустим позже, у нас это есть в самом методе move 
+					if @@stations.any?{|obj| obj.name == st_input}         						# проверку станции опустим позже, у нас это есть в самом методе move 
 						@train_to_move = @@tr_names.select{|obj| obj.number == @tr_input}  		# присваиваем переменной train_to_move значение объекта из массива с поездами, объект находим по аттрибуту -number                 # ТУТ ВМЕСТО tr_input нужно получать объект из массива с поездами (@@tr_names) в котором есть обЪект с именем равным @tr_input! ЭТО obj.id???? брать его из @@tr_names после строки с проверкой# то используем метод move (из train.rb)  для перегона на соответствующую станцию											
 						#p @train_to_move[1]
 						@train_to_move[0].move_to_st(st_input, @tr_input)         				#train_to_move у нас тут становится массивом, а нам нужен объект, решаем это вытаскивая сам объект, который является первым элементом массива train_to_move; метод move_to_st в train.rb
@@ -256,7 +256,7 @@ loop do
 				puts 'Пока нет ни одной станции с поездами!'
 		break
 		else
-			puts "Всего доступно #{@st_names.length} следующих станций:"
+			puts "Всего доступно #{@@stations.length} следующих станций:"
 			@@st_and_tr.each{ |key, value| puts "Станция: #{key}, Поезда: #{value} "} # показываем все станции с поездами из хеша @@st_and_tr. Где станция ключ, номер поезда - значение, поменя вместо вывода значения нп свое черезжопное решение tr_type, которым показыва номер поезда и тип  
 			@@tr_names.map{|obj| obj.type }
 		    puts "Введите 1 -> для возврата в основное меню \n"
