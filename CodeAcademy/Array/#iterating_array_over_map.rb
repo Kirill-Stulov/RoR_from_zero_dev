@@ -1,7 +1,7 @@
-# map! не просто итерирует, а преобразует элементы массива
+# map! Г­ГҐ ГЇГ°Г®Г±ГІГ® ГЁГІГҐГ°ГЁГ°ГіГҐГІ, Г  ГЇГ°ГҐГ®ГЎГ°Г Г§ГіГҐГІ ГЅГ«ГҐГ¬ГҐГ­ГІГ» Г¬Г Г±Г±ГЁГўГ 
 # 
-# к примеру если нужно возвести в степень каждый элемент массива
-# Метод map C:\Users\gz7n3r\Desktop\PROGS\work\hometask Online Course by Prog School\Lesson2 OOP in Ruby
+# ГЄ ГЇГ°ГЁГ¬ГҐГ°Гі ГҐГ±Г«ГЁ Г­ГіГ¦Г­Г® ГўГ®Г§ГўГҐГ±ГІГЁ Гў Г±ГІГҐГЇГҐГ­Гј ГЄГ Г¦Г¤Г»Г© ГЅГ«ГҐГ¬ГҐГ­ГІ Г¬Г Г±Г±ГЁГўГ 
+# ГЊГҐГІГ®Г¤ map C:\Users\gz7n3r\Desktop\PROGS\work\hometask Online Course by Prog School\Lesson2 OOP in Ruby
 # 01:01:25
 
 numbers = (5..15).to_a
