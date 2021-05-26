@@ -20,6 +20,9 @@ class Menu < Train
 # @@tr_names = []               #3 массив в котором храним объекты с именами поездов при выборе 3  этот больше не использую, использую тут @@tr_names из train.rb 
 @routes = []                  # 2
 # @@wg_names = []               # 4
+@st = []
+@st << @@stations.map{ |obj| obj.name }
+
  
 loop do
 	puts "<===================== Основное Меню ===========================>"
@@ -74,8 +77,11 @@ loop do
 			break if station_name_input_2 == '3'						
 			if @routes.any?{|obj| obj.stations == [station_name_input_1,station_name_input_2]} # проверка того, что пользователь не создает уже существующий маршрут. Заглядываем в каждый объект в массиве @routes, нас интересует там вложенный массив @stations, который является частью каждого объекта и содержит имена станций (2 шт) 
 				puts "Такой маршрут уже существует!"
-			elsif @@stations
-				(@@stations & ["ora","deb"]).size == 2
+				# def self.st_check                    							# метод для проверки того, что обе станции введенные пользователем существуют в массиве @@stations. Вместо этого метода следовало бы писать в массив @@stations не объекты, а только их имена, тогда можно воспользоваться простым вариантом №2 из \PROGS\work\RoR_from_zero\CodeAcademy\Array\check_if_object_attr_in_array.rb                    
+				# @@st = []
+				# @@st << @@stations.map{ |obj| obj.name }       					# 1.преобразую массив объектов в простой массив 
+				# st.flatten!                                    							# 2. преобразую новый массив окончательно	
+			elsif ([station_name_input_1,station_name_input_2] - @st.flatten!).empty?					# 3. Проверяю что оба значения station_name_input1 и 2 есть в простом массиве st
 			# elsif @@stations.any?{|obj|  obj.name == (station_name_input_1 && station_name_input_2)}  	НЕПРАВИЛЬНО!							# проверка того что пользователь ввел существующие станции 
 			# elsif @@stations.any?{|obj| obj.name == station_name_input_1} && @@stations.any?{|obj| obj.name == station_name_input_2}  		# это работает, но это не DRY       # проверка того что пользователь ввел существующие станции; лучше и проще проверять через valid? (таким образом будет проверяться что ввденное пользователем принадлежит классу RailwayStation, а значит существует, т.е не нужно как засовывать в массив и потом там искать, потому что объекты Railwaystation уже являются объектами класса, т.е незачем их пихать в массив чтобы потом еаходить для проверки
 			# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
