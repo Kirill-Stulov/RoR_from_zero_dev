@@ -1156,22 +1156,22 @@ RailwayStation.all
 # include Validator
 
 
-class Vehicle
-	@@br_names = []
-	BR_NAME_PATTERN = /^[a-zA-Z]{4,12}$/     # от 4 до 12 любых строчных или прописных латинских букв. От 4 до 12 от начала строки ^ и от конца строки $. От начала и от конца нужно чтобы шаблон не позволял вбивать больше 12
+# class Vehicle
+# 	@@br_names = []
+# 	BR_NAME_PATTERN = /^[a-zA-Z]{4,12}$/     # от 4 до 12 любых строчных или прописных латинских букв. От 4 до 12 от начала строки ^ и от конца строки $. От начала и от конца нужно чтобы шаблон не позволял вбивать больше 12
 
-	attr_accessor :brand, :type, :color
+# 	attr_accessor :brand, :type, :color
 
-		def initialize(brand, type, color)
-			@brand = brand
-			@type = type
-			@color = color
+# 		def initialize(brand, type, color)
+# 			@brand = brand
+# 			@type = type
+# 			@color = color
 
-			@@br_names << @brand
+# 			@@br_names << @brand
 
-			raise "wrong brand length" if @brand !~ BR_NAME_PATTERN
-			# p @@br_names
-		end
+# 			raise "wrong brand length" if @brand !~ BR_NAME_PATTERN
+# 			# p @@br_names
+# 		end
 
 		# def self.delete_wrong
 		# 	if @brand !~ BR_NAME_PATTERN
@@ -1194,4 +1194,10 @@ class Vehicle
 		# 	p @@br_names
 		# end
 
-end
+# end
+
+
+		# Выбираем (select) мужчин в возрасте 64 лет:
+		arr = [ [30, 1], [25, 0], [64, 1], [64, 0], [33, 1] ]
+
+		p arr.select { |element| element[0] == 64 && element[1] == 1 }

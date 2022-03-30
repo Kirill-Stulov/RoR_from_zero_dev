@@ -45,7 +45,7 @@
 		puts @speed
 	end
 
-	def set_speed(speed)                    # устанавливает значение instance переменной @speed в то значение которое передается параметром (speed)
+	def set_speed(speed)                    # метод сеттер - устанавливает значение instance переменной @speed в то значение которое передается параметром (speed)
 		@speed = speed
 	end
  

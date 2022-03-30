@@ -18,7 +18,7 @@ class Menu < Train
 # эти переменные можно создать в методах!!!!
 @st_names = []                #1 @st_names ЗАМЕНИЛ везде на @@stations!!!   stations_names массив в котором храним объекты с именами станций при выборе 1
 # @@tr_names = []               #3 массив в котором храним объекты с именами поездов при выборе 3  этот больше не использую, использую тут @@tr_names из train.rb 
-@routes = []                  # 2
+# @routes = []                  # 2
 # @@wg_names = []               # 4
 @st = []
 @st << @@stations.map{ |obj| obj.name }
@@ -67,36 +67,36 @@ loop do
 			@@stations.map{ |obj| puts obj.name }
 			p @@stations
 			puts '<===========================>'
-			st_names_only = []                                 									# новый локальный массив специально для имен станций
-			@@stations.each{|obj| st_names_only << obj.name}     								# перекидываем имена объектов массива @@stations в новый массив st_names_only. Т.е st_names_only будет содержать только имена, чтобы ниже было легко проверять содежржимое одного массива в другом
+			st_names = []                                 									# новый локальный массив специально для имен станций
+			@@stations.each{|obj| st_names << obj.name}     								# перекидываем имена объектов массива @@stations в новый массив st_names_only. Т.е st_names_only будет содержать только имена, чтобы ниже было легко проверять содежржимое одного массива в другом
 			station_name_input_1 = gets.chomp.strip.to_s               							# !!! Нужно изменить на произвольное колл-во станций в маршруте, вместо двух
 			break if station_name_input_1 == '3'
 			station_name_input_2 = gets.chomp.strip.to_s                						# проверка ввода количества станций у нас есть в методе initialize файла route.rb
-			p @routes
+			p @@routes
 			p @@stations
 			break if station_name_input_2 == '3'						
-			if @routes.any?{|obj| obj.stations == [station_name_input_1,station_name_input_2]} # проверка того, что пользователь не создает уже существующий маршрут. Заглядываем в каждый объект в массиве @routes, нас интересует там вложенный массив @stations, который является частью каждого объекта и содержит имена станций (2 шт) 
+			if @@routes.any?{|obj| obj.stations == [station_name_input_1,station_name_input_2]} # проверка того, что пользователь не создает уже существующий маршрут. Заглядываем в каждый объект в массиве @@routes, нас интересует там вложенный массив @stations, который является частью каждого объекта и содержит имена станций (2 шт) 
 				puts "Такой маршрут уже существует!"
 				# def self.st_check                    							# метод для проверки того, что обе станции введенные пользователем существуют в массиве @@stations. Вместо этого метода следовало бы писать в массив @@stations не объекты, а только их имена, тогда можно воспользоваться простым вариантом №2 из \PROGS\work\RoR_from_zero\CodeAcademy\Array\check_if_object_attr_in_array.rb                    
 				# @@st = []
 				# @@st << @@stations.map{ |obj| obj.name }       					# 1.преобразую массив объектов в простой массив 
 				# st.flatten!                                    							# 2. преобразую новый массив окончательно	
-			elsif ([station_name_input_1,station_name_input_2] - @st.flatten!).empty?					# 3. Проверяю что оба значения station_name_input1 и 2 есть в простом массиве st
-			# elsif @@stations.any?{|obj|  obj.name == (station_name_input_1 && station_name_input_2)}  	НЕПРАВИЛЬНО!							# проверка того что пользователь ввел существующие станции 
-			# elsif @@stations.any?{|obj| obj.name == station_name_input_1} && @@stations.any?{|obj| obj.name == station_name_input_2}  		# это работает, но это не DRY       # проверка того что пользователь ввел существующие станции; лучше и проще проверять через valid? (таким образом будет проверяться что ввденное пользователем принадлежит классу RailwayStation, а значит существует, т.е не нужно как засовывать в массив и потом там искать, потому что объекты Railwaystation уже являются объектами класса, т.е незачем их пихать в массив чтобы потом еаходить для проверки
+			# elsif ([station_name_input_1,station_name_input_2] - st_names).empty?					# 3. ПРАВИЛЬНО! Проверяю что оба значения station_name_input1 и 2 есть в простом массиве st_names. Есть массив [station_name_input_1,station_name_input_2] становится пустым после того как из него вычли массив st_names
+			# elsif @@stations.any?{|obj|  obj.name == (station_name_input_1 && station_name_input_2)}  	НЕПРАВИЛЬНО, потому что в этом случает поиск двух названий идет в одном конкретном объекте!							# проверка того что пользователь ввел существующие станции 
+			# elsif @@stations.any?{|obj| obj.name == station_name_input_1} && @@stations.any?{|obj| obj.name == station_name_input_2}  		# это работает, но это не DRY       # проверка того что пользователь ввел существующие станции; лучше и проще проверять через valid? (таким образом будет проверяться что введенное пользователем принадлежит классу RailwayStation, а значит существует, т.е не нужно как засовывать в массив и потом там искать, потому что объекты Railwaystation уже являются объектами класса, т.е незачем их пихать в массив чтобы потом находить для проверки
 			# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			# elsif st_names_only.include?(station_name_input_1 && station_name_input_2) 		# 1!!!!! вместо этого нужно использовать valid? при инициализации маршрута!!! КАК ЗДЕСЬ ИСПОЛЬЗОВАТЬ @@stations вместо st_names_only?   @@stations_only - массив только с именами, проверяем что пользователь вводит существующее имя станции, которое в свою очередь принадлежит аттрибуту @name какого либо из объектов в массиве @@stations.  тут использовано any?, а не each потому что each всегда выдает true, а нам нужно enaumerable https://stackoverflow.com/questions/57623915/ruby-lang-how-to-check-string-exists-in-name-attribute-of-objects-in-array
-				@routes << Route.new([station_name_input_1, station_name_input_2])                            # в качестве параметра тут передается массив с двумя станциями/ каждый новый маршрут - это новый объект
-				puts "Всего маршрутов создано: #{@routes.length}" 								# !!! Нужно добавиь проверку того что такого маршрута еще нет	
-				p station_name_input_1.class
 			else
-				puts 'Станция с таким именем еще не создана!'
+				Route.new([station_name_input_1, station_name_input_2])                            # в качестве параметра тут передается массив с двумя станциями/ каждый новый маршрут - это новый объект
+				puts "Всего маршрутов создано: #{@@routes.length}" 								# !!! Нужно добавиь проверку того что такого маршрута еще нет	
+			# else
+				# puts 'Станция с таким именем еще не создана!'
 			end
 		elsif input == 2
-			if @routes.empty?                                 									# на случай если ни одного маршрута еще не создано
+			if @@routes.empty?                                 									# на случай если ни одного маршрута еще не создано
 				puts "Пока не создано ни одного маршрута"
 			else
-				@routes.each{|obj| obj.list }                 									# пробегаем по каждому объекту (в массиве @routes) содержащему массив с именами первой и последней станции, используем метод list из route.rb
+				@@routes.each{|obj| obj.list }                 									# пробегаем по каждому объекту (в массиве @routes) содержащему массив с именами первой и последней станции, используем метод list из route.rb
 			end
 		elsif input == 3
 			break

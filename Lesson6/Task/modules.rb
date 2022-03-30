@@ -104,7 +104,8 @@ module Validator
 			raise "Wrong name, min 4 symb, max 12 symb and just letters" if @name !~ RS_NAME_PATTERN
 			true
 		elsif self.class == Route
-			raise "At least one of this stations does not exist" unless (start_point.class || end_point.class) != RailwayStation
+			puts self.stations.first
+			raise "At least one of this stations does not exist" unless (start_point.class || end_point.class) != RailwayStation  # !!! ЭТО НЕ РАБОТАЕТ ПОТОМУ ЧТО СЮДА ПОПАДАЕТ СТРОКА А НЕ ЭЛЕМЕНТ КЛАССА RailwayStation
 			true
 		else
 			true

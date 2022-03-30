@@ -16,5 +16,5 @@ class MyClass
   $my_variable = "Hello!"
 end
 
-puts $my_variable
+puts $my_variable.self
 # ==> Hello!

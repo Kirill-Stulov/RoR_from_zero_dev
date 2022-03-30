@@ -1,14 +1,15 @@
 ﻿#<================== Маршрут: ========================================================================>
-class Route
+class Route < Train
 
     attr_accessor :stations, :first
 
 	def initialize(stations = []) 
-        if  stations.size >= 2                 #проверяем что введено минимум две станции 
-            @stations = stations
+        @stations = stations
+        if  self.valid?                 #проверяем что введенные станции существуют через valid из modules 
+            @@routes << self            
             puts "Маршрут #{@stations.first} - #{@stations.last} создан"
         else
-            puts "В маршруте мало станций!"
+            puts "Маршрут не создан!"
         end
 	end
 
