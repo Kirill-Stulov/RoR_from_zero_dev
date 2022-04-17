@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html class="no-touch" lang="ru"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Методы select / reject в ruby — Ruby Rush</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Методы select / reject в ruby">
+  <meta name="description" content="Иногда надо выбрать из массива элементы по определнному условию. С помощью select и reject в ruby можно фильтровать элементы в массивах, хэшах, диапазонах и т.д.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Методы select / reject в ruby">
+  <meta property="og:description" content="Иногда надо выбрать из массива элементы по определнному условию. С помощью select и reject в ruby можно фильтровать элементы в массивах, хэшах, диапазонах и т.д.">
+  <meta property="og:image" content="">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Методы select / reject в ruby">
+  <meta property="twitter:description" content="Иногда надо выбрать из массива элементы по определнному условию. С помощью select и reject в ruby можно фильтровать элементы в массивах, хэшах, диапазонах и т.д.">
+  <meta property="twitter:image" content="">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://rubyrush.ru/images/icons/apple-touch-icon-628ceb65.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://rubyrush.ru/images/icons/favicon-32x32-8bb7a527.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://rubyrush.ru/images/icons/favicon-16x16-91cd1104.png">
+<link rel="manifest" href="https://rubyrush.ru/images/icons/site.webmanifest">
+<link rel="mask-icon" href="https://rubyrush.ru/images/icons/safari-pinned-tab-1bb4b99e.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://rubyrush.ru/images/icons/favicon.ico">
+<meta name="msapplication-TileColor" content="#b91d47">
+<meta name="msapplication-config" content="/images/icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+  <link rel="stylesheet" href="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/bootstrap.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/font-awesome.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+  <link href="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/custom-8f6419b7.css" rel="stylesheet">
+  <link href="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/rubyrush-d8521e21.css" rel="stylesheet">
+
+  <script type="text/javascript" async="" src="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/conversion_async.js"></script><script type="text/javascript" async="" src="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/js_002"></script><script type="text/javascript" async="" src="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/analytics.js"></script><script async="" src="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/tag.js"></script><script async="" src="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/fbevents.js"></script><script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://vk.com/js/api/openapi.js?162",t.onload=function(){VK.Retargeting.Init("VK-RTRG-399735-atnmu"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><script type="text/javascript" async="" src="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/openapi.js"></script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-399735-atnmu" style="position:fixed; left:-999px;" alt=""/></noscript>
+
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2674706149422854');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+               src="https://www.facebook.com/tr?id=2674706149422854&ev=PageView&noscript=1"
+  /></noscript>
+<!-- End Facebook Pixel Code -->
+
+  <link rel="stylesheet" href="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/an-old-hope.css">
+  <script src="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/highlight.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+<script src="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/a"></script></head>
+
+<body>
+  <div class="container p-0">
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand rubyrush-logo" href="https://rubyrush.ru/">
+        <span class="fa fa-diamond text-danger"></span> Rubyrush<span class="d-none d-md-inline"> — бесплатный курс по Ruby</span>
+      </a>
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="btn btn-outline-info" href="https://rubyrush.ru/tg.html" target="_blank">
+            <span class="d-none d-sm-inline"><span class="fa fa-telegram"></span> Чат для изучающих руби</span>
+            <span class="d-inline d-sm-none"><span class="fa fa-telegram"></span> Наш чатик</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div class="progress" style="height: 1px">
+      <div class="progress-bar bg-danger" id="steps-progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row py-4">
+    <div class="col-lg-3 col-md-12 order-2">
+      <div class="sticky-top py-3">
+        <div class="mb-4">
+
+          <!-- Listing all articles -->
+          <h3>Другие статьи</h3>
+            <p class="text-body">
+              <a href="https://rubyrush.ru/articles/ruby-if">Ветвление с if / else / elsif</a>
+            </p>
+            <p class="text-body">
+              <a href="https://rubyrush.ru/articles/ruby-case-examples">Ветвление с case</a>
+            </p>
+            <p class="text-body">
+              <a href="https://rubyrush.ru/articles/ruby-for">Циклы с for / each</a>
+            </p>
+            <p class="text-body">
+              <b>Методы select / reject</b>
+            </p>
+            <p class="text-body">
+              <a href="https://rubyrush.ru/articles/what-is-ruby-on-rails">Что такое Ruby on Rails</a>
+            </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-9 col-md-12 order-1 py-2">
+      <div class="rubyrush-markdown-container">
+        <h1 id="метод-select">Метод select</h1>
+
+<p>Иногда надо выбрать из массива элементы по определнному условию.</p>
+
+<p>Например, все положительные числа:</p>
+
+<pre><code class="language-rb hljs ruby">a = [-<span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]
+
+a.select { <span class="hljs-params">|n|</span> n &gt; <span class="hljs-number">0</span> }
+<span class="hljs-comment"># =&gt; [1, 2]</span>
+</code></pre>
+
+<p>У массивов в руби есть метод <strong>select</strong> (от англ. выбирать / отбирать), он возвращает новый массив, в который попадут только нужные элементы.</p>
+
+<p>Работает это так: <code>select</code> берет каждый элемент в массиве и передает его в блок. Если блок возвращает <code>true</code>, то этот элемент остается, если же блок возвращает <code>false</code> — нет.</p>
+
+<p>Напомним, что в Ruby все, что не является <code>false</code> или <code>nil</code> вычисляется как <code>true</code> (<a href="http://ruby.qkspace.com/ruby-kogda-ispolzuetsya-dvoynoe-otritsanie">истинноподобное</a> значение).</p>
+
+<p>Еще раз <code>select</code> — как шлагбаум на дороге. Он пропускает только те элементы для которых его блок дает «добро».</p>
+
+<p>В верхнем примере сравнение с помощью оператора <code>&gt;</code>  можно заменить на вызов метода <code>positive?</code> у числа, тогда код можно будет сильно упростить:</p>
+
+<pre><code class="language-rb hljs ruby">a.select { <span class="hljs-params">|n|</span> n.positive? }
+<span class="hljs-comment"># =&gt; [1, 2]</span>
+
+a.select(&amp;<span class="hljs-symbol">:positive?</span>)
+<span class="hljs-comment"># =&gt; [1, 2]</span>
+</code></pre>
+
+<p>В последнем случае блок не задан явно, а сгенерирован с помощью 
+шортката. Про создание блока через шорткат у нас есть две статьи: <a href="http://ruby.qkspace.com/ruby-chto-oznachaet-vyrazhenie-some_method">попроще</a> и <a href="http://ruby.qkspace.com/ruby-peredacha-v-metod-bloka-proc-i-lambda#6-sozdanie-proc-a-s-pomoschyu-metoda-symbol-to_proc">посложнее</a>.</p>
+
+<p>Вот более практический пример. Найдем футбольные команды чьи названия забыли капитализировать (написать с заглавной буквы):</p>
+
+<pre><code class="language-rb hljs ruby">teams = [<span class="hljs-string">'ЦСКА'</span>, <span class="hljs-string">'зенит'</span>, <span class="hljs-string">'Динамо'</span>, <span class="hljs-string">'Спартак'</span>]
+
+teams.select { <span class="hljs-params">|team|</span> team.start_with?(*<span class="hljs-string">'а'</span>..<span class="hljs-string">'я'</span>) }
+<span class="hljs-comment"># =&gt; ["зенит"]</span>
+</code></pre>
+
+<h1 id="метод-reject">Метод reject</h1>
+
+<p>Как это часто бывает в руби, у метода <code>select</code> есть антагонист, который делает ровно обратное — метод <strong>reject</strong> (англ. отклонять / забраковывать).</p>
+
+<p>Метод <code>reject</code> наоборот пропускает в конечный массив только те значения для которых его блок возвращает <code>false</code> или <code>nil</code>.</p>
+
+<pre><code class="language-rb hljs ruby">a = [-<span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]
+
+a.reject { <span class="hljs-params">|n|</span> n &lt; <span class="hljs-number">0</span> }
+<span class="hljs-comment"># =&gt; [0, 1, 2]</span>
+
+a.reject { <span class="hljs-params">|n|</span> n.negative? }
+<span class="hljs-comment"># =&gt; [0, 1, 2]</span>
+
+a.reject(&amp;<span class="hljs-symbol">:negative?</span>)
+<span class="hljs-comment"># =&gt; [0, 1, 2]</span>
+</code></pre>
+
+<p>И еще один практический пример. Мы прочитали данные из файла с 
+пользователями и у кого-то есть отчество, а у кого-то нет. Мы хотим 
+получить список всех отчеств (без <code>nil</code>):</p>
+
+<pre><code class="language-rb hljs ruby">patronimic_names =
+  [
+    <span class="hljs-string">'Александрович'</span>,
+    <span class="hljs-string">'Андреевич'</span>,
+    <span class="hljs-literal">nil</span>,
+    <span class="hljs-string">'Михайлович'</span>,
+    <span class="hljs-literal">nil</span>,
+    <span class="hljs-string">'Сергеевич'</span>
+  ]
+
+patronimic_names.reject { <span class="hljs-params">|p_name|</span> p_name.<span class="hljs-literal">nil</span>? }
+patronimic_names.reject(&amp;<span class="hljs-symbol">:nil?</span>)
+<span class="hljs-comment"># =&gt; ["Александрович", "Андреевич", "Михайлович", "Сергеевич"]</span>
+</code></pre>
+
+<p>Подобный случай такой распространенный, что для него создали отдельный метод у массива:</p>
+
+<pre><code class="language-rb hljs ruby">patronimic_names.compact
+<span class="hljs-comment"># =&gt; ["Александрович", "Андреевич", "Михайлович", "Сергеевич"]</span>
+</code></pre>
+
+<h1 id="select--reject-для-диапазонов">select / reject для диапазонов</h1>
+
+<p>Фильтровать можно не только массивы, но и другие коллекции, например, <strong>диапазоны (Range)</strong>, но в ответ <code>select</code> и <code>reject</code> все равно вернут массив:</p>
+
+<pre><code class="language-rb hljs ruby"><span class="hljs-comment"># Четные числа от 1 до 10</span>
+(<span class="hljs-number">1</span>..<span class="hljs-number">10</span>).select { <span class="hljs-params">|n|</span> n.even? }
+<span class="hljs-comment"># =&gt; [2, 4, 6, 8, 10]</span>
+
+<span class="hljs-comment"># Нечетные числа от 1 до 10</span>
+(<span class="hljs-number">1</span>..<span class="hljs-number">10</span>).reject { <span class="hljs-params">|n|</span> n.even? }
+<span class="hljs-comment"># =&gt; [1, 3, 5, 7, 9]</span>
+</code></pre>
+
+<h1 id="select--reject-для-хэшей">select / reject для хэшей</h1>
+
+<p><strong>Хэши (Hash)</strong> можно фильтровать как по ключу (key), так и по значению (value). В ответ возвращаются новые хэши.</p>
+
+<p>Фильтруем маршруты автобусов (ключ — номер автобуса, значение — длина маршрута).</p>
+
+<pre><code class="language-rb hljs ruby">routes_with_lengths =
+  {
+    <span class="hljs-string">'5'</span> =&gt; <span class="hljs-number">3.25</span>,
+    <span class="hljs-string">'8'</span> =&gt; <span class="hljs-number">1.2</span>,
+    <span class="hljs-string">'10к'</span> =&gt; <span class="hljs-number">2.6</span>,
+    <span class="hljs-string">'10'</span>  =&gt; <span class="hljs-number">3.8</span>,
+    <span class="hljs-string">'25'</span>  =&gt; <span class="hljs-number">3.6</span>,
+    <span class="hljs-string">'25д'</span> =&gt; <span class="hljs-number">5.9</span>
+  }
+
+<span class="hljs-comment"># Все десятки</span>
+routes_with_lengths.select { <span class="hljs-params">|route, length|</span> route.match(<span class="hljs-regexp">/10/</span>) }
+<span class="hljs-comment"># =&gt; {"10к"=&gt;2.6, "10"=&gt;3.8}</span>
+
+<span class="hljs-comment"># Маршруты короче 3.5км</span>
+routes_with_lengths.reject { <span class="hljs-params">|route, length|</span> length &gt; <span class="hljs-number">3.5</span> }
+<span class="hljs-comment"># =&gt; {"5"=&gt;3.25, "8"=&gt;1.2, "10к"=&gt;2.6}</span>
+
+<span class="hljs-comment"># Только ключи маршрутов короче 3.5км</span>
+routes_with_lengths.reject { <span class="hljs-params">|route, length|</span> length &gt; <span class="hljs-number">3.5</span> }.keys
+<span class="hljs-comment"># =&gt; ["5", "8", "10к"]</span>
+</code></pre>
+
+<p>Это все возможно, т.к. классы <a href="https://ruby-doc.org/core/Hash.html"><code>Hash</code></a> и <a href="https://ruby-doc.org/core/Range.html"><code>Range</code></a> включают модуль <a href="https://ruby-doc.org/core/Enumerable.html"><code>Enumerable</code></a> в котором и определен метод <code>select</code>. Очевидно, любой другой класс, который включает в себя этот модуль, также будет обладать методами <code>select</code> и <code>reject</code>.</p>
+
+<h1 id="выбор-на-основе-индекса-элемента">Выбор на основе индекса элемента</h1>
+
+<p>Иногда необходимо отобрать элементы не по их значению, а по их индексу в коллекции. Для этого сразу после вызова метода <code>select</code> (еще до передачи блока) можно по цепочке вызвать метод <code>with_index</code> и передать ему блок уже с двумя параметрами — для элемента и для индекса.</p>
+
+<p>Давайте получим каждую пятую букву алфавита:</p>
+
+<pre><code class="language-rb hljs ruby">alphabet = (<span class="hljs-string">'A'</span>..<span class="hljs-string">'Z'</span>)
+
+alphabet.select.with_index <span class="hljs-keyword">do</span> <span class="hljs-params">|letter, index|</span>
+  (index + <span class="hljs-number">1</span>) % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-comment"># =&gt; ["E", "J", "O", "T", "Y"]</span>
+</code></pre>
+
+<p>Как видите блок принимает решение не на основе значения элемента, а на основе его <strong>индекса</strong> в коллекции.</p>
+
+<p>В блоке индекс пришлось увеличить на 1, т.к. в программировании все 
+индексы начинаются с 0, а в общечеловеческом понимании — с единицы. Но в
+ Ruby об этом позаботились и в метод <code>with_index</code> в качестве параметра (до блока) можно передать число, с которого надо начинать считать индексы:</p>
+
+<pre><code class="language-rb hljs ruby">(<span class="hljs-string">'A'</span>..<span class="hljs-string">'Z'</span>).select.with_index(<span class="hljs-number">1</span>) { <span class="hljs-params">|letter, index|</span> index % <span class="hljs-number">5</span> == <span class="hljs-number">0</span> }
+<span class="hljs-comment"># =&gt; ["E", "J", "O", "T", "Y"]</span>
+</code></pre>
+
+<p>В нашем случае первым параметром в блоке идет элемент массива, который мы кладем в переменную <code>letter</code>. Но мы эту переменную в блоке никак не используем, однако передать ее надо из-за порядка следования параметров.</p>
+
+<p>В этом случае ее принято называть просто символом подчеркивания:</p>
+
+<pre><code class="language-rb hljs ruby">(<span class="hljs-string">'A'</span>..<span class="hljs-string">'Z'</span>).select.with_index(<span class="hljs-number">1</span>) { <span class="hljs-params">|_, index|</span> index % <span class="hljs-number">5</span> == <span class="hljs-number">0</span> }
+<span class="hljs-comment"># =&gt; ["E", "J", "O", "T", "Y"]</span>
+</code></pre>
+
+<h1 id="методы-filter-find_all">Методы filter, find_all</h1>
+
+<p>Ruby — язык программирования для человека. Поэтому нельзя просто 
+взять и придумать всего одно название для метода. Кому-то для выбора 
+нужных элементов коллекции может показаться более логичным названия <strong>filter</strong> (типа «отфильтровать» элементы массива) или <strong>find_all</strong> (типа «найти все» элементы массива по критерию).</p>
+
+<p>Поэтому в Ruby у <code>select</code> есть не только антагонист, но и два брата-близнеца: <code>filter</code> и <code>find_all</code>, которые делают ровно то же самое:</p>
+
+<pre><code class="language-rb hljs ruby">a = [-<span class="hljs-number">2</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]
+
+a.filter { <span class="hljs-params">|n|</span> n.positive? }
+<span class="hljs-comment"># =&gt; [1, 2]</span>
+
+a.find_all { <span class="hljs-params">|n|</span> n.positive? }
+<span class="hljs-comment"># =&gt; [1, 2]</span>
+</code></pre>
+
+<p>Теперь вы умеете выбирать нужные элементы из массивов, диапазонов и хэшей как настоящие рубисты.</p>
+
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Изучаешь руби?</h3>
+          <p class="card-text">Добавляйся в наш дружелюбный чат. Подскажем, поможем.</p>
+          <a href="https://rubyrush.ru/tg.html" class="btn btn-danger">
+            <span class="fa fa-telegram"></span> Присоединиться
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(51830999, "init", {
+        id:51830999,
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/51830999" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-131905269-1');
+</script>
+
+<!-- Global site tag (gtag.js) - Google Ads: 743780777 -->
+<script async="" src="%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B%20select%20_%20reject%20%D0%B2%20ruby%20%E2%80%94%20Ruby%20Rush_files/js_003"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-743780777');
+</script>
+
+
+
+
+
+<textarea id="BFI_DATA" style="width: 1px; height: 1px; display: none;"></textarea><title> </title><div id="WidgetFloaterPanels" translate="no" style="display: none; text-align: left; direction: ltr; visibility: hidden;" class="LTRStyle"> <div id="WidgetFloater" style="display: none" onmouseover="Microsoft.Translator.OnMouseOverFloater()" onmouseout="Microsoft.Translator.OnMouseOutFloater()"> <div id="WidgetLogoPanel"> <span id="WidgetTranslateWithSpan"><span>TRANSLATE with </span><img id="FloaterLogo"></span> <span id="WidgetCloseButton" title="Exit Translation" onclick="Microsoft.Translator.FloaterOnClose()">x</span></div> <div id="LanguageMenuPanel"> <div class="DDStyle_outer"><input name="LanguageMenu_svid" type="text" id="LanguageMenu_svid" style="display:none;" autocomplete="on" value="en" onclick="this.select()"> <input name="LanguageMenu_textid" type="text" id="LanguageMenu_textid" style="display:none;" autocomplete="on" onclick="this.select()"> <span onselectstart="return false" tabindex="0" class="DDStyle" id="__LanguageMenu_header" onclick="return LanguageMenu &amp;&amp; !LanguageMenu.Show('__LanguageMenu_popup', event);" onkeydown="return LanguageMenu &amp;&amp; !LanguageMenu.Show('__LanguageMenu_popup', event);">English</span> <div style="position:relative;text-align:left;left:0;"><div style="position:absolute;width:;left:0px;"><div class="DDStyle" style="display:none;" id="__LanguageMenu_popup"> <table id="LanguageMenu" border="0"> <tbody><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('ar');" ondragstart="LanguageMenu.ondragstart(event);" href="#ar">Arabic</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('he');" ondragstart="LanguageMenu.ondragstart(event);" href="#he">Hebrew</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('pl');" ondragstart="LanguageMenu.ondragstart(event);" href="#pl">Polish</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('bg');" ondragstart="LanguageMenu.ondragstart(event);" href="#bg">Bulgarian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('hi');" ondragstart="LanguageMenu.ondragstart(event);" href="#hi">Hindi</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('pt');" ondragstart="LanguageMenu.ondragstart(event);" href="#pt">Portuguese</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('ca');" ondragstart="LanguageMenu.ondragstart(event);" href="#ca">Catalan</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('mww');" ondragstart="LanguageMenu.ondragstart(event);" href="#mww">Hmong Daw</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ro');" ondragstart="LanguageMenu.ondragstart(event);" href="#ro">Romanian</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('zh-CHS');" ondragstart="LanguageMenu.ondragstart(event);" href="#zh-CHS">Chinese Simplified</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('hu');" ondragstart="LanguageMenu.ondragstart(event);" href="#hu">Hungarian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ru');" ondragstart="LanguageMenu.ondragstart(event);" href="#ru">Russian</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('zh-CHT');" ondragstart="LanguageMenu.ondragstart(event);" href="#zh-CHT">Chinese Traditional</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('id');" ondragstart="LanguageMenu.ondragstart(event);" href="#id">Indonesian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('sk');" ondragstart="LanguageMenu.ondragstart(event);" href="#sk">Slovak</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('cs');" ondragstart="LanguageMenu.ondragstart(event);" href="#cs">Czech</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('it');" ondragstart="LanguageMenu.ondragstart(event);" href="#it">Italian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('sl');" ondragstart="LanguageMenu.ondragstart(event);" href="#sl">Slovenian</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('da');" ondragstart="LanguageMenu.ondragstart(event);" href="#da">Danish</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ja');" ondragstart="LanguageMenu.ondragstart(event);" href="#ja">Japanese</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('es');" ondragstart="LanguageMenu.ondragstart(event);" href="#es">Spanish</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('nl');" ondragstart="LanguageMenu.ondragstart(event);" href="#nl">Dutch</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('tlh');" ondragstart="LanguageMenu.ondragstart(event);" href="#tlh">Klingon</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('sv');" ondragstart="LanguageMenu.ondragstart(event);" href="#sv">Swedish</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('en');" ondragstart="LanguageMenu.ondragstart(event);" href="#en">English</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ko');" ondragstart="LanguageMenu.ondragstart(event);" href="#ko">Korean</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('th');" ondragstart="LanguageMenu.ondragstart(event);" href="#th">Thai</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('et');" ondragstart="LanguageMenu.ondragstart(event);" href="#et">Estonian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('lv');" ondragstart="LanguageMenu.ondragstart(event);" href="#lv">Latvian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('tr');" ondragstart="LanguageMenu.ondragstart(event);" href="#tr">Turkish</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('fi');" ondragstart="LanguageMenu.ondragstart(event);" href="#fi">Finnish</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('lt');" ondragstart="LanguageMenu.ondragstart(event);" href="#lt">Lithuanian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('uk');" ondragstart="LanguageMenu.ondragstart(event);" href="#uk">Ukrainian</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('fr');" ondragstart="LanguageMenu.ondragstart(event);" href="#fr">French</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ms');" ondragstart="LanguageMenu.ondragstart(event);" href="#ms">Malay</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ur');" ondragstart="LanguageMenu.ondragstart(event);" href="#ur">Urdu</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('de');" ondragstart="LanguageMenu.ondragstart(event);" href="#de">German</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('mt');" ondragstart="LanguageMenu.ondragstart(event);" href="#mt">Maltese</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('vi');" ondragstart="LanguageMenu.ondragstart(event);" href="#vi">Vietnamese</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('el');" ondragstart="LanguageMenu.ondragstart(event);" href="#el">Greek</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('no');" ondragstart="LanguageMenu.ondragstart(event);" href="#no">Norwegian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('cy');" ondragstart="LanguageMenu.ondragstart(event);" href="#cy">Welsh</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('ht');" ondragstart="LanguageMenu.ondragstart(event);" href="#ht">Haitian Creole</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('fa');" ondragstart="LanguageMenu.ondragstart(event);" href="#fa">Persian</a></td><td></td> </tr> </tbody></table> <img alt="" style="height:7px;width:17px;border-width:0px;left:20px;"> </div></div></div></div> <script type="text/javascript"> var LanguageMenu; var LanguageMenu_keys=["ar","bg","ca","zh-CHS","zh-CHT","cs","da","nl","en","et","fi","fr","de","el","ht","he","hi","mww","hu","id","it","ja","tlh","ko","lv","lt","ms","mt","no","fa","pl","pt","ro","ru","sk","sl","es","sv","th","tr","uk","ur","vi","cy"]; var LanguageMenu_values=["Arabic","Bulgarian","Catalan","Chinese Simplified","Chinese Traditional","Czech","Danish","Dutch","English","Estonian","Finnish","French","German","Greek","Haitian Creole","Hebrew","Hindi","Hmong Daw","Hungarian","Indonesian","Italian","Japanese","Klingon","Korean","Latvian","Lithuanian","Malay","Maltese","Norwegian","Persian","Polish","Portuguese","Romanian","Russian","Slovak","Slovenian","Spanish","Swedish","Thai","Turkish","Ukrainian","Urdu","Vietnamese","Welsh"]; var LanguageMenu_callback=function(){ }; var LanguageMenu_popupid='__LanguageMenu_popup'; </script> </div> <div id="CTFLinksPanel"> <span id="ExternalLinksPanel"><a id="HelpLink" title="Help" target="_blank" href="https://go.microsoft.com/?linkid=9722454"> <img id="HelpImg"></a> <a id="EmbedLink" href="javascript:Microsoft.Translator.FloaterShowEmbed()" title="Get this widget for your own site"> <img id="EmbedImg"></a> <a id="ShareLink" title="Share translated page with friends" href="javascript:Microsoft.Translator.FloaterShowSharePanel()"> <img id="ShareImg"></a> </span> </div> <div id="FloaterProgressBar"> <span id="ProgressFill"></span> </div> </div> <div id="WidgetFloaterCollapsed" style="display: none" onmouseover="Microsoft.Translator.OnMouseOverFloater()"> <span>TRANSLATE with </span><img id="CollapsedLogoImg"></div> <div id="FloaterSharePanel" style="display: none"> <div id="ShareTextDiv"> <span id="ShareTextSpan"> COPY THE URL BELOW </span> </div> <div id="ShareTextboxDiv"> <input name="ShareTextbox" type="text" id="ShareTextbox" readonly="readonly" onclick="this.select()"> <!--a id="TwitterLink" title="Share on Twitter"> <img id="TwitterImg" /></a> <a-- id="FacebookLink" title="Share on Facebook"> <img id="FacebookImg" /></a--> <a id="EmailLink" title="Email this translation"> <img id="EmailImg"></a> </div> <div id="ShareFooter"> <span id="ShareHelpSpan"><a id="ShareHelpLink"> <img id="ShareHelpImg"></a></span> <span id="ShareBackSpan"><a id="ShareBack" href="javascript:Microsoft.Translator.FloaterOnShareBackClick()" title="Back To Translation"> Back</a></span> </div> <input name="EmailSubject" type="hidden" id="EmailSubject" value="Check out this page in {0} translated from {1}"> <input name="EmailBody" type="hidden" id="EmailBody" value="Translated: {0}%0d%0aOriginal: {1}%0d%0a%0d%0aAutomatic translation powered by Microsoft® Translator%0d%0ahttp://www.bing.com/translator?ref=MSTWidget"> <input type="hidden" id="ShareHelpText" value="This link allows visitors to launch this page and automatically translate it to {0}."> </div> <div id="FloaterEmbed" style="display: none"> <div id="EmbedTextDiv"> <span id="EmbedTextSpan">EMBED THE SNIPPET BELOW IN YOUR SITE</span> <a id="EmbedHelpLink" title="Copy this code and place it into your HTML."> <img id="EmbedHelpImg"></a> </div> <div id="EmbedTextboxDiv"> <input name="EmbedSnippetTextBox" type="text" id="EmbedSnippetTextBox" readonly="readonly" value="&lt;div id='MicrosoftTranslatorWidget' class='Dark' style='color:white;background-color:#555555'&gt;&lt;/div&gt;&lt;script type='text/javascript'&gt;setTimeout(function(){var s=document.createElement('script');s.type='text/javascript';s.charset='UTF-8';s.src=((location &amp;&amp; location.href &amp;&amp; location.href.indexOf('https') == 0)?'https://ssl.microsofttranslator.com':'http://www.microsofttranslator.com')+'/ajax/v3/WidgetV3.ashx?siteData=ueOIGRSKkd965FeEGM5JtQ**&amp;ctf=true&amp;ui=true&amp;settings=manual&amp;from=en';var p=document.getElementsByTagName('head')[0]||document.documentElement;p.insertBefore(s,p.firstChild); },0);&lt;/script&gt;" onclick="this.select()"> </div> <div id="EmbedNoticeDiv"><span id="EmbedNoticeSpan">Enable collaborative features and customize widget: <a href="http://www.bing.com/widget/translator" target="_blank">Bing Webmaster Portal</a></span></div> <div id="EmbedFooterDiv"><span id="EmbedBackSpan"><a href="javascript:Microsoft.Translator.FloaterOnEmbedBackClick()" title="Back To Translation">Back</a></span></div> </div> <script type="text/javascript"> var intervalId = setInterval(function () { if (MtPopUpList) { LanguageMenu = new MtPopUpList(); var langMenu = document.getElementById(LanguageMenu_popupid); var origLangDiv = document.createElement("div"); origLangDiv.id = "OriginalLanguageDiv"; origLangDiv.innerHTML = "<span id='OriginalTextSpan'>ORIGINAL: </span><span id='OriginalLanguageSpan'></span>"; langMenu.appendChild(origLangDiv); LanguageMenu.Init('LanguageMenu', LanguageMenu_keys, LanguageMenu_values, LanguageMenu_callback, LanguageMenu_popupid); window["LanguageMenu"] = LanguageMenu; clearInterval(intervalId); } }, 1); </script> </div></body><!-- Page created at 2022-02-27 15:49:22 +0300 by install --></html>

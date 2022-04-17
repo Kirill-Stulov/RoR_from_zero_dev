@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html class="wf-proximanova-n7-active wf-proximanova-n6-active wf-sourcesanspro-i7-active wf-proximanova-n4-active wf-sourcesanspro-n4-active wf-sourcesanspro-n7-active wf-sourcesanspro-i4-active wf-active no-touch"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/81b4b13fdb"></script><script src="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/rollbar.js" async=""></script><script type="text/javascript" async="" src="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/qtbj7y2m"></script><script src="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/nr-1215.js"></script><script type="text/javascript" async="" src="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/mixpanel-2.js"></script><script async="" src="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/analytics.js"></script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"81b4b13fdb","applicationID":"15576","transactionName":"dwwNF0ALVQ4GQR9fC1kGTAddDlY9AFtVVhBHCwYGRg==","queueTime":0,"applicationTime":116,"agent":""}</script>
+<script type="text/javascript">(window.NREUM||(NREUM={})).init={ajax:{deny_list:["bam.nr-data.net"]}};(window.NREUM||(NREUM={})).loader_config={licenseKey:"81b4b13fdb",applicationID:"15576"};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var i=e[n]={exports:{}};t[n][0].call(i.exports,function(e){var i=t[n][1][e];return r(i||e)},i,i.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<n.length;i++)r(n[i]);return r}({1:[function(t,e,n){function r(){}function i(t,e,n,r){return function(){return s.recordSupportability("API/"+e+"/called"),o(t+e,[u.now()].concat(c(arguments)),n?null:this,r),n?void 0:this}}var o=t("handle"),a=t(10),c=t(11),f=t("ee").get("tracer"),u=t("loader"),s=t(4),d=NREUM;"undefined"==typeof window.newrelic&&(newrelic=d);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",v=l+"ixn-";a(p,function(t,e){d[e]=i(l,e,!0,"api")}),d.addPageAction=i(l,"addPageAction",!0),d.setCurrentRouteName=i(l,"routeName",!0),e.exports=newrelic,d.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(t,e){var n={},r=this,i="function"==typeof e;return o(v+"tracer",[u.now(),t,n],r),function(){if(f.emit((i?"":"no-")+"fn-start",[u.now(),r,i],n),i)try{return e.apply(this,arguments)}catch(t){throw f.emit("fn-err",[arguments,this,t],n),t}finally{f.emit("fn-end",[u.now()],n)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){m[e]=i(v,e)}),newrelic.noticeError=function(t,e){"string"==typeof t&&(t=new Error(t)),s.recordSupportability("API/noticeError/called"),o("err",[t,u.now(),!1,e])}},{}],2:[function(t,e,n){function r(t){if(NREUM.init){for(var e=NREUM.init,n=t.split("."),r=0;r<n.length-1;r++)if(e=e[n[r]],"object"!=typeof e)return;return e=e[n[n.length-1]]}}e.exports={getConfiguration:r}},{}],3:[function(t,e,n){var r=!1;try{var i=Object.defineProperty({},"passive",{get:function(){r=!0}});window.addEventListener("testPassive",null,i),window.removeEventListener("testPassive",null,i)}catch(o){}e.exports=function(t){return r?{passive:!0,capture:!!t}:!!t}},{}],4:[function(t,e,n){function r(t,e){var n=[a,t,{name:t},e];return o("storeMetric",n,null,"api"),n}function i(t,e){var n=[c,t,{name:t},e];return o("storeEventMetrics",n,null,"api"),n}var o=t("handle"),a="sm",c="cm";e.exports={constants:{SUPPORTABILITY_METRIC:a,CUSTOM_METRIC:c},recordSupportability:r,recordCustom:i}},{}],5:[function(t,e,n){function r(){return c.exists&&performance.now?Math.round(performance.now()):(o=Math.max((new Date).getTime(),o))-a}function i(){return o}var o=(new Date).getTime(),a=o,c=t(12);e.exports=r,e.exports.offset=a,e.exports.getLastTimestamp=i},{}],6:[function(t,e,n){function r(t){return!(!t||!t.protocol||"file:"===t.protocol)}e.exports=r},{}],7:[function(t,e,n){function r(t,e){var n=t.getEntries();n.forEach(function(t){"first-paint"===t.name?l("timing",["fp",Math.floor(t.startTime)]):"first-contentful-paint"===t.name&&l("timing",["fcp",Math.floor(t.startTime)])})}function i(t,e){var n=t.getEntries();if(n.length>0){var r=n[n.length-1];if(u&&u<r.startTime)return;var i=[r],o=a({});o&&i.push(o),l("lcp",i)}}function o(t){t.getEntries().forEach(function(t){t.hadRecentInput||l("cls",[t])})}function a(t){var e=navigator.connection||navigator.mozConnection||navigator.webkitConnection;if(e)return e.type&&(t["net-type"]=e.type),e.effectiveType&&(t["net-etype"]=e.effectiveType),e.rtt&&(t["net-rtt"]=e.rtt),e.downlink&&(t["net-dlink"]=e.downlink),t}function c(t){if(t instanceof y&&!w){var e=Math.round(t.timeStamp),n={type:t.type};a(n),e<=v.now()?n.fid=v.now()-e:e>v.offset&&e<=Date.now()?(e-=v.offset,n.fid=v.now()-e):e=v.now(),w=!0,l("timing",["fi",e,n])}}function f(t){"hidden"===t&&(u=v.now(),l("pageHide",[u]))}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var u,s,d,p,l=t("handle"),v=t("loader"),m=t(9),g=t(3),y=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){s=new PerformanceObserver(r);try{s.observe({entryTypes:["paint"]})}catch(h){}d=new PerformanceObserver(i);try{d.observe({entryTypes:["largest-contentful-paint"]})}catch(h){}p=new PerformanceObserver(o);try{p.observe({type:"layout-shift",buffered:!0})}catch(h){}}if("addEventListener"in document){var w=!1,b=["click","keydown","mousedown","pointerdown","touchstart"];b.forEach(function(t){document.addEventListener(t,c,g(!1))})}m(f)}},{}],8:[function(t,e,n){function r(t,e){if(!i)return!1;if(t!==i)return!1;if(!e)return!0;if(!o)return!1;for(var n=o.split("."),r=e.split("."),a=0;a<r.length;a++)if(r[a]!==n[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var c=navigator.userAgent,f=c.match(a);f&&c.indexOf("Chrome")===-1&&c.indexOf("Chromium")===-1&&(i="Safari",o=f[1])}e.exports={agent:i,version:o,match:r}},{}],9:[function(t,e,n){function r(t){function e(){t(c&&document[c]?document[c]:document[o]?"hidden":"visible")}"addEventListener"in document&&a&&document.addEventListener(a,e,i(!1))}var i=t(3);e.exports=r;var o,a,c;"undefined"!=typeof document.hidden?(o="hidden",a="visibilitychange",c="visibilityState"):"undefined"!=typeof document.msHidden?(o="msHidden",a="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(o="webkitHidden",a="webkitvisibilitychange",c="webkitVisibilityState")},{}],10:[function(t,e,n){function r(t,e){var n=[],r="",o=0;for(r in t)i.call(t,r)&&(n[o]=e(r,t[r]),o+=1);return n}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],11:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,i=n-e||0,o=Array(i<0?0:i);++r<i;)o[r]=t[e+r];return o}e.exports=r},{}],12:[function(t,e,n){e.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(t,e,n){function r(){}function i(t){function e(t){return t&&t instanceof r?t:t?u(t,f,a):a()}function n(n,r,i,o,a){if(a!==!1&&(a=!0),!l.aborted||o){t&&a&&t(n,r,i);for(var c=e(i),f=m(n),u=f.length,s=0;s<u;s++)f[s].apply(c,r);var p=d[w[n]];return p&&p.push([b,n,r,c]),c}}function o(t,e){h[t]=m(t).concat(e)}function v(t,e){var n=h[t];if(n)for(var r=0;r<n.length;r++)n[r]===e&&n.splice(r,1)}function m(t){return h[t]||[]}function g(t){return p[t]=p[t]||i(n)}function y(t,e){l.aborted||s(t,function(t,n){e=e||"feature",w[n]=e,e in d||(d[e]=[])})}var h={},w={},b={on:o,addEventListener:o,removeEventListener:v,emit:n,get:g,listeners:m,context:e,buffer:y,abort:c,aborted:!1};return b}function o(t){return u(t,f,a)}function a(){return new r}function c(){(d.api||d.feature)&&(l.aborted=!0,d=l.backlog={})}var f="nr@context",u=t("gos"),s=t(10),d={},p={},l=e.exports=i();e.exports.getOrSetContext=o,l.backlog=d},{}],gos:[function(t,e,n){function r(t,e,n){if(i.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return t[e]=r,r}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){i.buffer([t],r),i.emit(t,e,n)}var i=t("ee").get("handle");e.exports=r,r.ee=i},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,o,function(){return i++})}var i=1,o="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!P++){var t=M.info=NREUM.info,e=g.getElementsByTagName("script")[0];if(setTimeout(u.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&e))return u.abort();f(O,function(e,n){t[e]||(t[e]=n)});var n=a();c("mark",["onload",n+M.offset],null,"api"),c("timing",["load",n]);var r=g.createElement("script");0===t.agent.indexOf("http://")||0===t.agent.indexOf("https://")?r.src=t.agent:r.src=v+"://"+t.agent,e.parentNode.insertBefore(r,e)}}function i(){"complete"===g.readyState&&o()}function o(){c("mark",["domContent",a()+M.offset],null,"api")}var a=t(5),c=t("handle"),f=t(10),u=t("ee"),s=t(8),d=t(6),p=t(2),l=t(3),v=p.getConfiguration("ssl")===!1?"http":"https",m=window,g=m.document,y="addEventListener",h="attachEvent",w=m.XMLHttpRequest,b=w&&w.prototype,E=!d(m.location);NREUM.o={ST:setTimeout,SI:m.setImmediate,CT:clearTimeout,XHR:w,REQ:m.Request,EV:m.Event,PR:m.Promise,MO:m.MutationObserver};var x=""+location,O={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1215.min.js"},T=w&&b&&b[y]&&!/CriOS/.test(navigator.userAgent),M=e.exports={offset:a.getLastTimestamp(),now:a,origin:x,features:{},xhrWrappable:T,userAgent:s,disabled:E};if(!E){t(1),t(7),g[y]?(g[y]("DOMContentLoaded",o,l(!1)),m[y]("load",r,l(!1))):(g[h]("onreadystatechange",i),m[h]("onload",r)),c("mark",["firstbyte",a.getLastTimestamp()],null,"api");var P=0}},{}],"wrap-function":[function(t,e,n){function r(t,e){function n(e,n,r,f,u){function nrWrapper(){var o,a,s,p;try{a=this,o=d(arguments),s="function"==typeof r?r(o,a):r||{}}catch(l){i([l,"",[o,a,f],s],t)}c(n+"start",[o,a,f],s,u);try{return p=e.apply(a,o)}catch(v){throw c(n+"err",[o,a,v],s,u),v}finally{c(n+"end",[o,a,p],s,u)}}return a(e)?e:(n||(n=""),nrWrapper[p]=e,o(e,nrWrapper,t),nrWrapper)}function r(t,e,r,i,o){r||(r="");var c,f,u,s="-"===r.charAt(0);for(u=0;u<e.length;u++)f=e[u],c=t[f],a(c)||(t[f]=n(c,s?f+r:r,i,f,o))}function c(n,r,o,a){if(!v||e){var c=v;v=!0;try{t.emit(n,r,o,e,a)}catch(f){i([f,n,r,o],t)}v=c}}return t||(t=s),n.inPlace=r,n.flag=p,n}function i(t,e){e||(e=s);try{e.emit("internal-error",t)}catch(n){}}function o(t,e,n){if(Object.defineProperty&&Object.keys)try{var r=Object.keys(t);return r.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(o){i([o],n)}for(var a in t)l.call(t,a)&&(e[a]=t[a]);return e}function a(t){return!(t&&t instanceof Function&&t.apply&&!t[p])}function c(t,e){var n=e(t);return n[p]=t,o(t,n,s),n}function f(t,e,n){var r=t[e];t[e]=c(r,n)}function u(){for(var t=arguments.length,e=new Array(t),n=0;n<t;++n)e[n]=arguments[n];return e}var s=t("ee"),d=t(11),p="nr@original",l=Object.prototype.hasOwnProperty,v=!1;e.exports=r,e.exports.wrapFunction=c,e.exports.wrapInPlace=f,e.exports.argsToArray=u},{}]},{},["loader"]);</script>
+<title>Ruby Arrays Cheat Sheet | ShortcutFoo</title>
+<meta content="Ruby Arrays cheat sheet of all shortcuts and commands." name="description">
+<link rel="shortcut icon" type="image/x-icon" href="https://www.shortcutfoo.com/assets/favicon-eb31c1cef1f6a90acad3d115a7eb32d81c9c32523b290c1849bc0b6fba5b4e0a.ico">
+<link rel="apple-touch-icon" type="image/png" href="https://www.shortcutfoo.com/assets/apple-touch-icon-c07598f155d95929a5fa39ff4b591dd1bff65db7431b0bcdf146ee65feec4707.png">
+<link rel="apple-touch-icon-precomposed" type="image/png" href="https://www.shortcutfoo.com/assets/apple-touch-icon-precomposed-05b98591ea24e3c64e99783a8587775796dfdca12e8a74efeeadbed705fa2543.png">
+<link rel="stylesheet" media="all" href="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/application-2ee68fc77374c719414e95f5a44543319542d7c07e97044d.css">
+<link href="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/css.css" rel="stylesheet" type="text/css">
+<script>
+  var _rollbarConfig = {
+      accessToken: "43f26320fea945b5975ea0e694b8d66b",
+      captureUncaught: true,
+      payload: {
+          environment: "production"
+      }
+  };
+</script>
+<script>
+  (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/qtbj7y2m';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
+</script>
+<script>
+  !function(a,b){function c(b){this.shimId=++h,this.notifier=null,this.parentShim=b,this.logger=function(){},a.console&&void 0===a.console.shimId&&(this.logger=a.console.log)}function d(b,c,d){!d[4]&&a._rollbarWrappedError&&(d[4]=a._rollbarWrappedError,a._rollbarWrappedError=null),b.uncaughtError.apply(b,d),c&&c.apply(a,d)}function e(b){var d=c;return g(function(){if(this.notifier)return this.notifier[b].apply(this.notifier,arguments);var c=this,e="scope"===b;e&&(c=new d(this));var f=Array.prototype.slice.call(arguments,0),g={shim:c,method:b,args:f,ts:new Date};return a._rollbarShimQueue.push(g),e?c:void 0})}function f(a,b){if(b.hasOwnProperty&&b.hasOwnProperty("addEventListener")){var c=b.addEventListener;b.addEventListener=function(b,d,e){c.call(this,b,a.wrap(d),e)};var d=b.removeEventListener;b.removeEventListener=function(a,b,c){d.call(this,a,b?b._wrapped:b,c)}}}function g(a,b){return b=b||this.logger,function(){try{return a.apply(this,arguments)}catch(c){b("Rollbar internal error:",c)}}}var h=0;c.init=function(a,b){var e=b.globalAlias||"Rollbar";if("object"==typeof a[e])return a[e];a._rollbarShimQueue=[],a._rollbarWrappedError=null,b=b||{};var h=new c;return g(function(){if(h.configure(b),b.captureUncaught){var c=a.onerror;a.onerror=function(){var a=Array.prototype.slice.call(arguments,0);d(h,c,a)};var g,i,j=["EventTarget","Window","Node","ApplicationCache","AudioTrackList","ChannelMergerNode","CryptoOperation","EventSource","FileReader","HTMLUnknownElement","IDBDatabase","IDBRequest","IDBTransaction","KeyOperation","MediaController","MessagePort","ModalWindow","Notification","SVGElementInstance","Screen","TextTrack","TextTrackCue","TextTrackList","WebSocket","WebSocketWorker","Worker","XMLHttpRequest","XMLHttpRequestEventTarget","XMLHttpRequestUpload"];for(g=0;g<j.length;++g)i=j[g],a[i]&&a[i].prototype&&f(h,a[i].prototype)}return a[e]=h,h},h.logger)()},c.prototype.loadFull=function(a,b,c,d){var e=g(function(){var a=b.createElement("script"),e=b.getElementsByTagName("script")[0];a.src=d.rollbarJsUrl,a.async=!c,a.onload=f,e.parentNode.insertBefore(a,e)},this.logger),f=g(function(){if(void 0===a._rollbarPayloadQueue)for(var b,c,d,e,f=new Error("rollbar.js did not load");b=a._rollbarShimQueue.shift();)for(d=b.args,e=0;e<d.length;++e)if(c=d[e],"function"==typeof c){c(f);break}},this.logger);g(function(){c?e():a.addEventListener?a.addEventListener("load",e,!1):a.attachEvent("onload",e)},this.logger)()},c.prototype.wrap=function(b){try{if("function"!=typeof b)return b;if(b._isWrap)return b;if(!b._wrapped){b._wrapped=function(){try{return b.apply(this,arguments)}catch(c){throw a._rollbarWrappedError=c,c}},b._wrapped._isWrap=!0;for(var c in b)b.hasOwnProperty(c)&&(b._wrapped[c]=b[c])}return b._wrapped}catch(d){return b}};for(var i="log,debug,info,warn,warning,error,critical,global,configure,scope,uncaughtError".split(","),j=0;j<i.length;++j)c.prototype[i[j]]=e(i[j]);var k="//d37gvrvc0wt4s1.cloudfront.net/js/v1.1/rollbar.min.js";_rollbarConfig.rollbarJsUrl=_rollbarConfig.rollbarJsUrl||k;var l=c.init(a,_rollbarConfig);l.loadFull(a,b,!1,_rollbarConfig)}(window,document);
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  ga('create', 'UA-53731120-1', 'auto');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+</script>
+<script>
+  (function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+  mixpanel.init("a10008317e3fdf15b999e83f4b5279cc");
+</script>
+<script src="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/checkout.js"></script>
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="4qGidYKOEV3QcATRGiXw8jE5Xq/Ume2sE9TS6bJHd+VhdcUtDTZwTww1SpCf0883TO0+WsMvaMW6ueB1bzLSYA=="><style type="text/css">.tk-proxima-nova,body{font-family:"proxima-nova",sans-serif;}.tk-source-sans-pro{font-family:"source-sans-pro",sans-serif;}</style><style type="text/css">@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/9b1c6c/00000000000000000001499c/21/l?subset_id=2&fvd=n7&v=3) format("woff2"),url(https://use.typekit.net/af/9b1c6c/00000000000000000001499c/21/d?subset_id=2&fvd=n7&v=3) format("woff"),url(https://use.typekit.net/af/9b1c6c/00000000000000000001499c/21/a?subset_id=2&fvd=n7&v=3) format("opentype");font-weight:700;font-style:normal;font-stretch:normal;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/0e8ca9/0000000000000000000148a6/21/l?subset_id=2&fvd=n6&v=3) format("woff2"),url(https://use.typekit.net/af/0e8ca9/0000000000000000000148a6/21/d?subset_id=2&fvd=n6&v=3) format("woff"),url(https://use.typekit.net/af/0e8ca9/0000000000000000000148a6/21/a?subset_id=2&fvd=n6&v=3) format("opentype");font-weight:600;font-style:normal;font-stretch:normal;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/651407/0000000000000000000148a4/21/l?subset_id=2&fvd=n4&v=3) format("woff2"),url(https://use.typekit.net/af/651407/0000000000000000000148a4/21/d?subset_id=2&fvd=n4&v=3) format("woff"),url(https://use.typekit.net/af/651407/0000000000000000000148a4/21/a?subset_id=2&fvd=n4&v=3) format("opentype");font-weight:400;font-style:normal;font-stretch:normal;font-display:auto;}@font-face{font-family:source-sans-pro;src:url(https://use.typekit.net/af/63ba0b/000000000000000000014fb5/21/l?subset_id=2&fvd=n4&v=3) format("woff2"),url(https://use.typekit.net/af/63ba0b/000000000000000000014fb5/21/d?subset_id=2&fvd=n4&v=3) format("woff"),url(https://use.typekit.net/af/63ba0b/000000000000000000014fb5/21/a?subset_id=2&fvd=n4&v=3) format("opentype");font-weight:400;font-style:normal;font-stretch:normal;font-display:auto;}@font-face{font-family:source-sans-pro;src:url(https://use.typekit.net/af/769184/000000000000000000014fb9/21/l?subset_id=2&fvd=n7&v=3) format("woff2"),url(https://use.typekit.net/af/769184/000000000000000000014fb9/21/d?subset_id=2&fvd=n7&v=3) format("woff"),url(https://use.typekit.net/af/769184/000000000000000000014fb9/21/a?subset_id=2&fvd=n7&v=3) format("opentype");font-weight:700;font-style:normal;font-stretch:normal;font-display:auto;}@font-face{font-family:source-sans-pro;src:url(https://use.typekit.net/af/0e9eee/000000000000000000014fba/21/l?subset_id=2&fvd=i7&v=3) format("woff2"),url(https://use.typekit.net/af/0e9eee/000000000000000000014fba/21/d?subset_id=2&fvd=i7&v=3) format("woff"),url(https://use.typekit.net/af/0e9eee/000000000000000000014fba/21/a?subset_id=2&fvd=i7&v=3) format("opentype");font-weight:700;font-style:italic;font-stretch:normal;font-display:auto;}@font-face{font-family:source-sans-pro;src:url(https://use.typekit.net/af/a9b407/000000000000000000014fb6/21/l?subset_id=2&fvd=i4&v=3) format("woff2"),url(https://use.typekit.net/af/a9b407/000000000000000000014fb6/21/d?subset_id=2&fvd=i4&v=3) format("woff"),url(https://use.typekit.net/af/a9b407/000000000000000000014fb6/21/a?subset_id=2&fvd=i4&v=3) format("opentype");font-weight:400;font-style:italic;font-stretch:normal;font-display:auto;}</style>
+</head>
+<body>
+<div class="container">
+<div id="logout"><div class="logout-container">Sign in</div></div>
+</div>
+<div class="container-fluid">
+<div id="app-navigation"><div class="navigation-inner-container"><div class="row">
+<div class="col-xs-2">
+<a href="https://www.shortcutfoo.com/">
+<img class="small-scf-logo" src="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/small_logo.png" style="height: 34px">
+</a>
+</div>
+<div class="col-xs-2"></div>
+<div class="col-xs-1 nav-container home-nav home-nav-container" style="margin-left: -30px">
+<a href="https://www.shortcutfoo.com/app/home">
+Home
+</a>
+</div>
+<div class="col-xs-1 nav-container dojos-nav dojos-nav-container active">
+<a href="https://www.shortcutfoo.com/app/dojos">
+Dojos
+</a>
+</div>
+<div class="col-xs-2 nav-container tournaments-nav tournaments-nav-container">
+<a href="https://www.shortcutfoo.com/app/tournaments">
+Tournaments
+</a>
+</div>
+<div class="col-xs-2 nav-container achievements-nav achievements-nav-container">
+<a href="https://www.shortcutfoo.com/app/achievements">
+Achievements
+</a>
+</div>
+<div class="col-xs-1 nav-container store-nav store-nav-container">
+<a href="https://www.shortcutfoo.com/app/profile">
+Profile
+</a>
+</div>
+<div class="col-xs-1 nav-container plans-nav plans-nav-container nav-container-last">
+<a href="https://www.shortcutfoo.com/app/pricing">
+Pricing
+</a>
+</div>
+</div>
+<div class="row" style="overflow: hidden">
+<div class="col-xs-3"></div>
+<div class="col-xs-1"></div>
+<div class="col-xs-1 nav-line home-nav-line active" style="margin-left: -30px; bottom: -8px;"></div>
+<div class="col-xs-1 nav-line dojos-nav-line active" style="bottom: 0px;"></div>
+<div class="col-xs-2 nav-line tournaments-nav-line" style="bottom: -8px;"></div>
+<div class="col-xs-2 nav-line achievements-nav-line" style="bottom: -8px;"></div>
+<div class="col-xs-1 nav-line store-nav-line" style="bottom: -8px;"></div>
+<div class="col-xs-1 nav-line plans-nav-line" style="bottom: -8px;"></div>
+</div></div></div>
+<div class="gray-divide"></div>
+</div>
+<div class="wrapper">
+<div class="container">
+<div id="achievement-container"><div class="achievements-popup floating-background"><div class="achievement-image-container pull-left">
+<div class="achievement-image a1"></div>
+</div>
+<div class="achievement-text-container pull-left">
+<div class="col-xs-12 achievement-name"></div>
+<div class="col-xs-12 achievement-description"></div>
+</div></div></div>
+<div id="app-container"><div class="col-xs-12"><div class="row" style="text-align:center;">
+<div class="col-xs-12 dojo-name-container">
+<h1 class="dojo-name" style="font-size: 24px;">Ruby Arrays Cheat Sheet</h1>
+<a class="btn btn-info back-to-dojo back-to-dojo-link" href="https://www.shortcutfoo.com/app/dojos/ruby-arrays">
+&lt; Learn These Shortcuts
+</a>
+</div>
+</div>
+<div class="row" style="margin-top: 20px;">
+<div class="units-container"><div><div class="row">
+<div class="col-xs-12">
+<div class="plans-section-header">
+Accessing Elements I
+</div>
+</div>
+</div>
+<div class="row">
+<div class="shortcuts-container col-xs-12"><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a[index]
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Element Reference - return the element at index of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a[n..length]
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Element Reference - return subarray starting at 'n' and ending at length of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.fetch(index)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Try to return element at position index of array a, but throw IndexError if index out of bounds
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.first
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return first element of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.index(obj)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Find index of first obj in a where object in a == obj (option 1)
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.last
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return the last element of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.sample(n)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Chose a random element or n random elements from array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div></div>
+</div></div><div><div class="row">
+<div class="col-xs-12">
+<div class="plans-section-header">
+Iterating I
+</div>
+</div>
+</div>
+<div class="row">
+<div class="shortcuts-container col-xs-12"><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.cycle(n)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Call given block for each element n times or forever if nil is given of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.each
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Call the given block once for each element in array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.each_index
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Call the given block once for each element in a passing the index as param
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.map
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Create a new array containing values returned by block of a (option 1)
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.reverse_each
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Same as a.each, but traverses a in reverse order
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div></div>
+</div></div><div><div class="row">
+<div class="col-xs-12">
+<div class="plans-section-header">
+Adding Items I
+</div>
+</div>
+</div>
+<div class="row">
+<div class="shortcuts-container col-xs-12"><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a &lt;&lt; obj
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Append - push obj on to the end of array a and return a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a[index] = obj
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Element Assignment - set element at index to obj of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a1[start, length] = a2
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Element Assignment - replace subarray from start to length of array a1 with a2
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a1.concat(a2)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Appends the elements of a2 to a1
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.fill(obj)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Fill array a with obj
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.fill(obj, start, length)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Fill array a with obj from start to length
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.insert(index, obj)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Insert given obj before element at given index of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.push(obj)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Append - push given obj on to end of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.unshift(obj)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Prepend object to front of a, moving other elements upwards
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div></div>
+</div></div><div><div class="row">
+<div class="col-xs-12">
+<div class="plans-section-header">
+Removing Items I
+</div>
+</div>
+</div>
+<div class="row">
+<div class="shortcuts-container col-xs-12"><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.clear
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Remove all elements from a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.compact
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return a copy of a with all nil elements removed
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.compact!
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Modify array a by removing nil elements from array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.delete(obj)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Delete all items from array a that are equal to obj
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.delete_at(index)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Delete element at index of array a, returning that element, or nil if index is out of range
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.drop(n)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Drop first n elements from array a and return the rest of the elements in an array
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.pop
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Remove the last element from array a and return it, or nil if a is empty
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.pop(n)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Remove and return an array of last n elements (or less) of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.shift
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Remove the first element of array a and return it (shifting all other elements down by 1)
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div></div>
+</div></div><div><div class="row">
+<div class="col-xs-12">
+<div class="plans-section-header">
+Obtaining Information I
+</div>
+</div>
+</div>
+<div class="row">
+<div class="shortcuts-container col-xs-12"><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.any?
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return true if block returns a value other than false or nil of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.count
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return the number of elements of a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.count(obj)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return the number of elements in a which equal obj
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.empty?
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return true if array a contains no elements
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a1.eql?(a2)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return true if a1 and a2 are the same object or both have same content
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.frozen?
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return true if array a if frozen
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.include?(obj)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return true if given obj is present in array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.length
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return the number of elements in array a (may be zero)
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.size
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Same as a.length
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div></div>
+</div></div><div><div class="row">
+<div class="col-xs-12">
+<div class="plans-section-header">
+Transforming I
+</div>
+</div>
+</div>
+<div class="row">
+<div class="shortcuts-container col-xs-12"><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.flatten
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return new array that is a one-dimensional flattening of a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.join(separator)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return a string of a separated by given separator (empty string by default)
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a1.replace(a2)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Replace contents of a1 with a2, truncating or expanding if necessary
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.reverse
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return a new array containing a's elements in reverse order
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.rotate(count)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return a new array by rotating a so element at count if first element in new array
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.shuffle
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return a new array with elements of a shuffled
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.sort
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return a new array created by sorting array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.uniq
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return a new array by removing duplicate values of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div></div>
+</div></div><div><div class="row">
+<div class="col-xs-12">
+<div class="plans-section-header">
+Selecting Items I
+</div>
+</div>
+</div>
+<div class="row">
+<div class="shortcuts-container col-xs-12"><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.delete_if
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Delete every element of array a which block evaluates to true
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.drop_while
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Drop elements up to, but not including, the first element for which bock returns nil or false
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.keep_if
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Delete every element of array a for which given block evaluates to false
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.reject
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return a new array containing the items in a for which the given block is not true
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.reject!
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Equivalent to a.delete_if, deleting elements from a for which the block 
+evaluates to true, but returns nil if no changes were made
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.select
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return a new array containing all elements of a for which given block returns true
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.select!
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Same as a.keep_if, deleting every element of array a for which given block evaluates to false
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div></div>
+</div></div><div><div class="row">
+<div class="col-xs-12">
+<div class="plans-section-header">
+Mathematical Operators I
+</div>
+</div>
+</div>
+<div class="row">
+<div class="shortcuts-container col-xs-12"><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a1 &amp; a2
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Set Intersection - return a new array containing elements common to arrays a1 and a2
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a * int
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return a new array built by concatenating int copies of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a * str
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Repetition - With string arg str, equivalent to a.join(str)
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a1 + a2
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Concatenation - return a new array by concatenating a1 and a2
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a1 - a2
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Difference - return a new array that is a copy of the original array a1, removing any items from array a2
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a1 | a2
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Set Union - return a new array by joining a1 with a2, excluding any duplicates
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div></div>
+</div></div><div><div class="row">
+<div class="col-xs-12">
+<div class="plans-section-header">
+General I
+</div>
+</div>
+</div>
+<div class="row">
+<div class="shortcuts-container col-xs-12"><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a1 &lt;=&gt; a2
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Comparison - return -1, 0, or +1 if a1 is less than, equal to, or greater than a2
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a1 == a2
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Equality - return true if a1 and a2 are the same length and each element is equal to corresponding element in the other array
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.hash
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Compute a hash-code for array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a1.initialize_copy(a2)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Replace contents of a1 with contents of a2, truncating or expanding if necessary
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.to_s
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Create string representation of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.to_h
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return hash of a treating array a as array of [key,value] pairs
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div></div>
+</div></div><div><div class="row">
+<div class="col-xs-12">
+<div class="plans-section-header">
+Accessing Elements II
+</div>
+</div>
+</div>
+<div class="row">
+<div class="shortcuts-container col-xs-12"><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a[range]
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Element Reference - return subarray specified by range of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.first(n)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return first n elements of array a (option 1)
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.last(n)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return the last n elements of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.rindex(obj)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return index of last object in a == obj
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.take(n)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return first n elements from array a (option 2)
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.take_while
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Pass elements to block until block returns nil or false, then return prior elements of a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.values_at(i1, i2, i3)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return array containing elements of array a corresponding to given indices i1, i2, and i3
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div></div>
+</div></div><div><div class="row">
+<div class="col-xs-12">
+<div class="plans-section-header">
+Transforming II
+</div>
+</div>
+</div>
+<div class="row">
+<div class="shortcuts-container col-xs-12"><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.flatten!
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Modify array a so that it is a one-dimensional flattening of itself
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.reverse!
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Reverse array a in place
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.rotate!(count)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Rotate a in place so element at count comes first, and return a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.shuffle!
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Shuffle elements in a in place
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.sort!
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Sort array a in place
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.uniq!
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Remove duplicate elements from a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div></div>
+</div></div><div><div class="row">
+<div class="col-xs-12">
+<div class="plans-section-header">
+Iterating II
+</div>
+</div>
+</div>
+<div class="row">
+<div class="shortcuts-container col-xs-12"><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.collect
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Create a new array containing values returned by block of a (option 2)
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.collect!
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Invoke given block once for each element of a, replacing the element with the value returned by the block (option 2)
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.find_index(obj)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Find index of first obj in a where object in a == obj (option 2)
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.map!
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Invoke given block once for each element of a, replacing the element with the value returned by the block (option 1)
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div></div>
+</div></div><div><div class="row">
+<div class="col-xs-12">
+<div class="plans-section-header">
+Accessing Elements III
+</div>
+</div>
+</div>
+<div class="row">
+<div class="shortcuts-container col-xs-12"><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.assoc(obj)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return first contained array of a whose first element is obj
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.bsearch
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Find a value in array a using binary search
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.combination(n)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return array containing all combinations of length n of a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.permutation(n)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Yield all permutation of length n of elements of array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.rassoc(obj)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return first contained array of a whose second element is obj
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.repeated_combination(n)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Yield all repeated combinations of length n of elements in array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.repeated_permutation(n)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Yield all repeated permutation of length n of elements in array a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div></div>
+</div></div><div><div class="row">
+<div class="col-xs-12">
+<div class="plans-section-header">
+Transforming III
+</div>
+</div>
+</div>
+<div class="row">
+<div class="shortcuts-container col-xs-12"><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.pack(aTemplateString)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Pack contents of a into binary sequence according to directives in aTemplateString
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a1.product(a2, a3)
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Return an array of all combinations of elements from a1, a2, and a3
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.sort_by!
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Sort array a in place using set of keys generated by mapping values of a through given block
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12 is-odd">
+<div class="cheatsheet-keys col-xs-4">
+a.transpose
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Transpose rows and columns of array of arrays a
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div><div><div class="cheatsheet-shortcut-container col-xs-12">
+<div class="cheatsheet-keys col-xs-4">
+a.zip
+</div>
+<div class="cheatsheet-name col-xs-7">
+<span class="preview-command glyphicon glyphicon-camera hidden"></span>
+Convert any arguments to arrays, then merge elements of array a with corresponding elements from each arg
+</div>
+<div class="col-xs-1">
+
+</div>
+</div></div></div>
+</div></div></div>
+</div>
+<div class="row" style="margin-top: 20px;">
+<div class="col-xs-12 back-to-dojo-container" style="text-align: center">
+<a class="btn btn-info back-to-dojo" href="https://www.shortcutfoo.com/app/dojos/ruby-arrays">
+&lt; Learn These Shortcuts
+</a>
+</div>
+</div><div class="modal fade"><div class="modal-dialog">
+<div class="modal-content col-xs-12">
+<div class="modal-header account-settings-header" style="text-align: center">
+<h4 class="modal-title" style="color: #282828; font-size: 22px;"></h4>
+</div>
+<div class="modal-body account-settings-body" style="font-size: 16px;">
+<div class="row">
+<div class="col-xs-12">
+<div id="holder">
+<h3 style="text-align: center">
+Drag visual here
+</h3>
+</div>
+</div>
+</div>
+</div>
+<div class="modal-footer col-xs-12" style="text-align:center">
+<button class="btn btn-success upload-image" style="width: 150px">Upload</button>
+</div>
+</div>
+</div></div></div></div>
+<div class="modal fade" data-backdrop="static" id="account-setup-modal"></div>
+</div>
+<div class="push"></div>
+</div>
+<footer class="footer" id="footer">
+<div class="container-fluid">
+<a class="footer-link" href="https://www.shortcutfoo.com/blog">Blog</a>
+<a class="footer-link" href="https://www.shortcutfoo.com/about">About</a>
+<a class="footer-link" href="https://www.shortcutfoo.com/privacy">Privacy Policy</a>
+<a class="footer-link" href="https://www.shortcutfoo.com/terms">Terms of Service</a>
+<a class="footer-link" href="https://www.shortcutfoo.com/app/pricing">Pricing</a>
+<div class="footer-divider"></div>
+<div class="social-links-container">
+<a class="footer-social-link" href="https://www.facebook.com/shortcutfoo">
+<img src="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/facebook.png">
+</a>
+<a class="footer-social-link" href="https://www.twitter.com/shortcutfoo">
+<img src="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/twitter.png">
+</a>
+</div>
+</div>
+</footer>
+
+<script src="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/jquery-1.js"></script>
+<script src="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/pusher.js"></script>
+<script>
+  window.jQuery || document.write('<script src=\"/assets/jquery-df58914649d03b0bf3f7a6727f32ba7f8edb804d0c3dde6142deebd5c67c0869.js\"><\/script>')
+</script>
+<script src="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/ujd0fhm.js" type="text/javascript"></script>
+<script>
+  try{Typekit.load();}catch(e){}
+</script>
+<script src="Ruby%20Arrays%20Cheat%20Sheet%20ShortcutFoo_files/application-c5cf6d5fe26ef1496fd6cb6b9a45a8de96ce04e15aa635724.js"></script>
+<script>
+  (function() {
+    Shortcutfoo.initialize(false, null, "1b34999e311f9d589bf7", "pk_M76H5ts3EKWMNTSvlmMwEZzMCUMVG", "qtbj7y2m", "");
+  
+  }).call(this);
+</script>
+
+
+
+<textarea id="BFI_DATA" style="width: 1px; height: 1px; display: none;"></textarea><title> </title><div id="WidgetFloaterPanels" translate="no" style="display: none; text-align: left; direction: ltr; visibility: hidden;" class="LTRStyle"> <div id="WidgetFloater" style="display: none" onmouseover="Microsoft.Translator.OnMouseOverFloater()" onmouseout="Microsoft.Translator.OnMouseOutFloater()"> <div id="WidgetLogoPanel"> <span id="WidgetTranslateWithSpan"><span>TRANSLATE with </span><img id="FloaterLogo"></span> <span id="WidgetCloseButton" title="Exit Translation" onclick="Microsoft.Translator.FloaterOnClose()">x</span></div> <div id="LanguageMenuPanel"> <div class="DDStyle_outer"><input name="LanguageMenu_svid" type="text" id="LanguageMenu_svid" style="display:none;" autocomplete="on" value="en" onclick="this.select()"> <input name="LanguageMenu_textid" type="text" id="LanguageMenu_textid" style="display:none;" autocomplete="on" onclick="this.select()"> <span onselectstart="return false" tabindex="0" class="DDStyle" id="__LanguageMenu_header" onclick="return LanguageMenu &amp;&amp; !LanguageMenu.Show('__LanguageMenu_popup', event);" onkeydown="return LanguageMenu &amp;&amp; !LanguageMenu.Show('__LanguageMenu_popup', event);">English</span> <div style="position:relative;text-align:left;left:0;"><div style="position:absolute;width:;left:0px;"><div class="DDStyle" style="display:none;" id="__LanguageMenu_popup"> <table id="LanguageMenu" border="0"> <tbody><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('ar');" ondragstart="LanguageMenu.ondragstart(event);" href="#ar">Arabic</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('he');" ondragstart="LanguageMenu.ondragstart(event);" href="#he">Hebrew</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('pl');" ondragstart="LanguageMenu.ondragstart(event);" href="#pl">Polish</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('bg');" ondragstart="LanguageMenu.ondragstart(event);" href="#bg">Bulgarian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('hi');" ondragstart="LanguageMenu.ondragstart(event);" href="#hi">Hindi</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('pt');" ondragstart="LanguageMenu.ondragstart(event);" href="#pt">Portuguese</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('ca');" ondragstart="LanguageMenu.ondragstart(event);" href="#ca">Catalan</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('mww');" ondragstart="LanguageMenu.ondragstart(event);" href="#mww">Hmong Daw</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ro');" ondragstart="LanguageMenu.ondragstart(event);" href="#ro">Romanian</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('zh-CHS');" ondragstart="LanguageMenu.ondragstart(event);" href="#zh-CHS">Chinese Simplified</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('hu');" ondragstart="LanguageMenu.ondragstart(event);" href="#hu">Hungarian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ru');" ondragstart="LanguageMenu.ondragstart(event);" href="#ru">Russian</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('zh-CHT');" ondragstart="LanguageMenu.ondragstart(event);" href="#zh-CHT">Chinese Traditional</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('id');" ondragstart="LanguageMenu.ondragstart(event);" href="#id">Indonesian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('sk');" ondragstart="LanguageMenu.ondragstart(event);" href="#sk">Slovak</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('cs');" ondragstart="LanguageMenu.ondragstart(event);" href="#cs">Czech</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('it');" ondragstart="LanguageMenu.ondragstart(event);" href="#it">Italian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('sl');" ondragstart="LanguageMenu.ondragstart(event);" href="#sl">Slovenian</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('da');" ondragstart="LanguageMenu.ondragstart(event);" href="#da">Danish</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ja');" ondragstart="LanguageMenu.ondragstart(event);" href="#ja">Japanese</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('es');" ondragstart="LanguageMenu.ondragstart(event);" href="#es">Spanish</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('nl');" ondragstart="LanguageMenu.ondragstart(event);" href="#nl">Dutch</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('tlh');" ondragstart="LanguageMenu.ondragstart(event);" href="#tlh">Klingon</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('sv');" ondragstart="LanguageMenu.ondragstart(event);" href="#sv">Swedish</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('en');" ondragstart="LanguageMenu.ondragstart(event);" href="#en">English</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ko');" ondragstart="LanguageMenu.ondragstart(event);" href="#ko">Korean</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('th');" ondragstart="LanguageMenu.ondragstart(event);" href="#th">Thai</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('et');" ondragstart="LanguageMenu.ondragstart(event);" href="#et">Estonian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('lv');" ondragstart="LanguageMenu.ondragstart(event);" href="#lv">Latvian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('tr');" ondragstart="LanguageMenu.ondragstart(event);" href="#tr">Turkish</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('fi');" ondragstart="LanguageMenu.ondragstart(event);" href="#fi">Finnish</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('lt');" ondragstart="LanguageMenu.ondragstart(event);" href="#lt">Lithuanian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('uk');" ondragstart="LanguageMenu.ondragstart(event);" href="#uk">Ukrainian</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('fr');" ondragstart="LanguageMenu.ondragstart(event);" href="#fr">French</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ms');" ondragstart="LanguageMenu.ondragstart(event);" href="#ms">Malay</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ur');" ondragstart="LanguageMenu.ondragstart(event);" href="#ur">Urdu</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('de');" ondragstart="LanguageMenu.ondragstart(event);" href="#de">German</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('mt');" ondragstart="LanguageMenu.ondragstart(event);" href="#mt">Maltese</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('vi');" ondragstart="LanguageMenu.ondragstart(event);" href="#vi">Vietnamese</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('el');" ondragstart="LanguageMenu.ondragstart(event);" href="#el">Greek</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('no');" ondragstart="LanguageMenu.ondragstart(event);" href="#no">Norwegian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('cy');" ondragstart="LanguageMenu.ondragstart(event);" href="#cy">Welsh</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('ht');" ondragstart="LanguageMenu.ondragstart(event);" href="#ht">Haitian Creole</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('fa');" ondragstart="LanguageMenu.ondragstart(event);" href="#fa">Persian</a></td><td></td> </tr> </tbody></table> <img alt="" style="height:7px;width:17px;border-width:0px;left:20px;"> </div></div></div></div> <script type="text/javascript"> var LanguageMenu; var LanguageMenu_keys=["ar","bg","ca","zh-CHS","zh-CHT","cs","da","nl","en","et","fi","fr","de","el","ht","he","hi","mww","hu","id","it","ja","tlh","ko","lv","lt","ms","mt","no","fa","pl","pt","ro","ru","sk","sl","es","sv","th","tr","uk","ur","vi","cy"]; var LanguageMenu_values=["Arabic","Bulgarian","Catalan","Chinese Simplified","Chinese Traditional","Czech","Danish","Dutch","English","Estonian","Finnish","French","German","Greek","Haitian Creole","Hebrew","Hindi","Hmong Daw","Hungarian","Indonesian","Italian","Japanese","Klingon","Korean","Latvian","Lithuanian","Malay","Maltese","Norwegian","Persian","Polish","Portuguese","Romanian","Russian","Slovak","Slovenian","Spanish","Swedish","Thai","Turkish","Ukrainian","Urdu","Vietnamese","Welsh"]; var LanguageMenu_callback=function(){ }; var LanguageMenu_popupid='__LanguageMenu_popup'; </script> </div> <div id="CTFLinksPanel"> <span id="ExternalLinksPanel"><a id="HelpLink" title="Help" target="_blank" href="https://go.microsoft.com/?linkid=9722454"> <img id="HelpImg"></a> <a id="EmbedLink" href="javascript:Microsoft.Translator.FloaterShowEmbed()" title="Get this widget for your own site"> <img id="EmbedImg"></a> <a id="ShareLink" title="Share translated page with friends" href="javascript:Microsoft.Translator.FloaterShowSharePanel()"> <img id="ShareImg"></a> </span> </div> <div id="FloaterProgressBar"> <span id="ProgressFill"></span> </div> </div> <div id="WidgetFloaterCollapsed" style="display: none" onmouseover="Microsoft.Translator.OnMouseOverFloater()"> <span>TRANSLATE with </span><img id="CollapsedLogoImg"></div> <div id="FloaterSharePanel" style="display: none"> <div id="ShareTextDiv"> <span id="ShareTextSpan"> COPY THE URL BELOW </span> </div> <div id="ShareTextboxDiv"> <input name="ShareTextbox" type="text" id="ShareTextbox" readonly="readonly" onclick="this.select()"> <!--a id="TwitterLink" title="Share on Twitter"> <img id="TwitterImg" /></a> <a-- id="FacebookLink" title="Share on Facebook"> <img id="FacebookImg" /></a--> <a id="EmailLink" title="Email this translation"> <img id="EmailImg"></a> </div> <div id="ShareFooter"> <span id="ShareHelpSpan"><a id="ShareHelpLink"> <img id="ShareHelpImg"></a></span> <span id="ShareBackSpan"><a id="ShareBack" href="javascript:Microsoft.Translator.FloaterOnShareBackClick()" title="Back To Translation"> Back</a></span> </div> <input name="EmailSubject" type="hidden" id="EmailSubject" value="Check out this page in {0} translated from {1}"> <input name="EmailBody" type="hidden" id="EmailBody" value="Translated: {0}%0d%0aOriginal: {1}%0d%0a%0d%0aAutomatic translation powered by Microsoft® Translator%0d%0ahttp://www.bing.com/translator?ref=MSTWidget"> <input type="hidden" id="ShareHelpText" value="This link allows visitors to launch this page and automatically translate it to {0}."> </div> <div id="FloaterEmbed" style="display: none"> <div id="EmbedTextDiv"> <span id="EmbedTextSpan">EMBED THE SNIPPET BELOW IN YOUR SITE</span> <a id="EmbedHelpLink" title="Copy this code and place it into your HTML."> <img id="EmbedHelpImg"></a> </div> <div id="EmbedTextboxDiv"> <input name="EmbedSnippetTextBox" type="text" id="EmbedSnippetTextBox" readonly="readonly" value="&lt;div id='MicrosoftTranslatorWidget' class='Dark' style='color:white;background-color:#555555'&gt;&lt;/div&gt;&lt;script type='text/javascript'&gt;setTimeout(function(){var s=document.createElement('script');s.type='text/javascript';s.charset='UTF-8';s.src=((location &amp;&amp; location.href &amp;&amp; location.href.indexOf('https') == 0)?'https://ssl.microsofttranslator.com':'http://www.microsofttranslator.com')+'/ajax/v3/WidgetV3.ashx?siteData=ueOIGRSKkd965FeEGM5JtQ**&amp;ctf=true&amp;ui=true&amp;settings=manual&amp;from=en';var p=document.getElementsByTagName('head')[0]||document.documentElement;p.insertBefore(s,p.firstChild); },0);&lt;/script&gt;" onclick="this.select()"> </div> <div id="EmbedNoticeDiv"><span id="EmbedNoticeSpan">Enable collaborative features and customize widget: <a href="http://www.bing.com/widget/translator" target="_blank">Bing Webmaster Portal</a></span></div> <div id="EmbedFooterDiv"><span id="EmbedBackSpan"><a href="javascript:Microsoft.Translator.FloaterOnEmbedBackClick()" title="Back To Translation">Back</a></span></div> </div> <script type="text/javascript"> var intervalId = setInterval(function () { if (MtPopUpList) { LanguageMenu = new MtPopUpList(); var langMenu = document.getElementById(LanguageMenu_popupid); var origLangDiv = document.createElement("div"); origLangDiv.id = "OriginalLanguageDiv"; origLangDiv.innerHTML = "<span id='OriginalTextSpan'>ORIGINAL: </span><span id='OriginalLanguageSpan'></span>"; langMenu.appendChild(origLangDiv); LanguageMenu.Init('LanguageMenu', LanguageMenu_keys, LanguageMenu_values, LanguageMenu_callback, LanguageMenu_popupid); window["LanguageMenu"] = LanguageMenu; clearInterval(intervalId); } }, 1); </script> </div><div class="TnITTtw-fp-collapsed-button" style="display: block;"></div><div class="TnITTtw-mate-fp-bar" translate="no" style="z-index: 1051; width: 0px; height: 0px; opacity: 0; display: none;">    <div class="TnITTtw-hide-fp-bar" style="display: none;"></div>    <div class="TnITTtw-current-page-lang" style="display: none;">Язык этой страницы: Английский</div>    <div class="TnITTtw-cta-button-layout" style="display: none;">        <div class="TnITTtw-spinner">            <div class="TnITTtw-bounce1"></div>            <div class="TnITTtw-bounce2"></div>            <div class="TnITTtw-bounce3"></div>        </div>        <div class="TnITTtw-mw-button TnITTtw-fp-translate TnITTtw-high-cta" style="display: none;">Перевести на Русский</div>    </div>    <div class="TnITTtw-change-language TnITTtw-select" data-for-serial="3" style="display: none;"></div>    <div class="TnITTtw-stop-fp"></div>    <div class="TnITTtw-toggle-iphone-settings" style="display: none;"></div>    <div class="TnITTtw-ui_selector" style="display: none;">        <div class="TnITTtw-options-arrow"></div>        <div class="TnITTtw-options TnITTtw-opt-3 TnITTtw-standalone" data-serial="3" style="display: none; z-index: 998;">            <div class="TnITTtw-dd-search">                <input class="TnITTtw-dd-input" type="text" data-dir="to" placeholder="Поиск" data-width="NaN">            </div>            <div id="selVisibleScroll-3">                <div id="selEntireScroll-3">                    <div class="TnITTtw-inner-options-layout">                        <ul class="TnITTtw-list"><li class="lang-az TnITTtw-option" index="1"><span id="lang-az" val="az" class="lang-az">Азербайджанский</span></li><li class="lang-sq TnITTtw-option" index="2"><span id="lang-sq" val="sq" class="lang-sq">Албанский</span></li><li class="lang-am TnITTtw-option" index="3"><span id="lang-am" val="am" class="lang-am">Амхарский</span></li><li class="lang-en TnITTtw-option" index="4"><span id="lang-en" val="en" class="lang-en">Английский</span></li><li class="lang-ar TnITTtw-option" index="5"><span id="lang-ar" val="ar" class="lang-ar">Арабский</span></li><li class="lang-hy TnITTtw-option" index="6"><span id="lang-hy" val="hy" class="lang-hy">Армянский</span></li><li class="lang-af TnITTtw-option" index="7"><span id="lang-af" val="af" class="lang-af">Африкаанс</span></li><li class="lang-bn TnITTtw-option" index="8"><span id="lang-bn" val="bn" class="lang-bn">Бенгальский</span></li><li class="lang-my TnITTtw-option" index="9"><span id="lang-my" val="my" class="lang-my">Бирманский</span></li><li class="lang-bg TnITTtw-option" index="10"><span id="lang-bg" val="bg" class="lang-bg">Болгарский</span></li><li class="lang-cy TnITTtw-option" index="11"><span id="lang-cy" val="cy" class="lang-cy">Валлийский</span></li><li class="lang-hu TnITTtw-option" index="12"><span id="lang-hu" val="hu" class="lang-hu">Венгерский</span></li><li class="lang-vi TnITTtw-option" index="13"><span id="lang-vi" val="vi" class="lang-vi">Вьетнамский</span></li><li class="lang-el TnITTtw-option" index="14"><span id="lang-el" val="el" class="lang-el">Греческий</span></li><li class="lang-gu TnITTtw-option" index="15"><span id="lang-gu" val="gu" class="lang-gu">Гуджарати</span></li><li class="lang-da TnITTtw-option" index="16"><span id="lang-da" val="da" class="lang-da">Датский</span></li><li class="lang-iw TnITTtw-option" index="17"><span id="lang-iw" val="iw" class="lang-iw">Иврит</span></li><li class="lang-id TnITTtw-option" index="18"><span id="lang-id" val="id" class="lang-id">Индонезийский</span></li><li class="lang-is TnITTtw-option" index="19"><span id="lang-is" val="is" class="lang-is">Исландский</span></li><li class="lang-es TnITTtw-option" index="20"><span id="lang-es" val="es" class="lang-es">Испанский</span></li><li class="lang-it TnITTtw-option" index="21"><span id="lang-it" val="it" class="lang-it">Итальянский</span></li><li class="lang-kk TnITTtw-option" index="22"><span id="lang-kk" val="kk" class="lang-kk">Казахский</span></li><li class="lang-kn TnITTtw-option" index="23"><span id="lang-kn" val="kn" class="lang-kn">Каннада</span></li><li class="lang-ca TnITTtw-option" index="24"><span id="lang-ca" val="ca" class="lang-ca">Каталанский</span></li><li class="lang-zh-TW TnITTtw-option" index="25"><span id="lang-zh-TW" val="zh-TW" class="lang-zh-TW">Китайский (традиционный)</span></li><li class="lang-zh-CN TnITTtw-option" index="26"><span id="lang-zh-CN" val="zh-CN" class="lang-zh-CN">Китайский (упрощенный)</span></li><li class="lang-ko TnITTtw-option" index="27"><span id="lang-ko" val="ko" class="lang-ko">Корейский</span></li><li class="lang-ht TnITTtw-option" index="28"><span id="lang-ht" val="ht" class="lang-ht">Креольский (гаити)</span></li><li class="lang-ku TnITTtw-option" index="29"><span id="lang-ku" val="ku" class="lang-ku">Курманджи</span></li><li class="lang-km TnITTtw-option" index="30"><span id="lang-km" val="km" class="lang-km">Кхмерский</span></li><li class="lang-lo TnITTtw-option" index="31"><span id="lang-lo" val="lo" class="lang-lo">Лаосский</span></li><li class="lang-lv TnITTtw-option" index="32"><span id="lang-lv" val="lv" class="lang-lv">Латышский</span></li><li class="lang-lt TnITTtw-option" index="33"><span id="lang-lt" val="lt" class="lang-lt">Литовский</span></li><li class="lang-mg TnITTtw-option" index="34"><span id="lang-mg" val="mg" class="lang-mg">Малагасийский</span></li><li class="lang-ms TnITTtw-option" index="35"><span id="lang-ms" val="ms" class="lang-ms">Малайский</span></li><li class="lang-ml TnITTtw-option" index="36"><span id="lang-ml" val="ml" class="lang-ml">Малаялам</span></li><li class="lang-mt TnITTtw-option" index="37"><span id="lang-mt" val="mt" class="lang-mt">Мальтийский</span></li><li class="lang-mi TnITTtw-option" index="38"><span id="lang-mi" val="mi" class="lang-mi">Маори</span></li><li class="lang-mr TnITTtw-option" index="39"><span id="lang-mr" val="mr" class="lang-mr">Маратхи</span></li><li class="lang-de TnITTtw-option" index="40"><span id="lang-de" val="de" class="lang-de">Немецкий</span></li><li class="lang-ne TnITTtw-option" index="41"><span id="lang-ne" val="ne" class="lang-ne">Непальский</span></li><li class="lang-nl TnITTtw-option" index="42"><span id="lang-nl" val="nl" class="lang-nl">Нидерландский</span></li><li class="lang-no TnITTtw-option" index="43"><span id="lang-no" val="no" class="lang-no">Норвежский</span></li><li class="lang-pa TnITTtw-option" index="44"><span id="lang-pa" val="pa" class="lang-pa">Панджаби</span></li><li class="lang-fa TnITTtw-option" index="45"><span id="lang-fa" val="fa" class="lang-fa">Персидский</span></li><li class="lang-pl TnITTtw-option" index="46"><span id="lang-pl" val="pl" class="lang-pl">Польский</span></li><li class="lang-pt TnITTtw-option" index="47"><span id="lang-pt" val="pt" class="lang-pt">Португальский</span></li><li class="lang-ps TnITTtw-option" index="48"><span id="lang-ps" val="ps" class="lang-ps">Пушту</span></li><li class="lang-ro TnITTtw-option" index="49"><span id="lang-ro" val="ro" class="lang-ro">Румынский</span></li><li class="lang-ru TnITTtw-option_selected" index="50"><span id="lang-ru" val="ru" class="lang-ru">Русский</span></li><li class="lang-sm TnITTtw-option" index="51"><span id="lang-sm" val="sm" class="lang-sm">Самоанский</span></li><li class="lang-sk TnITTtw-option" index="52"><span id="lang-sk" val="sk" class="lang-sk">Словацкий</span></li><li class="lang-sl TnITTtw-option" index="53"><span id="lang-sl" val="sl" class="lang-sl">Словенский</span></li><li class="lang-th TnITTtw-option" index="54"><span id="lang-th" val="th" class="lang-th">Тайский</span></li><li class="lang-ta TnITTtw-option" index="55"><span id="lang-ta" val="ta" class="lang-ta">Тамильский</span></li><li class="lang-te TnITTtw-option" index="56"><span id="lang-te" val="te" class="lang-te">Телугу</span></li><li class="lang-tr TnITTtw-option" index="57"><span id="lang-tr" val="tr" class="lang-tr">Турецкий</span></li><li class="lang-uk TnITTtw-option" index="58"><span id="lang-uk" val="uk" class="lang-uk">Украинский</span></li><li class="lang-ur TnITTtw-option" index="59"><span id="lang-ur" val="ur" class="lang-ur">Урду</span></li><li class="lang-fi TnITTtw-option" index="60"><span id="lang-fi" val="fi" class="lang-fi">Финский</span></li><li class="lang-fr TnITTtw-option" index="61"><span id="lang-fr" val="fr" class="lang-fr">Французский</span></li><li class="lang-hi TnITTtw-option" index="62"><span id="lang-hi" val="hi" class="lang-hi">Хинди</span></li><li class="lang-hr TnITTtw-option" index="63"><span id="lang-hr" val="hr" class="lang-hr">Хорватский</span></li><li class="lang-cs TnITTtw-option" index="64"><span id="lang-cs" val="cs" class="lang-cs">Чешский</span></li><li class="lang-sv TnITTtw-option" index="65"><span id="lang-sv" val="sv" class="lang-sv">Шведский</span></li><li class="lang-et TnITTtw-option" index="66"><span id="lang-et" val="et" class="lang-et">Эстонский</span></li><li class="lang-ja TnITTtw-option" index="67"><span id="lang-ja" val="ja" class="lang-ja">Японский</span></li></ul>                    </div>                </div>                <div id="sel-scrollbar-3">                    <div id="sel-track-3">                        <div id="sel-dragBar-3"></div>                    </div>                </div>            </div>        </div>    </div>    <div class="TnITTtw-fp-options" style="display: none;">        <input type="checkbox" id="TnITTtw-always-translate" readonly="readonly" style="display: none;"><label for="TnITTtw-always-translate" class="TnITTtw-always-translate-label TnITTtw-not-pro" style="display: none;"><span class="TnITTtw-always-translate-inner-label" style="display: none;">Всегда переводить Английский на Русский</span><span class="TnITTtw-pro-label" style="display: none;">PRO</span></label>        <br style="display: none;">        <input type="checkbox" id="TnITTtw-never-translate-lang" style="display: none;"><label for="TnITTtw-never-translate-lang" class="TnITTtw-never-translate-lang-label" style="display: none;">Никогда не переводить Английский</label>        <br style="display: none;">        <input type="checkbox" id="TnITTtw-never-translate-site" style="display: none;"><label for="TnITTtw-never-translate-site" class="TnITTtw-never-translate-site-label" style="display: none;">Никогда не переводить www.shortcutfoo.com</label>    </div></div></body></html>
