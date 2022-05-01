@@ -1,7 +1,7 @@
 # another syntax or The Ternary Operator
 # An even more concise version of if/else is the ternary conditional expression
 # https://www.codecademy.com/courses/learn-ruby/lessons/the-zen-of-ruby/exercises/one-good-turn-deserves-a-ternary
-puts 3<4 ? "3 is less than 4!" : "3 is not less than 4"  # åñëè 3<4 true, òî âûâîäèì 3 is less than 4, else âûâîäèì 3 is not less than 4
+puts 3<4 ? "3 is less than 4!" : "3 is not less than 4"  # ÐµÑÐ»Ð¸ 3<4 true, Ñ‚Ð¾ Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ð¼ 3 is less than 4, else Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ð¼ 3 is not less than 4
 puts 5>=6 ? "Honey is Boney!" : "Honey is Evil!!!"
 
 
