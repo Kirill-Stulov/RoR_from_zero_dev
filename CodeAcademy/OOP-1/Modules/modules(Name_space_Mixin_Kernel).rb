@@ -27,16 +27,16 @@
 
 module FuelTank                            	# 6. Создадим этот mixin модуль, перенеся общие для всех классов методы сюда !!! 0:26:00  ПОЛУЧАЕМ ДВА МЕТОДА КОТРЫЕ МОЖНО ИСПОЛЬЗОВАТЬ В АБСОЛЮТНО РАЗНЫХ КЛАССАХ!
 	def fill_tank(level)						# но просто объявления модуля не достаточно чтобы он включился в класс, его нужно включить через include и название модуля
-		self.fuel_tank = level # self тут нужен чтобы не было путаницы с instance переменной
+		self.fuel_tank = level 				# self тут нужен чтобы не было путаницы с instance переменной
 	end
 
 	def fuel_level 								
-		p self.fuel_tank
+		p self.fuel_tank							# возвращает значение fuel_tank
 	end
 
 	protected
-	attr_accessor :fuel_tank                    # тут protected а не private, потому что выше обращаемся к методу fuel_tank через self
-end	
+	attr_accessor :fuel_tank                    # тут protected а не private, потому что выше обращаемся к методу fuel_tank через self (видео 27:52)
+end																							# а защищен метод, чтобы напрямую нельзя было установить значение fuel_tank, а только через метод fill_tank
 
 class Car
 	include FuelTank                         # 7. Вот так через include подключается каждый модуль по отдельности

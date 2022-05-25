@@ -36,3 +36,17 @@ case language
   else
   puts "I don't know that language!"
 end
+
+#In general, the case expression is used when you want to test one value for several conditions. For example:
+
+case x
+when String
+  "You passed a string but X is supposed to be a number. What were you thinking?"
+when 0
+  "X is zero"
+when 1..5
+  "X is between 1 and 5"
+else
+  "X isn't a number we're interested in"
+end
+
