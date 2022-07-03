@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html class="no-touch" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>A Beginner's Guide to Exceptions in Ruby - Honeybadger Developer Blog</title>
+<meta name="description" content="The other day I was searching for an introduction to Ruby exceptions written for beginners - people who know basic Ruby syntax but aren't really sure what an exception is or why it's useful. I couldn't find one, so I decided to have a go at it myself. I hope you find it useful.">
+<meta name="pull_image" content="https://ondemand.bannerbear.com/signedurl/nZ52rq9EkQ6V3bp1Lj/image.jpg?modifications=W3sibmFtZSI6InRpdGxlIiwidGV4dCI6IkEgQmVnaW5uZXIncyBHdWlkZSB0byBFeGNlcHRpb25zIGluIFJ1YnkiLCJjb2xvciI6bnVsbCwiYmFja2dyb3VuZCI6bnVsbH0seyJuYW1lIjoiaGVhZHNob3QiLCJpbWFnZV91cmwiOiJodHRwczovL3d3dy5ob25leWJhZGdlci5pby9pbWFnZXMvaGVhZHNob3RzL3N0YXJyaC5wbmcifSx7Im5hbWUiOiJzdW1tYXJ5IiwidGV4dCI6IlRoZSBvdGhlciBkYXkgSSB3YXMgc2VhcmNoaW5nIGZvciBhbiBpbnRyb2R1Y3Rpb24gdG8gUnVieSBleGNlcHRpb25zIHdyaXR0ZW4gZm9yIGJlZ2lubmVycyAtIHBlb3BsZSB3aG8ga25vdyBiYXNpYyBSdWJ5IHN5bnRheCBidXQgYXJlbid0IHJlYWxseSBzdXJlIHdoYXQgYW4gZXhjZXB0aW9uIGlzIG9yIHdoeSBpdCdzIHVzZWZ1bC4gSSBjb3VsZG4ndCBmaW5kIG9uZSwgc28gSSBkZWNpZGVkIHRvIGhhdmUgYSBnbyBhdCBpdCBteXNlbGYuIEkgaG9wZSB5b3UgZmluZCBpdCB1c2VmdWwuIiwiY29sb3IiOm51bGwsImJhY2tncm91bmQiOm51bGx9LHsibmFtZSI6ImF1dGhvciIsInRleHQiOiJCeSAqU3RhcnIgSG9ybmUqIiwiY29sb3IiOm51bGwsImJhY2tncm91bmQiOm51bGx9LHsibmFtZSI6InRhZ3MiLCJ0ZXh0IjoiI3J1YnkiLCJjb2xvciI6bnVsbCwiYmFja2dyb3VuZCI6bnVsbH1d&amp;s=e402ea13a0b276eb1ee110e9b0aa93c18ee690595cde09a6696406ba415e797d">
+<meta name="site" content="Honeybadger Developer Blog">
+<meta property="og:site_name" content="Honeybadger Developer Blog">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="The other day I was searching for an introduction to Ruby exceptions written for beginners - people who know basic Ruby syntax but aren't really sure what an exception is or why it's useful. I couldn't find one, so I decided to have a go at it myself. I hope you find it useful.">
+<meta name="twitter:image:src" content="https://ondemand.bannerbear.com/signedurl/nZ52rq9EkQ6V3bp1Lj/image.jpg?modifications=W3sibmFtZSI6InRpdGxlIiwidGV4dCI6IkEgQmVnaW5uZXIncyBHdWlkZSB0byBFeGNlcHRpb25zIGluIFJ1YnkiLCJjb2xvciI6bnVsbCwiYmFja2dyb3VuZCI6bnVsbH0seyJuYW1lIjoiaGVhZHNob3QiLCJpbWFnZV91cmwiOiJodHRwczovL3d3dy5ob25leWJhZGdlci5pby9pbWFnZXMvaGVhZHNob3RzL3N0YXJyaC5wbmcifSx7Im5hbWUiOiJzdW1tYXJ5IiwidGV4dCI6IlRoZSBvdGhlciBkYXkgSSB3YXMgc2VhcmNoaW5nIGZvciBhbiBpbnRyb2R1Y3Rpb24gdG8gUnVieSBleGNlcHRpb25zIHdyaXR0ZW4gZm9yIGJlZ2lubmVycyAtIHBlb3BsZSB3aG8ga25vdyBiYXNpYyBSdWJ5IHN5bnRheCBidXQgYXJlbid0IHJlYWxseSBzdXJlIHdoYXQgYW4gZXhjZXB0aW9uIGlzIG9yIHdoeSBpdCdzIHVzZWZ1bC4gSSBjb3VsZG4ndCBmaW5kIG9uZSwgc28gSSBkZWNpZGVkIHRvIGhhdmUgYSBnbyBhdCBpdCBteXNlbGYuIEkgaG9wZSB5b3UgZmluZCBpdCB1c2VmdWwuIiwiY29sb3IiOm51bGwsImJhY2tncm91bmQiOm51bGx9LHsibmFtZSI6ImF1dGhvciIsInRleHQiOiJCeSAqU3RhcnIgSG9ybmUqIiwiY29sb3IiOm51bGwsImJhY2tncm91bmQiOm51bGx9LHsibmFtZSI6InRhZ3MiLCJ0ZXh0IjoiI3J1YnkiLCJjb2xvciI6bnVsbCwiYmFja2dyb3VuZCI6bnVsbH1d&amp;s=e402ea13a0b276eb1ee110e9b0aa93c18ee690595cde09a6696406ba415e797d">
+<meta name="twitter:title" content="A Beginner's Guide to Exceptions in Ruby">
+<meta property="og:description" content="The other day I was searching for an introduction to Ruby exceptions written for beginners - people who know basic Ruby syntax but aren't really sure what an exception is or why it's useful. I couldn't find one, so I decided to have a go at it myself. I hope you find it useful.">
+<meta property="og:image" content="https://ondemand.bannerbear.com/signedurl/nZ52rq9EkQ6V3bp1Lj/image.jpg?modifications=W3sibmFtZSI6InRpdGxlIiwidGV4dCI6IkEgQmVnaW5uZXIncyBHdWlkZSB0byBFeGNlcHRpb25zIGluIFJ1YnkiLCJjb2xvciI6bnVsbCwiYmFja2dyb3VuZCI6bnVsbH0seyJuYW1lIjoiaGVhZHNob3QiLCJpbWFnZV91cmwiOiJodHRwczovL3d3dy5ob25leWJhZGdlci5pby9pbWFnZXMvaGVhZHNob3RzL3N0YXJyaC5wbmcifSx7Im5hbWUiOiJzdW1tYXJ5IiwidGV4dCI6IlRoZSBvdGhlciBkYXkgSSB3YXMgc2VhcmNoaW5nIGZvciBhbiBpbnRyb2R1Y3Rpb24gdG8gUnVieSBleGNlcHRpb25zIHdyaXR0ZW4gZm9yIGJlZ2lubmVycyAtIHBlb3BsZSB3aG8ga25vdyBiYXNpYyBSdWJ5IHN5bnRheCBidXQgYXJlbid0IHJlYWxseSBzdXJlIHdoYXQgYW4gZXhjZXB0aW9uIGlzIG9yIHdoeSBpdCdzIHVzZWZ1bC4gSSBjb3VsZG4ndCBmaW5kIG9uZSwgc28gSSBkZWNpZGVkIHRvIGhhdmUgYSBnbyBhdCBpdCBteXNlbGYuIEkgaG9wZSB5b3UgZmluZCBpdCB1c2VmdWwuIiwiY29sb3IiOm51bGwsImJhY2tncm91bmQiOm51bGx9LHsibmFtZSI6ImF1dGhvciIsInRleHQiOiJCeSAqU3RhcnIgSG9ybmUqIiwiY29sb3IiOm51bGwsImJhY2tncm91bmQiOm51bGx9LHsibmFtZSI6InRhZ3MiLCJ0ZXh0IjoiI3J1YnkiLCJjb2xvciI6bnVsbCwiYmFja2dyb3VuZCI6bnVsbH1d&amp;s=e402ea13a0b276eb1ee110e9b0aa93c18ee690595cde09a6696406ba415e797d">
+<meta property="og:title" content="A Beginner's Guide to Exceptions in Ruby">
+
+    <!-- CSS -->
+    <link href="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/main.css" rel="stylesheet">
+    <link href="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/css.css" rel="stylesheet" type="text/css">
+    <link href="https://www.honeybadger.io/favicon.ico?1656121126" rel="shortcut icon">
+    <link color="#EA5937" href="https://www.honeybadger.io/favicon.svg?1656121126" rel="mask-icon">
+
+    <link rel="canonical" href="https://www.honeybadger.io/blog/a-beginner-s-guide-to-exceptions-in-ruby/">
+
+    <link rel="alternate" type="application/atom+xml" href="https://www.honeybadger.io/blog/feed.xml" title="Atom Feed">
+
+    <!-- ConvertKit -->
+    <script async="" src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/matomo.js"></script><script async="" src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/profitwell.js"></script><script src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/ck.js"></script>
+
+    <!-- Netlify Identity -->
+    <script type="text/javascript" src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/netlify-identity-widget.js"></script>
+
+    <!-- Profitwell Retain -->
+    <script id="profitwell-js" data-pw-auth="2453108de24292a3a0298ede019855c3">
+      (function(i,s,o,g,r,a,m){i[o]=i[o]||function(){(i[o].q=i[o].q||[]).push(arguments)};
+      a=s.createElement(g);m=s.getElementsByTagName(g)[0];a.async=1;a.src=r+'?auth='+
+      s.getElementById(o+'-js').getAttribute('data-pw-auth');m.parentNode.insertBefore(a,m);
+      })(window,document,'profitwell','script','https://public.profitwell.com/js/profitwell.js');
+      profitwell('start', {});
+    </script>
+
+    <!-- Matomo -->
+    <script>
+      var _paq = window._paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//matomo.honeybadger.io/matomo/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '1']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+
+  </head>
+  <body class="blog blog_a-beginner-s-guide-to-exceptions-in-ruby blog_a-beginner-s-guide-to-exceptions-in-ruby_index">
+
+        <div>
+  <nav class="navbar navbar-light navbar-expand-lg bg-transparent text-lg">
+    <div class="container-xxl">
+      <a class="navbar-brand" href="https://www.honeybadger.io/"><img src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/navbar_logo.svg"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item ">
+            <a class="nav-link" href="https://www.honeybadger.io/tour/">Tour</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="https://www.honeybadger.io/plans/">Pricing</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="https://www.honeybadger.io/blog/">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://docs.honeybadger.io/">Docs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://status.honeybadger.io/">Status</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="https://www.honeybadger.io/contact/">Contact</a>
+          </li>
+          <li class="nav-item  d-lg-none d-xl-block" style="font-style:italic;">
+            <a class="nav-link" href="https://www.honeybadger.io/about/">Meet the 'Badgers</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav d-flex">
+          <li class="nav-item">
+            <a class="btn btn-success cta-nav me-2" href="https://app.honeybadger.io/users/sign_up?plan_id=30252" onclick="window.fathom.trackGoal('YDVASYAU', 3900);">Start Free Trial</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://app.honeybadger.io/users/sign_in">Log In</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+  <div class="c-blog-subnav">
+  <nav class="navbar navbar-expand">
+    <div class="container-xxl" style="padding-right:15px;padding-left:15px;">
+      <ul class="navbar-nav me-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.honeybadger.io/blog/" title="Blog Home"><i class="fas fa-home" aira-hidden="true"></i><span class="a11y-text">Blog Home</span></a>
+        </li>
+          <li class="nav-item hidden-md-down">
+            <a class="nav-link " href="https://www.honeybadger.io/blog/tags/honeybadger/">Honeybadger</a>
+          </li>
+          <li class="nav-item hidden-md-down">
+            <a class="nav-link active" href="https://www.honeybadger.io/blog/tags/ruby/">Ruby</a>
+          </li>
+          <li class="nav-item hidden-md-down">
+            <a class="nav-link " href="https://www.honeybadger.io/blog/tags/php/">PHP</a>
+          </li>
+          <li class="nav-item hidden-md-down">
+            <a class="nav-link " href="https://www.honeybadger.io/blog/tags/python/">Python</a>
+          </li>
+          <li class="nav-item hidden-md-down">
+            <a class="nav-link " href="https://www.honeybadger.io/blog/tags/elixir/">Elixir</a>
+          </li>
+          <li class="nav-item hidden-md-down">
+            <a class="nav-link " href="https://www.honeybadger.io/blog/tags/javascript/">JavaScript</a>
+          </li>
+        <li class="nav-item">
+          <div class="dropdown">
+            <a href="#" class="nav-link tag-menu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="All Tags">
+              <span>Posts by Topic</span>
+              <i class="fas fa-caret-down" aira-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu c-tags-dropdown" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/ruby/">Ruby <span class="text-muted">(161)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/honeybadger/">Honeybadger <span class="text-muted">(76)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/rails/">Rails <span class="text-muted">(43)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/javascript/">JavaScript <span class="text-muted">(28)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/php/">PHP <span class="text-muted">(15)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/briefing/">Briefing <span class="text-muted">(13)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/devops/">DevOps <span class="text-muted">(9)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/go/">Go <span class="text-muted">(9)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/laravel/">Laravel <span class="text-muted">(9)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/elixir/">Elixir <span class="text-muted">(8)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/briefing-2021-q3/">Briefing 2021 Q3 <span class="text-muted">(7)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/python/">Python <span class="text-muted">(7)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/founderquest/">FounderQuest <span class="text-muted">(6)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/briefing-2021-q2/">Briefing 2021 Q2 <span class="text-muted">(6)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/conferences/">Conferences <span class="text-muted">(5)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/node/">Node <span class="text-muted">(5)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/security/">Security <span class="text-muted">(4)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/developer-tools/">Developer Tools <span class="text-muted">(4)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/aws/">Aws <span class="text-muted">(4)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/heroku/">Heroku <span class="text-muted">(3)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/events/">Events <span class="text-muted">(2)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/jekyll/">Jekyll <span class="text-muted">(2)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/startup-advice/">Startup Advice <span class="text-muted">(2)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/guest-post/">Guest Post <span class="text-muted">(2)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/sidekiq/">Sidekiq <span class="text-muted">(2)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/debugging/">Debugging <span class="text-muted">(2)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/serverless/">Serverless <span class="text-muted">(2)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/git/">Git <span class="text-muted">(2)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/testing/">Testing <span class="text-muted">(2)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/case-studies/">Case Studies <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/front-end/">Front End <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/performance/">Performance <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/allocation-stats/">Allocation Stats <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/integrations/">Integrations <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/bitbucket/">Bitbucket <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/mobile/">Mobile <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/gophercon/">Gophercon <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/clients/">Clients <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/vue/">Vue <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/lambda/">Lambda <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/turbolinks/">Turbolinks <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/redis/">Redis <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/circleci/">CircleCI <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/github/">GitHub <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/crystal/">Crystal <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/stripe/">Stripe <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/saas/">Saas <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/elastic-beanstalk/">Elastic Beanstalk <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/oauth/">Oauth <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/graphql/">Graphql <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/docker/">Docker <span class="text-muted">(1)</span></a>
+                <a class="dropdown-item" href="https://www.honeybadger.io/blog/tags/django/">Django <span class="text-muted">(1)</span></a>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto right-navbar">
+        <li class="nav-item">
+          <a class="nav-link subtle" href="https://www.honeybadger.io/blog/write-for-us/">Write For Us</a>
+        </li>
+        <li class="nav-item">
+          <a title="RSS Feed" class="nav-link subtle" href="https://www.honeybadger.io/blog/feed.xml"><i class="fas fa-rss" aira-hidden="true"><span class="a11y-text">RSS Feed</span></i></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+
+  <div class="c-blog-hero">
+    <div class="container-xxl">
+      <div class="row">
+        <div class="col-xl-8 col-lg-9">
+          <h1>A Beginner's Guide to Exceptions in Ruby</h1>
+          <p class="teaser">The other day I was searching for an 
+introduction to Ruby exceptions written for beginners - people who know 
+basic Ruby syntax but aren't really sure what an exception is or why 
+it's useful. I couldn't find one, so I decided to have a go at it 
+myself. I hope you find it useful.</p>
+          <ul class="list-inline c-blog-meta">
+              <li class="list-inline-item">
+                  <img src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/starrh.png" class="avatar" alt="author photo">
+                By <a href="#authorDetails">Starr Horne</a>
+              <a href="https://twitter.com/starrhorne" class="author-twitter"><i class="fab fa-twitter" aira-hidden="true"></i><span class="a11y-text">Author Twitter</span></a>
+              </li>
+              <li class="list-inline-item tags">
+                <a href="https://www.honeybadger.io/blog/tags/ruby/">#ruby</a>
+              </li>
+            <li class="list-inline-item">
+              Dec 6, 2016
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container-xxl rmb-5">
+    <div class="row">
+      <div class="col-xl-7 col-lg-8">
+        <div class="c-blog-post">
+          <article>
+            <p>The other day I was searching for an introduction to Ruby
+ exceptions written for beginners - people who know basic Ruby syntax 
+but aren't really sure what an exception is or why it's useful. I 
+couldn't find one, so I decided to have a go at it myself. I hope you 
+find it useful. If there are any points that are confusing, feel free to
+ tweet at me at @StarrHorne. :) </p>
+
+<h2 id="whats-an-exception">What's an exception?</h2>
+
+<p>Exceptions are Ruby's way of dealing with unexpected events. </p>
+
+<p>If you've ever made a typo in your code, causing your program to crash with a message like <code>SyntaxError</code> or <code>NoMethodError</code>, then you've seen exceptions in action. </p>
+
+<p>When you raise an exception in Ruby, the world stops and your program
+ starts to shut down. If nothing stops the process, your program will 
+eventually exit with an error message. </p>
+
+<p>Here's an example. In the code below, we try to divide by zero. This is impossible, so Ruby raises an exception called <code>ZeroDivisionError</code>. The program quits and prints an error message. </p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+<span class="c1"># Program crashes and outputs: "ZeroDivisionError: divided by 0"</span>
+</code></pre></div>
+<p>Crashing programs tend to make our users angry. So we normally want 
+to stop this shutdown process, and react to the error intelligently. </p>
+
+<p>This is called "rescuing," "handling," or "catching" an exception. They all mean the same thing. This is how you do it in Ruby:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">begin</span>
+  <span class="c1"># Any exceptions in here... </span>
+  <span class="mi">1</span><span class="o">/</span><span class="mi">0</span>
+<span class="k">rescue</span>
+  <span class="c1"># ...will cause this code to run</span>
+  <span class="nb">puts</span> <span class="s2">"Got an exception, but I'm responding intelligently!"</span>
+  <span class="n">do_something_intelligent</span><span class="p">()</span>
+<span class="k">end</span>
+
+<span class="c1"># This program does not crash.</span>
+<span class="c1"># Outputs: "Got an exception, but I'm responding intelligently!"</span>
+</code></pre></div>
+<p>The exception still happens, but it doesn't cause the program to 
+crash because it was "rescued." Instead of exiting, Ruby runs the code 
+in the rescue block, which prints out a message. </p>
+
+<p>This is nice, but it has one big limitation. It tells us "something went wrong," without letting us know <em>what</em> went wrong. </p>
+
+<p>All of the information about what went wrong is going to be contained in an exception object.</p>
+
+<h2 id="exception-objects">Exception Objects</h2>
+
+<p>Exception objects are normal Ruby objects. They hold all of the data about "what happened" for the exception you just rescued. </p>
+
+<p>To get the exception object, you will use a slightly different rescue syntax. </p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># Rescues all errors, an puts the exception object in `e`</span>
+<span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
+
+<span class="c1"># Rescues only ZeroDivisionError and puts the exception object in `e`</span>
+<span class="k">rescue</span> <span class="no">ZeroDivisionError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+</code></pre></div>
+<p>In the second example above, <code>ZeroDivisionError</code> is the class of the object in <code>e</code>. All of the "types" of exceptions we've talked about are really just class names. </p>
+
+<p>Exception objects also hold useful debug data. Let's take a look at the exception object for our <code>ZeroDivisionError</code>.</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">begin</span>
+  <span class="c1"># Any exceptions in here... </span>
+  <span class="mi">1</span><span class="o">/</span><span class="mi">0</span>
+<span class="k">rescue</span> <span class="no">ZeroDivisionError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="nb">puts</span> <span class="s2">"Exception Class: </span><span class="si">#{</span> <span class="n">e</span><span class="p">.</span><span class="nf">class</span><span class="p">.</span><span class="nf">name</span> <span class="si">}</span><span class="s2">"</span>
+  <span class="nb">puts</span> <span class="s2">"Exception Message: </span><span class="si">#{</span> <span class="n">e</span><span class="p">.</span><span class="nf">message</span> <span class="si">}</span><span class="s2">"</span>
+  <span class="nb">puts</span> <span class="s2">"Exception Backtrace: </span><span class="si">#{</span> <span class="n">e</span><span class="p">.</span><span class="nf">backtrace</span> <span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+
+<span class="c1"># Outputs:</span>
+<span class="c1"># Exception Class: ZeroDivisionError</span>
+<span class="c1"># Exception Message: divided by 0</span>
+<span class="c1"># Exception Backtrace: ...backtrace as an array...</span>
+</code></pre></div>
+<p>Like most Ruby exceptions, it contains a message and a backtrace along with its class name. </p>
+
+<div class="c-very-special-messages__item">
+                <div>
+                  “We've looked at a lot of error management systems. 
+Honeybadger is head and shoulders above the rest and somehow gets better
+ with every new release.”&nbsp;
+                  <div style="display: inline-block">
+                    <img class="circular" style="display: inline-block; max-width: 30px; margin: 0 5px 0 0; " src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/michael.png">
+                    <small>Michael Smith</small>
+                  </div>
+                </div>
+                <a class="btn btn-success cta" href="https://app.honeybadger.io/users/sign_up?plan_id=30087">
+                  Try Error Monitoring Free for 15 Days
+                </a>
+              </div><h2 id="raising-your-own-exceptions">Raising Your Own Exceptions</h2>
+
+<p>So far we've only talked about rescuing exceptions. You can also 
+trigger your own exceptions. This process is called "raising." You do it
+ by calling the <code>raise</code> method. </p>
+
+<p>When you raise your own exceptions, you get to pick which type of exception to use. You also get to set the error message. </p>
+
+<p>Here's an example:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">begin</span>
+  <span class="c1"># raises an ArgumentError with the message "you messed up!"</span>
+  <span class="k">raise</span> <span class="no">ArgumentError</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"You messed up!"</span><span class="p">)</span>
+<span class="k">rescue</span> <span class="no">ArgumentError</span> <span class="o">=&gt;</span> <span class="n">e</span>  
+  <span class="nb">puts</span> <span class="n">e</span><span class="p">.</span><span class="nf">message</span>
+<span class="k">end</span>
+
+<span class="c1"># Outputs: You messed up! </span>
+</code></pre></div>
+<p>As you can see, we're creating a new error object (an <code>ArgumentError</code>) with a custom message ("You messed up!") and passing it to the <code>raise</code> method.</p>
+
+<p>This being Ruby, <code>raise</code> can be called in several ways:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="c1"># This is my favorite because it's so explicit</span>
+<span class="k">raise</span> <span class="no">RuntimeError</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"You messed up!"</span><span class="p">)</span>
+
+<span class="c1"># ...produces the same result</span>
+<span class="k">raise</span> <span class="no">RuntimeError</span><span class="p">,</span> <span class="s2">"You messed up!"</span>
+
+<span class="c1"># ...produces the same result. But you can only raise </span>
+<span class="c1"># RuntimeErrors this way</span>
+<span class="k">raise</span> <span class="s2">"You messed up!"</span>
+</code></pre></div>
+<h2 id="making-custom-exceptions">Making Custom Exceptions</h2>
+
+<p>Ruby's built-in exceptions are great, but they don't cover every possible use case. </p>
+
+<p>What if you're building a user system and want to raise an exception 
+when the user tries to access an off-limits part of the site? None of 
+Ruby's standard exceptions fit, so your best bet is to create a new kind
+ of exception. </p>
+
+<p>To make a custom exception, just create a new class that inherits from <code>StandardError</code>. </p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">PermissionDeniedError</span> <span class="o">&lt;</span> <span class="no">StandardError</span>
+
+<span class="k">end</span>
+
+<span class="k">raise</span> <span class="no">PermissionDeniedError</span><span class="p">.</span><span class="nf">new</span><span class="p">()</span>
+</code></pre></div>
+<p>This is just a normal Ruby class. That means you can add methods and 
+data to it like any other class. Let's add an attribute called "action":</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">class</span> <span class="nc">PermissionDeniedError</span> <span class="o">&lt;</span> <span class="no">StandardError</span>
+
+  <span class="nb">attr_reader</span> <span class="ss">:action</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
+    <span class="c1"># Call the parent's constructor to set the message</span>
+    <span class="k">super</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+    <span class="c1"># Store the action in an instance variable</span>
+    <span class="vi">@action</span> <span class="o">=</span> <span class="n">action</span>
+  <span class="k">end</span>
+
+<span class="k">end</span>
+
+<span class="c1"># Then, when the user tries to delete something they don't</span>
+<span class="c1"># have permission to delete, you might do something like this:</span>
+<span class="k">raise</span> <span class="no">PermissionDeniedError</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"Permission Denied"</span><span class="p">,</span> <span class="ss">:delete</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="the-class-hierarchy">The Class Hierarchy</h2>
+
+<p>We just made a custom exception by subclassing <code>StandardError</code>, which itself subclasses <code>Exception</code>. </p>
+
+<p>In fact, if you look at the class hierarchy of any exception in Ruby, you'll find it eventually leads back to <code>Exception</code>. Here, I'll prove it to you. These are most of Ruby's built-in exceptions, displayed hierarchically:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="no">Exception</span>
+ <span class="no">NoMemoryError</span>
+ <span class="no">ScriptError</span>
+   <span class="no">LoadError</span>
+   <span class="no">NotImplementedError</span>
+   <span class="no">SyntaxError</span>
+ <span class="no">SignalException</span>
+   <span class="no">Interrupt</span>
+ <span class="no">StandardError</span>
+   <span class="no">ArgumentError</span>
+   <span class="no">IOError</span>
+     <span class="no">EOFError</span>
+   <span class="no">IndexError</span>
+   <span class="no">LocalJumpError</span>
+   <span class="no">NameError</span>
+     <span class="no">NoMethodError</span>
+   <span class="no">RangeError</span>
+     <span class="no">FloatDomainError</span>
+   <span class="no">RegexpError</span>
+   <span class="no">RuntimeError</span>
+   <span class="no">SecurityError</span>
+   <span class="no">SystemCallError</span>
+   <span class="no">SystemStackError</span>
+   <span class="no">ThreadError</span>
+   <span class="no">TypeError</span>
+   <span class="no">ZeroDivisionError</span>
+ <span class="no">SystemExit</span>
+</code></pre></div>
+<p>You don't have to memorize all of these, of course. I'm showing them 
+to you because this idea of hierarchy is very important for a specific 
+reason. </p>
+
+<p><strong>Rescuing errors of a specific class also rescues errors of its child classes.</strong> </p>
+
+<p>Let's try that again...</p>
+
+<p>When you <code>rescue StandardError</code>, you not only rescue exceptions with class <code>StandardError</code> but those of its children as well. If you look at the chart, you'll see that's a lot: <code>ArgumentError</code>, <code>IOError</code>, etc. </p>
+
+<p>If you were to <code>rescue Exception</code>, you would rescue every single exception, which would be a very bad idea </p>
+
+<div class="c-very-special-messages__item">
+                  <div id="blog-footer-newsletter-form" class="rmcloak">
+  <form action="https://app.convertkit.com/forms/3333647/subscriptions" class="seva-form formkit-form pt-3" style="" method="post" data-sv-form="3333647" data-uid="518597ca1c" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;redirect&quot;,&quot;success_message&quot;:&quot;Success! Now check your email to confirm your subscription.&quot;,&quot;redirect_url&quot;:&quot;https://www.honeybadger.io/newsletter/confirmation/?source=blog&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://convertkit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}" min-width="400 500 600 700 800">
+    <h3>Get Honeybadger's best Ruby articles in your inbox</h3>
+    <p>We publish 1-2 times per month. Subscribe to get our Ruby articles as soon as we publish them.</p>
+
+    <div data-style="clean">
+      <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
+      <div data-element="fields" data-stacked="false" class="seva-fields formkit-fields row gx-3 gy-2 align-items-end">
+        <div class="col-auto">
+          <input class="formkit-input form-control mb-1 me-1" aria-label="Your first name" name="fields[first_name]" placeholder="Your first name" type="text">
+          <input class="formkit-input form-control mb-1 me-1" name="email_address" placeholder="Your email address" required="" type="email">
+        </div>
+        <div class="col-auto">
+          <button data-element="submit" class="formkit-submit formkit-submit btn btn-primary mb-1">
+            <div class="formkit-spinner">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <span>Let me in</span>
+          </button>
+        </div>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" name="tags[]" value="3123765" checked="checked">
+          Also send me <a href="https://www.honeybadger.io/newsletter/" target="_blank">the Honeybadger Newsletter</a>
+        </label>
+      </div>
+    </div>
+
+    <p><small class="text-muted">We're Honeybadger. We'll never send you spam; we <em>will</em> send you cool stuff like exclusive content, memes, and swag.</small></p>
+
+    <input type="hidden" name="tags[]" value="3123786">
+
+    <input type="hidden" name="tags[]" value="740329">
+  </form>
+</div>
+
+              </div><h2 id="rescuing-all-exceptions-the-bad-way">Rescuing All Exceptions (the bad way)</h2>
+
+<p>If you want to get yelled at, go to stack overflow and post some code that looks like this:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="sr">//</span> <span class="no">Don</span><span class="err">'</span><span class="n">t</span> <span class="k">do</span> <span class="n">this</span> 
+<span class="k">begin</span>
+  <span class="n">do_something</span><span class="p">()</span>
+<span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>The code above will rescue every exception. <strong>Don't do it!</strong> It'll break your program in weird ways. </p>
+
+<p>That's because Ruby uses exceptions for things other than errors. It 
+also uses them to handle messages from the operating system called 
+"Signals." If you've ever pressed "ctrl-c" to exit a program, you've 
+used a signal. By suppressing all exceptions, you also suppress those 
+signals. </p>
+
+<p>There are also some kinds of exceptions — like syntax errors — that 
+really should cause your program to crash. If you suppress them, you'll 
+never know when you make typos or other mistakes. </p>
+
+<h2 id="rescuing-all-errors-the-right-way">Rescuing All Errors (The Right Way)</h2>
+
+<p>Go back and look at the class hierarchy chart and you'll see that all of the errors you'd want to rescue are children of <code>StandardError</code></p>
+
+<p>That means that if you want to rescue "all errors" you should rescue <code>StandardError</code>.</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">begin</span>
+  <span class="n">do_something</span><span class="p">()</span>
+<span class="k">rescue</span> <span class="no">StandardError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="c1"># Only your app's exceptions are swallowed. Things like SyntaxErrror are left alone. </span>
+<span class="k">end</span>
+</code></pre></div>
+<p>In fact, if you don't specify an exception class, Ruby assumes you mean <code>StandardError</code></p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">begin</span>
+  <span class="n">do_something</span><span class="p">()</span>
+<span class="k">rescue</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="c1"># This is the same as rescuing StandardError</span>
+<span class="k">end</span>
+</code></pre></div>
+<h2 id="rescuing-specific-errors-the-best-approach">Rescuing Specific Errors (The Best Approach)</h2>
+
+<p>Now that you know how to rescue all errors, you should know that it's
+ usually a bad idea, a code smell, considered harmful, etc. </p>
+
+<p>They're usually a sign that you were too lazy to figure out which 
+specific exceptions needed to be rescued. And they will almost always 
+come back to haunt you.</p>
+
+<p>So take the time and do it right. Rescue specific exceptions.</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">begin</span>
+  <span class="n">do_something</span><span class="p">()</span>
+<span class="k">rescue</span> <span class="no">Errno</span><span class="o">::</span><span class="no">ETIMEDOUT</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="sr">//</span> <span class="no">This</span> <span class="n">will</span> <span class="n">only</span> <span class="k">rescue</span> <span class="no">Errno</span><span class="o">::</span><span class="no">ETIMEDOUT</span> <span class="n">exceptions</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>You can even rescue multiple kinds of exceptions in the same rescue block, so no excuses. :)</p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="k">begin</span>
+  <span class="n">do_something</span><span class="p">()</span>
+<span class="k">rescue</span> <span class="no">Errno</span><span class="o">::</span><span class="no">ETIMEDOUT</span><span class="p">,</span> <span class="no">Errno</span><span class="o">::</span><span class="no">ECONNREFUSED</span> <span class="o">=&gt;</span> <span class="n">e</span>
+<span class="k">end</span>
+</code></pre></div>
+          </article>
+
+          <section>
+            <h2>Honeybadger has your back when it counts.</h2>
+            <p>We're the only error tracker that combines exception 
+monitoring, uptime monitoring, and cron monitoring into a single, simple
+ to use platform. Our mission: to tame production and make you a better,
+ more productive developer.</p>
+            <a href="https://www.honeybadger.io/for/ruby/" class="btn btn-success">Learn more</a>
+          </section>
+        </div>
+
+          <div class="row no-gutters c-blog-author" id="authorDetails">
+            <div class="col-sm-2">
+                <img src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/starrh.png" class="avatar" alt="author photo">
+            </div>
+
+            <div class="col-sm-8">
+              <h4>Starr Horne</h4>
+              <p>Starr Horne is a Rubyist and Chief JavaScripter at 
+Honeybadger.io. When she's not neck-deep in other people's bugs, she 
+enjoys making furniture with traditional hand-tools, reading history and
+ brewing beer in her garage in Seattle.</p>
+              <ul class="list-inline c-blog-meta">
+                  <li class="list-inline-item">
+                    <a href="https://twitter.com/starrhorne" title="Twitter" rel="noopener nofollow" class="twitter" target="_blank">
+                      <i class="fab fa-twitter" aira-hidden="true"></i>@starrhorne
+                      <span class="a11y-text">Author Twitter</span>
+                    </a>
+                  </li>
+              </ul>
+                <a href="https://www.honeybadger.io/blog/authors/starr/">More articles by Starr Horne</a>
+            </div>
+          </div>
+
+        <section id="more-articles">
+          <h2 class="mb-4">More Ruby articles</h2>
+          <ul class="list-unstyled">
+              <li class="mb-1">
+                <span class="d-none d-sm-inline-block" style="width: 130px;">Jun 13, 2022</span>
+                <a href="https://www.honeybadger.io/blog/containerizing-an-existing-rails-application/">Containerizing an Existing Rails Application</a>
+              </li>
+              <li class="mb-1">
+                <span class="d-none d-sm-inline-block" style="width: 130px;">May 30, 2022</span>
+                <a href="https://www.honeybadger.io/blog/rails-activerecord-store/">Hidden Gems: ActiveRecord Store</a>
+              </li>
+              <li class="mb-1">
+                <span class="d-none d-sm-inline-block" style="width: 130px;">May 23, 2022</span>
+                <a href="https://www.honeybadger.io/blog/event-streaming-rails-kafka/">Event Streaming in Rails with Kafka</a>
+              </li>
+              <li class="mb-1">
+                <span class="d-none d-sm-inline-block" style="width: 130px;">May 19, 2022</span>
+                <a href="https://www.honeybadger.io/blog/linting-formatting-ruby/">Linting and Auto-formatting Ruby Code With RuboCop</a>
+              </li>
+              <li class="mb-1">
+                <span class="d-none d-sm-inline-block" style="width: 130px;">May 16, 2022</span>
+                <a href="https://www.honeybadger.io/blog/ruby-object-model/">Understanding the Ruby Object Model In Depth</a>
+              </li>
+              <li class="mb-1">
+                <span class="d-none d-sm-inline-block" style="width: 130px;">May 09, 2022</span>
+                <a href="https://www.honeybadger.io/blog/sell-a-one-time-purchase-in-rails-with-stripe/">How to Sell a One-time Purchase in Rails With Stripe</a>
+              </li>
+              <li class="mb-1">
+                <span class="d-none d-sm-inline-block" style="width: 130px;">May 05, 2022</span>
+                <a href="https://www.honeybadger.io/blog/active-support-cache-increment/">Rails' Hidden Gems: ActiveSupport Cache Increment and Decrement</a>
+              </li>
+              <li class="mb-1">
+                <span class="d-none d-sm-inline-block" style="width: 130px;">Mar 21, 2022</span>
+                <a href="https://www.honeybadger.io/blog/complete-guide-to-managing-user-permissions-in-rails-apps/">Complete Guide To Managing User Permissions In Rails Apps</a>
+              </li>
+              <li class="mb-1">
+                <span class="d-none d-sm-inline-block" style="width: 130px;">Feb 21, 2022</span>
+                <a href="https://www.honeybadger.io/blog/ruby-view-components/">An Introduction to the ViewComponent Gem</a>
+              </li>
+              <li class="mb-1">
+                <span class="d-none d-sm-inline-block" style="width: 130px;">Jan 10, 2022</span>
+                <a href="https://www.honeybadger.io/blog/hb-turbolinks-to-turbo/">Migrating From Turbolinks To Turbo</a>
+              </li>
+          </ul>
+        </section>
+
+      </div>
+
+
+
+      <div class="col-xl-4 col-lg-4 offset-xl-1">
+
+        <div class="c-very-special-messages c-very-special-messages-inlineable">
+
+
+              <div class="c-very-special-messages__item">
+                <div>
+                  “We've looked at a lot of error management systems. 
+Honeybadger is head and shoulders above the rest and somehow gets better
+ with every new release.”&nbsp;
+                  <div style="display: inline-block">
+                    <img class="circular" style="display: inline-block; max-width: 30px; margin: 0 5px 0 0; " src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/michael.png">
+                    <small>Michael Smith</small>
+                  </div>
+                </div>
+                <a class="btn btn-success cta" href="https://app.honeybadger.io/users/sign_up?plan_id=30087">
+                  Try Error Monitoring Free for 15 Days
+                </a>
+              </div>
+
+              <div class="c-very-special-messages__item">
+                  <div id="blog-footer-newsletter-form" class="rmcloak">
+  <form action="https://app.convertkit.com/forms/3333647/subscriptions" class="seva-form formkit-form pt-3" style="" method="post" data-sv-form="3333647" data-uid="518597ca1c" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;redirect&quot;,&quot;success_message&quot;:&quot;Success! Now check your email to confirm your subscription.&quot;,&quot;redirect_url&quot;:&quot;https://www.honeybadger.io/newsletter/confirmation/?source=blog&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://convertkit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}" min-width="400 500 600 700 800">
+    <h3>Get Honeybadger's best Ruby articles in your inbox</h3>
+    <p>We publish 1-2 times per month. Subscribe to get our Ruby articles as soon as we publish them.</p>
+
+    <div data-style="clean">
+      <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
+      <div data-element="fields" data-stacked="false" class="seva-fields formkit-fields row gx-3 gy-2 align-items-end">
+        <div class="col-auto">
+          <input class="formkit-input form-control mb-1 me-1" aria-label="Your first name" name="fields[first_name]" placeholder="Your first name" type="text">
+          <input class="formkit-input form-control mb-1 me-1" name="email_address" placeholder="Your email address" required="" type="email">
+        </div>
+        <div class="col-auto">
+          <button data-element="submit" class="formkit-submit formkit-submit btn btn-primary mb-1">
+            <div class="formkit-spinner">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <span>Let me in</span>
+          </button>
+        </div>
+      </div>
+      <div class="form-check">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" name="tags[]" value="3123765" checked="checked">
+          Also send me <a href="https://www.honeybadger.io/newsletter/" target="_blank">the Honeybadger Newsletter</a>
+        </label>
+      </div>
+    </div>
+
+    <p><small class="text-muted">We're Honeybadger. We'll never send you spam; we <em>will</em> send you cool stuff like exclusive content, memes, and swag.</small></p>
+
+    <input type="hidden" name="tags[]" value="3123786">
+
+    <input type="hidden" name="tags[]" value="740329">
+  </form>
+</div>
+
+              </div>
+
+              <div class="c-very-special-messages__item">
+                <div>
+                  Are you using <strong>Bugsnag, Rollbar, or Airbrake</strong>
+ for your monitoring? Honeybadger includes exception, uptime, and 
+check-in monitoring — all for probably less than you're paying now. 
+Discover why so many companies are switching to Honeybadger
+                  <a href="https://www.honeybadger.io/vs/error-trackers/">here</a>.
+                </div>
+                <a class="btn btn-info cta" href="https://app.honeybadger.io/users/sign_up?plan_id=30087">
+                  Try Error Monitoring Free for 15 Days
+                </a>
+              </div>
+
+              <div class="c-very-special-messages__item">
+                <div>
+                  <strong>Stop digging through chat logs</strong> to 
+find the bug-fix someone mentioned last month. Honeybadger's built-in 
+issue tracker keeps discussion central to each error, so that if it pops
+ up again you'll be able to pick up right where you left off.
+                </div>
+                <a class="btn btn-info cta" href="https://app.honeybadger.io/users/sign_up?plan_id=30087">
+                  Try Error Monitoring Free for 15 Days
+                </a>
+              </div>
+
+              <div class="c-very-special-messages__item">
+                <div>
+                  "Wow — Customers are
+                  <strong>blown away</strong>
+                  that I email them so quickly after an error."
+                  <div style="display: inline-block">
+                    <img class="circular" style="display: inline-block; max-width: 30px; margin: 0 5px 0 20px;" src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/chris.png">
+                    <small>Chris Patton</small>
+                  </div>
+                </div>
+                <a class="btn btn-info cta" href="https://app.honeybadger.io/users/sign_up?plan_id=30087">
+                  Try Error Monitoring Free for 15 Days
+                </a>
+              </div>
+
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <div class="footer footer-container-outer pb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1 rmt-5" style="margin-right: 0; padding-right: 0; margin-left: 0; padding-left: 0;">
+        <center><img src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/bolt.svg" class="img-fluid" style="max-width: 100px;"></center>
+      </div>
+      <div class="col-md-3 col-6 rmt-5">
+        <div class="footer__heading">Product</div>
+        <nav class="footer__nav">
+          <ul>
+            <li>
+              <a href="https://www.honeybadger.io/tour/">Tour</a>
+            </li>
+            <li>
+              <a href="https://www.honeybadger.io/tour/uptime-monitoring">Uptime Monitoring</a>
+            </li>
+            <li>
+              <a href="https://www.honeybadger.io/tour/status-pages">Status Pages</a>
+            </li>
+            <li>
+              <a href="https://www.honeybadger.io/integrations/">Integrations</a>
+            </li>
+            <li>
+              <a href="https://www.honeybadger.io/plans/">Plans &amp; Pricing</a>
+            </li>
+            <li>
+              <a href="https://www.honeybadger.io/gdpr/">GDPR</a>
+            </li>
+            <li>
+              <a href="https://www.honeybadger.io/security/">Security</a>
+            </li>
+            <li>
+              <a href="https://www.honeybadger.io/vs/error-trackers/">HB vs. Error Trackers</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-md-3 col-6 rmt-5">
+        <div class="footer__heading">Stacks</div>
+        <div class="row">
+          <div class="col-lg-5 col-12">
+            <nav class="footer__nav">
+              <ul>
+                <li>
+                  <a href="https://www.honeybadger.io/for/rails/">Rails</a>
+                </li>
+                <li>
+                  <a href="https://www.honeybadger.io/for/laravel/">Laravel</a>
+                </li>
+                <li>
+                  <a href="https://www.honeybadger.io/for/django/">Django</a>
+                </li>
+                <li>
+                  <a href="https://www.honeybadger.io/for/javascript/">JavaScript</a>
+                </li>
+                <li>
+                  <a href="https://www.honeybadger.io/for/ruby/">Ruby</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-lg-5 col-12">
+            <nav class="footer__nav">
+              <ul>
+                <li>
+                  <a href="https://www.honeybadger.io/for/python/">Python</a>
+                </li>
+                <li>
+                  <a href="https://www.honeybadger.io/for/php/">PHP</a>
+                </li>
+                <li>
+                  <a href="https://www.honeybadger.io/for/elixir/">Elixir</a>
+                </li>
+                <li>
+                  <a href="https://www.honeybadger.io/for/crystal/">Crystal</a>
+                </li>
+                <li>
+                  <a href="https://www.honeybadger.io/for/go/">Go</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-6 rmt-5">
+        <div class="footer__heading">Company</div>
+        <nav class="footer__nav">
+          <ul>
+            <li>
+              <a href="https://www.honeybadger.io/about/">Meet the 'Badgers</a>
+            </li>
+            <li>
+              <a href="https://www.honeybadger.io/careers/">Job Openings</a>
+            </li>
+            <li>
+              <a href="https://www.honeybadger.io/assets/">Brand Assets</a>
+            </li>
+            <li>
+              <a href="https://www.honeybadger.io/terms/">Terms of Use</a>
+            </li>
+            <li>
+              <a href="https://www.honeybadger.io/privacy/">Privacy Statement</a>
+            </li>
+            <li>
+              <a href="https://www.honeybadger.io/contact/">Contact Us</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-md-2 col-6 rmt-5">
+        <div class="footer__heading">Resources</div>
+        <nav class="footer__nav">
+          <ul>
+            <li>
+              <a href="https://docs.honeybadger.io/">Developer Docs</a>
+            </li>
+            <li>
+              <a href="http://www.honeybadger.io/blog/">Developer Blog</a>
+            </li>
+            <li>
+              <a href="https://www.honeybadger.io/newsletter/">Newsletter</a>
+            </li>
+            <li>
+              <a href="https://www.exceptionalcreatures.com/">Exceptional Creatures</a>
+            </li>
+            <li>
+              <a href="https://www.founderquestpodcast.com/">FounderQuest</a>
+            </li>
+            <li>
+              <a href="https://twitter.com/honeybadgerapp"><i class="fab fa-twitter" aria-hidden="true"></i> Twitter</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div id="do-not-track" class="row">
+      <div class="offset-md-1 col-md-11 rmt-3">
+        <nav class="footer___av">
+          <ul class="list-unstyled">
+            <li>
+              <a href="https://www.honeybadger.io/do-not-track" class="text-decoration-none"><img src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/emoji.jpg" width="18" height="18"> You're not being tracked</a>
+            </li>
+          </ul>
+      </nav></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+    <script src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/main.js"></script>
+
+    <!-- Wistia -->
+    <script async="" charset="ISO-8859-1" src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/E-v1.js"></script>
+
+    <!-- Fathom - beautiful, simple website analytics -->
+    <script src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/script.js" site="HVGCVOJS" defer="defer"></script>
+    <!-- / Fathom -->
+
+  
+
+<iframe id="netlify-identity-widget" title="Netlify identity widget" style="position: fixed; top: 0; left: 0; border: none; width: 100%; height: 100%; overflow: visible; background: transparent; display: none; z-index: 99; " src="A%20Beginner's%20Guide%20to%20Exceptions%20in%20Ruby_files/a.html"></iframe><style id="wistia_22_style" type="text/css" class="wistia_injected_style">
+@font-face {
+font-family: 'WistiaPlayerInterNumbersSemiBold';
+font-feature-settings: 'tnum' 1;
+src: url(data:application/x-font-woff;charset=utf-8;base64,d09GMk9UVE8AAAaMAAwAAAAACgAAAAZBAAMD1wAAAAAAAAAAAAAAAAAAAAAAAAAADYpwGhQbIBwqBmAAgTIBNgIkAzAEBgWDGgcgGykJEZWkARP8KHCbm2tEznyIN98tPTUk9Ig3oiVV3pbDIzXa+f/fZgXpALFTZhBoMVFC9cp036dXvRKVmVnsxe+D+1NDQI5lG7ikZWEINIElTeBIdnxlhauQ5GQtoLHA/wN0riVdSx5xgbxF3KTbgnjVQ4B9P7YqCx7FpEZK+6ilx0AoopUh4aExJEKmkU+0ncdr4iFfKhdSFD9y91LCRaxNbVqvi0dND3rxI7ndUDR7EiwT3bhiua9krFA0oepCy2hCjwmjnjDjKjNTDz2ZuHtN8820Wfw/l8u4w4yV/f8/6uscs5rmiN00LcP4hAofyZUSyS3WinX0RGFFtnGrjj36x6dlNa57+PLTlrUisH2n9orfgd+R34XfDd0NsWDXwfwhvKHpbs3UBni37dBlPvO4KYn/PgylilcgSdw6sjsSSxsRGfIJgqhi14bKZCHcQvjUh/+3HMotTYrGLVYCxyMFjEnYC98yTAp6atAKVxaZ9eu2NMji8WTj4w/Y34elD60PPwb5bEywLqAX/amwmUo6TBCy14N/TL44jb3sE5JdUIPXXI0RBSoGt3BUObn4agKGIxxQhlyQacbstK4fS2mZoBtFNQ1bd+4zND2vQu6anl7gWFOj8MV2DVMtU44xMhpwElrrjA7zO5IqWojd/v1Vso6cqp91zC2YrGhDOy07Iqyza2q9smDIwUYek0AWbCt/8x78QmrzayQ6xtpmqfCYsLfgU9HdeP3UqutZTTNd/9Q8k08XzXzIxSdvLPda8YaeeZnkxUwql0nDKyUYdaWZjGAy7UDLHpVqBVHTxSV0wBy21El9u/491ik2J3YkdiP2LPZL41RBeeNUWtp97Bbn0Ee1g9wr9qqV/X+4R9nlPX03743dylnaXZyNp8v58yLOsFYCbUnCVQzjN+5QhlmKccO7aMkueWJggROd4qnw2x5LydUcg/NRamE3XMlkGovpRWPKWEavP74P2O1RANM/3gIIPJj7TX+lqU2geQuaBx4B/7cWAOx0ucTiEHYJU9y5DBuUMYNIHeHZz9tn+Fw2G5EBTqUlHRfRi4eB5wNlJsRsv5k4b6HyFkhIC6BO4LzPbWhW7rbCcxubeKHOc6UaBKZBMMd4j8XuRUynOCCa4EMfF9grkI1NcTaSAVtk1nrIOwFfeEBlQw4f4phb6zHzBOm0ZZ0dBcaZRVdYIo5xYiyOMEWONwQHmjKGE//VuRBgul1QrpyxmMvF4vGj0xfuuQrNt4tVTsRhEnjY9AuKa1FVLSEneQWzFd5WbO7hasX08ONUOVQgwQuVqACFXkSoIoUgK1hJEkAgbkG5CjqBS5wrRFuY2IfVwhRnLsVyZTZpatveGR4yEbYqbE6J80nM4aa+LD7Oqmr8PdSJFUQVynmgN4lerGQV1+uLdYzdOFWHPW/iK2gIQayhizQ0NMwyvBEBlrDczRfmU40CTtAHqLQGnjQG8MYkxm1MwJuTqjHwVCu9iRJ1C8ojWGHxUYowH0c5X57zpXquvlw0wzHHGMTfufxiJ1psFJTzq6nGeDvHF4LgmHHWCUViZBaInRn+cswnBi460RBPRYg9TRUQ0CZUC5LAT0qLLu50FpdTeBhjGf7/h4dg9hE0uqsBx/saOcYRDIfnOhfzGFBHyizcJK3p2edUjWrC0rn1aGjXtfVUCHMAKKhlxV8eTEIcV2jCOdKiqahv/MisrfRQVnxPJoOU62mR6pu2ZllIzo8zOZqQB7kWJXW2/c0aihata5PcIVJKfFRgHAETmEQVTCELptGMGcyigTnMJ1voUVN6uCZS9pV2hrwl7FYMvBwtUSd7L7E5qP9t7BIPRF7EcmA9ct2nIPHrxgWajtDltbXuBLuaY6qRZGa5ZlX5anfR0lYXaHUzVSFjZa8rfdhZ8rKXFZg21LVL5LFjI5TlDIbwnFGHE2dypHs6Q50N015dpOgLONEUlOqoiQgIaeCsjMq9gITDKwRMieQgKUy9UQY1BTFYZU2KpE2SkILMIjW8IdFwIKmMaK8oClJVssAEtFnz5dQ1s+w6EZoNGtPGQfzx+aoE8ikiP8GCYOWtgB+HBdWDaxACAZInVq14dZI85RRDvZGIghyONw59KV/BBEQ02P1ER8hmNGiURT2hQP8WfAY=);
+}
+</style><textarea id="BFI_DATA" style="width: 1px; height: 1px; display: none;"></textarea><title> </title><div id="WidgetFloaterPanels" translate="no" style="display: none; text-align: left; direction: ltr; visibility: hidden;" class="LTRStyle"> <div id="WidgetFloater" style="display: none" onmouseover="Microsoft.Translator.OnMouseOverFloater()" onmouseout="Microsoft.Translator.OnMouseOutFloater()"> <div id="WidgetLogoPanel"> <span id="WidgetTranslateWithSpan"><span>TRANSLATE with </span><img id="FloaterLogo"></span> <span id="WidgetCloseButton" title="Exit Translation" onclick="Microsoft.Translator.FloaterOnClose()">x</span></div> <div id="LanguageMenuPanel"> <div class="DDStyle_outer"><input name="LanguageMenu_svid" type="text" id="LanguageMenu_svid" style="display:none;" autocomplete="on" value="en" onclick="this.select()"> <input name="LanguageMenu_textid" type="text" id="LanguageMenu_textid" style="display:none;" autocomplete="on" onclick="this.select()"> <span onselectstart="return false" tabindex="0" class="DDStyle" id="__LanguageMenu_header" onclick="return LanguageMenu &amp;&amp; !LanguageMenu.Show('__LanguageMenu_popup', event);" onkeydown="return LanguageMenu &amp;&amp; !LanguageMenu.Show('__LanguageMenu_popup', event);">English</span> <div style="position:relative;text-align:left;left:0;"><div style="position:absolute;width:;left:0px;"><div class="DDStyle" style="display:none;" id="__LanguageMenu_popup"> <table id="LanguageMenu" border="0"> <tbody><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('ar');" ondragstart="LanguageMenu.ondragstart(event);" href="#ar">Arabic</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('he');" ondragstart="LanguageMenu.ondragstart(event);" href="#he">Hebrew</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('pl');" ondragstart="LanguageMenu.ondragstart(event);" href="#pl">Polish</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('bg');" ondragstart="LanguageMenu.ondragstart(event);" href="#bg">Bulgarian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('hi');" ondragstart="LanguageMenu.ondragstart(event);" href="#hi">Hindi</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('pt');" ondragstart="LanguageMenu.ondragstart(event);" href="#pt">Portuguese</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('ca');" ondragstart="LanguageMenu.ondragstart(event);" href="#ca">Catalan</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('mww');" ondragstart="LanguageMenu.ondragstart(event);" href="#mww">Hmong Daw</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ro');" ondragstart="LanguageMenu.ondragstart(event);" href="#ro">Romanian</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('zh-CHS');" ondragstart="LanguageMenu.ondragstart(event);" href="#zh-CHS">Chinese Simplified</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('hu');" ondragstart="LanguageMenu.ondragstart(event);" href="#hu">Hungarian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ru');" ondragstart="LanguageMenu.ondragstart(event);" href="#ru">Russian</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('zh-CHT');" ondragstart="LanguageMenu.ondragstart(event);" href="#zh-CHT">Chinese Traditional</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('id');" ondragstart="LanguageMenu.ondragstart(event);" href="#id">Indonesian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('sk');" ondragstart="LanguageMenu.ondragstart(event);" href="#sk">Slovak</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('cs');" ondragstart="LanguageMenu.ondragstart(event);" href="#cs">Czech</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('it');" ondragstart="LanguageMenu.ondragstart(event);" href="#it">Italian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('sl');" ondragstart="LanguageMenu.ondragstart(event);" href="#sl">Slovenian</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('da');" ondragstart="LanguageMenu.ondragstart(event);" href="#da">Danish</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ja');" ondragstart="LanguageMenu.ondragstart(event);" href="#ja">Japanese</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('es');" ondragstart="LanguageMenu.ondragstart(event);" href="#es">Spanish</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('nl');" ondragstart="LanguageMenu.ondragstart(event);" href="#nl">Dutch</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('tlh');" ondragstart="LanguageMenu.ondragstart(event);" href="#tlh">Klingon</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('sv');" ondragstart="LanguageMenu.ondragstart(event);" href="#sv">Swedish</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('en');" ondragstart="LanguageMenu.ondragstart(event);" href="#en">English</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ko');" ondragstart="LanguageMenu.ondragstart(event);" href="#ko">Korean</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('th');" ondragstart="LanguageMenu.ondragstart(event);" href="#th">Thai</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('et');" ondragstart="LanguageMenu.ondragstart(event);" href="#et">Estonian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('lv');" ondragstart="LanguageMenu.ondragstart(event);" href="#lv">Latvian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('tr');" ondragstart="LanguageMenu.ondragstart(event);" href="#tr">Turkish</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('fi');" ondragstart="LanguageMenu.ondragstart(event);" href="#fi">Finnish</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('lt');" ondragstart="LanguageMenu.ondragstart(event);" href="#lt">Lithuanian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('uk');" ondragstart="LanguageMenu.ondragstart(event);" href="#uk">Ukrainian</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('fr');" ondragstart="LanguageMenu.ondragstart(event);" href="#fr">French</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ms');" ondragstart="LanguageMenu.ondragstart(event);" href="#ms">Malay</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('ur');" ondragstart="LanguageMenu.ondragstart(event);" href="#ur">Urdu</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('de');" ondragstart="LanguageMenu.ondragstart(event);" href="#de">German</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('mt');" ondragstart="LanguageMenu.ondragstart(event);" href="#mt">Maltese</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('vi');" ondragstart="LanguageMenu.ondragstart(event);" href="#vi">Vietnamese</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('el');" ondragstart="LanguageMenu.ondragstart(event);" href="#el">Greek</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('no');" ondragstart="LanguageMenu.ondragstart(event);" href="#no">Norwegian</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('cy');" ondragstart="LanguageMenu.ondragstart(event);" href="#cy">Welsh</a></td> </tr><tr> <td><a tabindex="-1" onclick="return LanguageMenu.onclick('ht');" ondragstart="LanguageMenu.ondragstart(event);" href="#ht">Haitian Creole</a></td><td><a tabindex="-1" onclick="return LanguageMenu.onclick('fa');" ondragstart="LanguageMenu.ondragstart(event);" href="#fa">Persian</a></td><td></td> </tr> </tbody></table> <img alt="" style="height:7px;width:17px;border-width:0px;left:20px;"> </div></div></div></div> <script type="text/javascript"> var LanguageMenu; var LanguageMenu_keys=["ar","bg","ca","zh-CHS","zh-CHT","cs","da","nl","en","et","fi","fr","de","el","ht","he","hi","mww","hu","id","it","ja","tlh","ko","lv","lt","ms","mt","no","fa","pl","pt","ro","ru","sk","sl","es","sv","th","tr","uk","ur","vi","cy"]; var LanguageMenu_values=["Arabic","Bulgarian","Catalan","Chinese Simplified","Chinese Traditional","Czech","Danish","Dutch","English","Estonian","Finnish","French","German","Greek","Haitian Creole","Hebrew","Hindi","Hmong Daw","Hungarian","Indonesian","Italian","Japanese","Klingon","Korean","Latvian","Lithuanian","Malay","Maltese","Norwegian","Persian","Polish","Portuguese","Romanian","Russian","Slovak","Slovenian","Spanish","Swedish","Thai","Turkish","Ukrainian","Urdu","Vietnamese","Welsh"]; var LanguageMenu_callback=function(){ }; var LanguageMenu_popupid='__LanguageMenu_popup'; </script> </div> <div id="CTFLinksPanel"> <span id="ExternalLinksPanel"><a id="HelpLink" title="Help" target="_blank" href="https://go.microsoft.com/?linkid=9722454"> <img id="HelpImg"></a> <a id="EmbedLink" href="javascript:Microsoft.Translator.FloaterShowEmbed()" title="Get this widget for your own site"> <img id="EmbedImg"></a> <a id="ShareLink" title="Share translated page with friends" href="javascript:Microsoft.Translator.FloaterShowSharePanel()"> <img id="ShareImg"></a> </span> </div> <div id="FloaterProgressBar"> <span id="ProgressFill"></span> </div> </div> <div id="WidgetFloaterCollapsed" style="display: none" onmouseover="Microsoft.Translator.OnMouseOverFloater()"> <span>TRANSLATE with </span><img id="CollapsedLogoImg"></div> <div id="FloaterSharePanel" style="display: none"> <div id="ShareTextDiv"> <span id="ShareTextSpan"> COPY THE URL BELOW </span> </div> <div id="ShareTextboxDiv"> <input name="ShareTextbox" type="text" id="ShareTextbox" readonly="readonly" onclick="this.select()"> <!--a id="TwitterLink" title="Share on Twitter"> <img id="TwitterImg" /></a> <a-- id="FacebookLink" title="Share on Facebook"> <img id="FacebookImg" /></a--> <a id="EmailLink" title="Email this translation"> <img id="EmailImg"></a> </div> <div id="ShareFooter"> <span id="ShareHelpSpan"><a id="ShareHelpLink"> <img id="ShareHelpImg"></a></span> <span id="ShareBackSpan"><a id="ShareBack" href="javascript:Microsoft.Translator.FloaterOnShareBackClick()" title="Back To Translation"> Back</a></span> </div> <input name="EmailSubject" type="hidden" id="EmailSubject" value="Check out this page in {0} translated from {1}"> <input name="EmailBody" type="hidden" id="EmailBody" value="Translated: {0}%0d%0aOriginal: {1}%0d%0a%0d%0aAutomatic translation powered by Microsoft® Translator%0d%0ahttp://www.bing.com/translator?ref=MSTWidget"> <input type="hidden" id="ShareHelpText" value="This link allows visitors to launch this page and automatically translate it to {0}."> </div> <div id="FloaterEmbed" style="display: none"> <div id="EmbedTextDiv"> <span id="EmbedTextSpan">EMBED THE SNIPPET BELOW IN YOUR SITE</span> <a id="EmbedHelpLink" title="Copy this code and place it into your HTML."> <img id="EmbedHelpImg"></a> </div> <div id="EmbedTextboxDiv"> <input name="EmbedSnippetTextBox" type="text" id="EmbedSnippetTextBox" readonly="readonly" value="&lt;div id='MicrosoftTranslatorWidget' class='Dark' style='color:white;background-color:#555555'&gt;&lt;/div&gt;&lt;script type='text/javascript'&gt;setTimeout(function(){var s=document.createElement('script');s.type='text/javascript';s.charset='UTF-8';s.src=((location &amp;&amp; location.href &amp;&amp; location.href.indexOf('https') == 0)?'https://ssl.microsofttranslator.com':'http://www.microsofttranslator.com')+'/ajax/v3/WidgetV3.ashx?siteData=ueOIGRSKkd965FeEGM5JtQ**&amp;ctf=true&amp;ui=true&amp;settings=manual&amp;from=en';var p=document.getElementsByTagName('head')[0]||document.documentElement;p.insertBefore(s,p.firstChild); },0);&lt;/script&gt;" onclick="this.select()"> </div> <div id="EmbedNoticeDiv"><span id="EmbedNoticeSpan">Enable collaborative features and customize widget: <a href="http://www.bing.com/widget/translator" target="_blank">Bing Webmaster Portal</a></span></div> <div id="EmbedFooterDiv"><span id="EmbedBackSpan"><a href="javascript:Microsoft.Translator.FloaterOnEmbedBackClick()" title="Back To Translation">Back</a></span></div> </div> <script type="text/javascript"> var intervalId = setInterval(function () { if (MtPopUpList) { LanguageMenu = new MtPopUpList(); var langMenu = document.getElementById(LanguageMenu_popupid); var origLangDiv = document.createElement("div"); origLangDiv.id = "OriginalLanguageDiv"; origLangDiv.innerHTML = "<span id='OriginalTextSpan'>ORIGINAL: </span><span id='OriginalLanguageSpan'></span>"; langMenu.appendChild(origLangDiv); LanguageMenu.Init('LanguageMenu', LanguageMenu_keys, LanguageMenu_values, LanguageMenu_callback, LanguageMenu_popupid); window["LanguageMenu"] = LanguageMenu; clearInterval(intervalId); } }, 1); </script> </div><div class="TnITTtw-fp-collapsed-button" style="display: block;"></div><div class="TnITTtw-mate-fp-bar" translate="no" style="z-index: 1001; width: 0px; height: 0px; opacity: 0; display: none;">    <div class="TnITTtw-hide-fp-bar" style="display: none;"></div>    <div class="TnITTtw-current-page-lang" style="display: none;">Язык этой страницы: Английский</div>    <div class="TnITTtw-cta-button-layout" style="display: none;">        <div class="TnITTtw-spinner">            <div class="TnITTtw-bounce1"></div>            <div class="TnITTtw-bounce2"></div>            <div class="TnITTtw-bounce3"></div>        </div>        <div class="TnITTtw-mw-button TnITTtw-fp-translate TnITTtw-high-cta" style="display: none;">Перевести на Русский</div>    </div>    <div class="TnITTtw-change-language TnITTtw-select" data-for-serial="3" style="display: none;"></div>    <div class="TnITTtw-stop-fp"></div>    <div class="TnITTtw-toggle-iphone-settings" style="display: none;"></div>    <div class="TnITTtw-ui_selector" style="display: none;">        <div class="TnITTtw-options-arrow"></div>        <div class="TnITTtw-options TnITTtw-opt-3 TnITTtw-standalone" data-serial="3" style="display: none; z-index: 998;">            <div class="TnITTtw-dd-search">                <input class="TnITTtw-dd-input" type="text" data-dir="to" placeholder="Поиск" data-width="NaN">            </div>            <div id="selVisibleScroll-3">                <div id="selEntireScroll-3">                    <div class="TnITTtw-inner-options-layout">                        <ul class="TnITTtw-list"><li class="lang-az TnITTtw-option" index="1"><span id="lang-az" val="az" class="lang-az">Азербайджанский</span></li><li class="lang-sq TnITTtw-option" index="2"><span id="lang-sq" val="sq" class="lang-sq">Албанский</span></li><li class="lang-am TnITTtw-option" index="3"><span id="lang-am" val="am" class="lang-am">Амхарский</span></li><li class="lang-en TnITTtw-option" index="4"><span id="lang-en" val="en" class="lang-en">Английский</span></li><li class="lang-ar TnITTtw-option" index="5"><span id="lang-ar" val="ar" class="lang-ar">Арабский</span></li><li class="lang-hy TnITTtw-option" index="6"><span id="lang-hy" val="hy" class="lang-hy">Армянский</span></li><li class="lang-af TnITTtw-option" index="7"><span id="lang-af" val="af" class="lang-af">Африкаанс</span></li><li class="lang-bn TnITTtw-option" index="8"><span id="lang-bn" val="bn" class="lang-bn">Бенгальский</span></li><li class="lang-my TnITTtw-option" index="9"><span id="lang-my" val="my" class="lang-my">Бирманский</span></li><li class="lang-bg TnITTtw-option" index="10"><span id="lang-bg" val="bg" class="lang-bg">Болгарский</span></li><li class="lang-cy TnITTtw-option" index="11"><span id="lang-cy" val="cy" class="lang-cy">Валлийский</span></li><li class="lang-hu TnITTtw-option" index="12"><span id="lang-hu" val="hu" class="lang-hu">Венгерский</span></li><li class="lang-vi TnITTtw-option" index="13"><span id="lang-vi" val="vi" class="lang-vi">Вьетнамский</span></li><li class="lang-el TnITTtw-option" index="14"><span id="lang-el" val="el" class="lang-el">Греческий</span></li><li class="lang-gu TnITTtw-option" index="15"><span id="lang-gu" val="gu" class="lang-gu">Гуджарати</span></li><li class="lang-da TnITTtw-option" index="16"><span id="lang-da" val="da" class="lang-da">Датский</span></li><li class="lang-iw TnITTtw-option" index="17"><span id="lang-iw" val="iw" class="lang-iw">Иврит</span></li><li class="lang-id TnITTtw-option" index="18"><span id="lang-id" val="id" class="lang-id">Индонезийский</span></li><li class="lang-is TnITTtw-option" index="19"><span id="lang-is" val="is" class="lang-is">Исландский</span></li><li class="lang-es TnITTtw-option" index="20"><span id="lang-es" val="es" class="lang-es">Испанский</span></li><li class="lang-it TnITTtw-option" index="21"><span id="lang-it" val="it" class="lang-it">Итальянский</span></li><li class="lang-kk TnITTtw-option" index="22"><span id="lang-kk" val="kk" class="lang-kk">Казахский</span></li><li class="lang-kn TnITTtw-option" index="23"><span id="lang-kn" val="kn" class="lang-kn">Каннада</span></li><li class="lang-ca TnITTtw-option" index="24"><span id="lang-ca" val="ca" class="lang-ca">Каталанский</span></li><li class="lang-zh-TW TnITTtw-option" index="25"><span id="lang-zh-TW" val="zh-TW" class="lang-zh-TW">Китайский (традиционный)</span></li><li class="lang-zh-CN TnITTtw-option" index="26"><span id="lang-zh-CN" val="zh-CN" class="lang-zh-CN">Китайский (упрощенный)</span></li><li class="lang-ko TnITTtw-option" index="27"><span id="lang-ko" val="ko" class="lang-ko">Корейский</span></li><li class="lang-ht TnITTtw-option" index="28"><span id="lang-ht" val="ht" class="lang-ht">Креольский (гаити)</span></li><li class="lang-ku TnITTtw-option" index="29"><span id="lang-ku" val="ku" class="lang-ku">Курманджи</span></li><li class="lang-km TnITTtw-option" index="30"><span id="lang-km" val="km" class="lang-km">Кхмерский</span></li><li class="lang-lo TnITTtw-option" index="31"><span id="lang-lo" val="lo" class="lang-lo">Лаосский</span></li><li class="lang-lv TnITTtw-option" index="32"><span id="lang-lv" val="lv" class="lang-lv">Латышский</span></li><li class="lang-lt TnITTtw-option" index="33"><span id="lang-lt" val="lt" class="lang-lt">Литовский</span></li><li class="lang-mg TnITTtw-option" index="34"><span id="lang-mg" val="mg" class="lang-mg">Малагасийский</span></li><li class="lang-ms TnITTtw-option" index="35"><span id="lang-ms" val="ms" class="lang-ms">Малайский</span></li><li class="lang-ml TnITTtw-option" index="36"><span id="lang-ml" val="ml" class="lang-ml">Малаялам</span></li><li class="lang-mt TnITTtw-option" index="37"><span id="lang-mt" val="mt" class="lang-mt">Мальтийский</span></li><li class="lang-mi TnITTtw-option" index="38"><span id="lang-mi" val="mi" class="lang-mi">Маори</span></li><li class="lang-mr TnITTtw-option" index="39"><span id="lang-mr" val="mr" class="lang-mr">Маратхи</span></li><li class="lang-de TnITTtw-option" index="40"><span id="lang-de" val="de" class="lang-de">Немецкий</span></li><li class="lang-ne TnITTtw-option" index="41"><span id="lang-ne" val="ne" class="lang-ne">Непальский</span></li><li class="lang-nl TnITTtw-option" index="42"><span id="lang-nl" val="nl" class="lang-nl">Нидерландский</span></li><li class="lang-no TnITTtw-option" index="43"><span id="lang-no" val="no" class="lang-no">Норвежский</span></li><li class="lang-pa TnITTtw-option" index="44"><span id="lang-pa" val="pa" class="lang-pa">Панджаби</span></li><li class="lang-fa TnITTtw-option" index="45"><span id="lang-fa" val="fa" class="lang-fa">Персидский</span></li><li class="lang-pl TnITTtw-option" index="46"><span id="lang-pl" val="pl" class="lang-pl">Польский</span></li><li class="lang-pt TnITTtw-option" index="47"><span id="lang-pt" val="pt" class="lang-pt">Португальский</span></li><li class="lang-ps TnITTtw-option" index="48"><span id="lang-ps" val="ps" class="lang-ps">Пушту</span></li><li class="lang-ro TnITTtw-option" index="49"><span id="lang-ro" val="ro" class="lang-ro">Румынский</span></li><li class="lang-ru TnITTtw-option_selected" index="50"><span id="lang-ru" val="ru" class="lang-ru">Русский</span></li><li class="lang-sm TnITTtw-option" index="51"><span id="lang-sm" val="sm" class="lang-sm">Самоанский</span></li><li class="lang-sk TnITTtw-option" index="52"><span id="lang-sk" val="sk" class="lang-sk">Словацкий</span></li><li class="lang-sl TnITTtw-option" index="53"><span id="lang-sl" val="sl" class="lang-sl">Словенский</span></li><li class="lang-th TnITTtw-option" index="54"><span id="lang-th" val="th" class="lang-th">Тайский</span></li><li class="lang-ta TnITTtw-option" index="55"><span id="lang-ta" val="ta" class="lang-ta">Тамильский</span></li><li class="lang-te TnITTtw-option" index="56"><span id="lang-te" val="te" class="lang-te">Телугу</span></li><li class="lang-tr TnITTtw-option" index="57"><span id="lang-tr" val="tr" class="lang-tr">Турецкий</span></li><li class="lang-uk TnITTtw-option" index="58"><span id="lang-uk" val="uk" class="lang-uk">Украинский</span></li><li class="lang-ur TnITTtw-option" index="59"><span id="lang-ur" val="ur" class="lang-ur">Урду</span></li><li class="lang-fi TnITTtw-option" index="60"><span id="lang-fi" val="fi" class="lang-fi">Финский</span></li><li class="lang-fr TnITTtw-option" index="61"><span id="lang-fr" val="fr" class="lang-fr">Французский</span></li><li class="lang-hi TnITTtw-option" index="62"><span id="lang-hi" val="hi" class="lang-hi">Хинди</span></li><li class="lang-hr TnITTtw-option" index="63"><span id="lang-hr" val="hr" class="lang-hr">Хорватский</span></li><li class="lang-cs TnITTtw-option" index="64"><span id="lang-cs" val="cs" class="lang-cs">Чешский</span></li><li class="lang-sv TnITTtw-option" index="65"><span id="lang-sv" val="sv" class="lang-sv">Шведский</span></li><li class="lang-et TnITTtw-option" index="66"><span id="lang-et" val="et" class="lang-et">Эстонский</span></li><li class="lang-ja TnITTtw-option" index="67"><span id="lang-ja" val="ja" class="lang-ja">Японский</span></li></ul>                    </div>                </div>                <div id="sel-scrollbar-3">                    <div id="sel-track-3">                        <div id="sel-dragBar-3"></div>                    </div>                </div>            </div>        </div>    </div>    <div class="TnITTtw-fp-options" style="display: none;">        <input type="checkbox" id="TnITTtw-always-translate" style="display: none;" readonly="readonly"><label for="TnITTtw-always-translate" class="TnITTtw-always-translate-label TnITTtw-not-pro" style="display: none;"><span class="TnITTtw-always-translate-inner-label" style="display: none;">Всегда переводить Английский на Русский</span><span class="TnITTtw-pro-label" style="display: none;">PRO</span></label>        <br style="display: none;">        <input type="checkbox" id="TnITTtw-never-translate-lang" style="display: none;"><label for="TnITTtw-never-translate-lang" class="TnITTtw-never-translate-lang-label" style="display: none;">Никогда не переводить Английский</label>        <br style="display: none;">        <input type="checkbox" id="TnITTtw-never-translate-site" style="display: none;"><label for="TnITTtw-never-translate-site" class="TnITTtw-never-translate-site-label" style="display: none;">Никогда не переводить www.honeybadger.io</label>    </div></div></body></html>

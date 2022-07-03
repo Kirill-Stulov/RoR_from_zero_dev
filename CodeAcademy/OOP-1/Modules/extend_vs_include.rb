@@ -10,7 +10,7 @@ class Bar
   extend Foo
 end
 
-b = Bar.foo   # работает потомму что в классе Bar естьextend Foo
+b = Bar.foo   # работает потомму что в классе Bar есть extend Foo
 a = Bar.new  # работает потомму что в классе Bar есть include Foo 
 a.foo
 
