@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head><meta charset="UTF-8"><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();</script>
+		<!--[if lt IE 9]>
+	<script src="https://www.rubyguides.com/wp-content/themes/rise/js/html5/dist/html5shiv.js"></script>
+	<script src="//css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+	<![endif]-->
+	<!--[if IE 8]>
+	<link rel="stylesheet" type="text/css" href="https://www.rubyguides.com/wp-content/themes/rise/css/ie8.css"/>
+	<![endif]-->
+	<!--[if IE 7]>
+	<link rel="stylesheet" type="text/css" href="https://www.rubyguides.com/wp-content/themes/rise/css/ie7.css"/>
+	<![endif]-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	
+	
+			<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="rocketlazyloadscript" async src="https://www.googletagmanager.com/gtag/js?id=G-9HHF5TFM22"></script>
+<script type="rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9HHF5TFM22');
+</script>	
+		
+<!-- Open Graph Meta Tags generated by MashShare 3.8.1 - https://mashshare.net -->
+<meta property="og:type" content="article" /> 
+<meta property="og:title" content="The Ultimate Guide to Blocks, Procs & Lambdas" />
+<meta property="og:description" content="Ruby blocks, procs &amp;amp; lambdas.  What are they?  How do they work?  How are they different from each other?  You will learn that &amp;amp; a lot more by reading this post!    Understanding Ruby Blocks  Ruby blocks are little anonymous functions that" />
+<meta property="og:image" content="https://www.rubyguides.com/wp-content/uploads/2016/02/ultimate-guide-header-1.png" />
+<meta property="og:url" content="https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/" />
+<meta property="og:site_name" content="RubyGuides" />
+<meta property="article:author" content="https://www.facebook.com/BlackBytes-1559052444354186/" />
+<meta property="article:publisher" content="https://www.facebook.com/RubyGuidesLearning/" />
+<meta property="article:published_time" content="2016-02-02T19:26:17+01:00" />
+<meta property="article:modified_time" content="2020-01-31T18:56:16+01:00" />
+<meta property="og:updated_time" content="2020-01-31T18:56:16+01:00" />
+<!-- Open Graph Meta Tags generated by MashShare 3.8.1 - https://www.mashshare.net -->
+<!-- Twitter Card generated by MashShare 3.8.1 - https://www.mashshare.net -->
+<meta property="og:image:width" content="2089" />
+<meta property="og:image:height" content="1097" />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Ultimate Guide to Blocks, Procs & Lambdas">
+<meta name="twitter:description" content="Ruby blocks, procs &amp;amp; lambdas.  What are they?  How do they work?  How are they different from each other?  You will learn that &amp;amp; a lot more by reading this post!    Understanding Ruby Blocks  Ruby blocks are little anonymous functions that">
+<meta name="twitter:image" content="https://www.rubyguides.com/wp-content/uploads/2016/02/ultimate-guide-header-1.png">
+<meta name="twitter:site" content="@matugm">
+<meta name="twitter:creator" content="@matugm">
+<!-- Twitter Card generated by MashShare 3.8.1 - https://www.mashshare.net -->
+
+
+	<!-- This site is optimized with the Yoast SEO plugin v18.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Ruby Blocks, Procs &amp; Lambdas - The Ultimate Guide!</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C400italic%2C500&#038;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C400italic%2C500&#038;display=swap" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C400italic%2C500&#038;display=swap" /></noscript>
+	<meta name="description" content="Ruby blocks are anonymous functions that can be passed into methods. But how do you use blocks? What&#039;s the difference between procs &amp; lambdas? What does &quot;yield&quot; do? Find the answers here!" />
+	<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+	<link rel="canonical" href="https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Ruby Blocks, Procs &amp; Lambdas - The Ultimate Guide!" />
+	<meta property="og:description" content="Ruby blocks are anonymous functions that can be passed into methods. But how do you use blocks? What&#039;s the difference between procs &amp; lambdas? What does &quot;yield&quot; do? Find the answers here!" />
+	<meta property="og:url" content="https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/" />
+	<meta property="og:site_name" content="RubyGuides" />
+	<meta property="article:publisher" content="https://www.facebook.com/BlackBytes-1559052444354186/" />
+	<meta property="article:author" content="https://www.facebook.com/BlackBytes-1559052444354186/" />
+	<meta property="article:published_time" content="2016-02-02T18:26:17+00:00" />
+	<meta property="article:modified_time" content="2020-01-31T17:56:16+00:00" />
+	<meta property="og:image" content="https://i0.wp.com/www.rubyguides.com/wp-content/uploads/2017/08/fb-banner-new.png?fit=1500%2C500&#038;ssl=1" />
+	<meta property="og:image:width" content="1500" />
+	<meta property="og:image:height" content="500" />
+	<meta property="og:image:type" content="image/png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:creator" content="@matugm" />
+	<meta name="twitter:site" content="@matugm" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://www.rubyguides.com/#website","url":"https://www.rubyguides.com/","name":"RubyGuides","description":"Ruby Programming Tutorials","publisher":{"@id":"https://www.rubyguides.com/#/schema/person/99f93e44dd027ce69f5f2eedff0add55"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.rubyguides.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/#primaryimage","inLanguage":"en-US","url":"https://i1.wp.com/www.rubyguides.com/wp-content/uploads/2016/02/ultimate-guide-header-1.png?ssl=1","contentUrl":"https://i1.wp.com/www.rubyguides.com/wp-content/uploads/2016/02/ultimate-guide-header-1.png?ssl=1","caption":"ruby procs and lambdas"},{"@type":"WebPage","@id":"https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/#webpage","url":"https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/","name":"Ruby Blocks, Procs & Lambdas - The Ultimate Guide!","isPartOf":{"@id":"https://www.rubyguides.com/#website"},"primaryImageOfPage":{"@id":"https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/#primaryimage"},"datePublished":"2016-02-02T18:26:17+00:00","dateModified":"2020-01-31T17:56:16+00:00","description":"Ruby blocks are anonymous functions that can be passed into methods. But how do you use blocks? What's the difference between procs & lambdas? What does \"yield\" do? Find the answers here!","breadcrumb":{"@id":"https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/"]}]},{"@type":"BreadcrumbList","@id":"https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.rubyguides.com/"},{"@type":"ListItem","position":2,"name":"The Ultimate Guide to Blocks, Procs &#038; Lambdas"}]},{"@type":"Article","@id":"https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/#article","isPartOf":{"@id":"https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/#webpage"},"author":{"@id":"https://www.rubyguides.com/#/schema/person/99f93e44dd027ce69f5f2eedff0add55"},"headline":"The Ultimate Guide to Blocks, Procs &#038; Lambdas","datePublished":"2016-02-02T18:26:17+00:00","dateModified":"2020-01-31T17:56:16+00:00","mainEntityOfPage":{"@id":"https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/#webpage"},"wordCount":1121,"publisher":{"@id":"https://www.rubyguides.com/#/schema/person/99f93e44dd027ce69f5f2eedff0add55"},"image":{"@id":"https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/#primaryimage"},"thumbnailUrl":"https://i1.wp.com/www.rubyguides.com/wp-content/uploads/2016/02/ultimate-guide-header-1.png?ssl=1","keywords":["blocks","lambda","procs","ruby"],"articleSection":["Programming"],"inLanguage":"en-US"},{"@type":["Person","Organization"],"@id":"https://www.rubyguides.com/#/schema/person/99f93e44dd027ce69f5f2eedff0add55","name":"Jesus Castello","logo":{"@id":"https://www.rubyguides.com/#personlogo"},"sameAs":["https://www.facebook.com/BlackBytes-1559052444354186/","https://www.linkedin.com/in/jesus-castello-05733331/","https://twitter.com/matugm","https://www.youtube.com/channel/UCUCRO4CMJQgoabub5SzJQug"]}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//scripts.mediavine.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="RubyGuides &raquo; The Ultimate Guide to Blocks, Procs &#038; Lambdas Comments Feed" href="https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/feed/" />
+		<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.rubyguides.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.6.8"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='pt-cv-public-style-css'  href='https://www.rubyguides.com/wp-content/plugins/content-views-query-and-display-post-page/public/assets/css/cv.css?ver=2.4.0.5' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://c0.wp.com/c/5.6.8/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='mashsb-styles-css'  href='https://www.rubyguides.com/wp-content/plugins/mashsharer/assets/css/mashsb.min.css?ver=3.8.1' type='text/css' media='all' />
+<style id='mashsb-styles-inline-css' type='text/css'>
+.mashsb-count {color:#cccccc;}.mashsb-buttons a {
+        background-image: -webkit-linear-gradient(bottom,rgba(0, 0, 0, 0.17) 0%,rgba(255, 255, 255, 0.17) 100%);
+        background-image: -moz-linear-gradient(bottom,rgba(0, 0, 0, 0.17) 0%,rgba(255, 255, 255, 0.17) 100%);
+        background-image: linear-gradient(bottom,rgba(0,0,0,.17) 0%,rgba(255,255,255,.17) 100%);}@media only screen and (min-width:568px){.mashsb-buttons a {min-width: 177px;}}
+</style>
+<link rel='stylesheet' id='toc-screen-css'  href='https://www.rubyguides.com/wp-content/plugins/table-of-contents-plus/screen.min.css?ver=2106' type='text/css' media='all' />
+<link rel='stylesheet' id='tve_style_family_tve_flt-css'  href='https://www.rubyguides.com/wp-content/plugins/thrive-visual-editor/editor/css/thrive_flat.css?ver=2.6.9.1' type='text/css' media='all' />
+<link rel='stylesheet' id='tve_leads_forms-css'  href='//www.rubyguides.com/wp-content/plugins/thrive-leads/editor-layouts/css/frontend.css?ver=2.4.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='rise-style-css'  href='https://www.rubyguides.com/wp-content/themes/rise/style.css?ver=5.6.8' type='text/css' media='all' />
+<link rel='stylesheet' id='thrive-reset-css'  href='https://www.rubyguides.com/wp-content/themes/rise/css/reset.css?v=1.300.06' type='text/css' media='all' />
+<link rel='stylesheet' id='thrive-main-style-css'  href='https://www.rubyguides.com/wp-content/themes/rise/css/main_red.css?v=1.300.06' type='text/css' media='all' />
+<link rel='stylesheet' id='enlighterjs-css'  href='https://www.rubyguides.com/wp-content/plugins/enlighter/cache/enlighterjs.min.css?ver=pOCPCFiNhO67QP1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='https://c0.wp.com/p/jetpack/6.9.2/css/jetpack.css' type='text/css' media='all' />
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://c0.wp.com/c/5.6.8/wp-includes/js/jquery/jquery.min.js?v=1.300.06' id='jquery-core-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://c0.wp.com/c/5.6.8/wp-includes/js/jquery/jquery-migrate.min.js?v=1.300.06' id='jquery-migrate-js'></script>
+<script type='text/javascript' id='jetpack_related-posts-js-extra'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://c0.wp.com/p/jetpack/6.9.2/_inc/build/related-posts/related-posts.min.js' id='jetpack_related-posts-js'></script>
+<script type='text/javascript' async="async" data-noptimize="1" data-cfasync="false" src='https://scripts.mediavine.com/tags/rubyguides.js?ver=5.6.8' id='mv-script-wrapper-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://c0.wp.com/c/5.6.8/wp-includes/js/plupload/moxie.min.js' id='moxiejs-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://c0.wp.com/c/5.6.8/wp-includes/js/plupload/plupload.min.js' id='plupload-js'></script>
+<link rel="https://api.w.org/" href="https://www.rubyguides.com/wp-json/" /><link rel="alternate" type="application/json" href="https://www.rubyguides.com/wp-json/wp/v2/posts/2561" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.rubyguides.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.rubyguides.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.6.8" />
+<link rel='shortlink' href='https://www.rubyguides.com/?p=2561' />
+<link rel="alternate" type="application/json+oembed" href="https://www.rubyguides.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.rubyguides.com%2F2016%2F02%2Fruby-procs-and-lambdas%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.rubyguides.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.rubyguides.com%2F2016%2F02%2Fruby-procs-and-lambdas%2F&#038;format=xml" />
+<style type="text/css" id="tve_global_variables">:root{}</style>
+<link rel='dns-prefetch' href='//i0.wp.com'/>
+<link rel='dns-prefetch' href='//i1.wp.com'/>
+<link rel='dns-prefetch' href='//i2.wp.com'/>
+<link rel='dns-prefetch' href='//c0.wp.com'/>
+		<style type="text/css">.wp-video-shortcode {
+				max-width: 100% !important;
+			}
+			.bSe a {clear: right;}
+			.bSe blockquote {clear: both;}
+			body { background:#FFF; }.cnt article h1.entry-title a { color:#1c1c1c; }.cnt article h2.entry-title a { color:#1c1c1c; }.bSe h1, h1.entry-title, h1.entry-title a { color:#1c1c1c; }.bSe h2 { color:#1c1c1c; }.bSe h3 { color:#1c1c1c; }.bSe h4 { color:#1c1c1c; }.bSe h5 { color:#1c1c1c; }.bSe h6 { color:#1c1c1c; }.bSe p, .mry .awr-e p { color:#000000; }.cnt .bSe { color:#000000; }.cnt h1 a, .tve-woocommerce .bSe .awr .entry-title, .tve-woocommerce .bSe .awr .page-title{font-family:Roboto,sans-serif;}.cnt h1 a, .tve-woocommerce .bSe .awr .entry-title, .tve-woocommerce .bSe .awr .page-title {font-weight: bold;}.bSe h1{font-family:Roboto,sans-serif;}.bSe h1 {font-weight: bold;}.bSe h2,.tve-woocommerce .bSe h2{font-family:Roboto,sans-serif;}.bSe h2,.tve-woocommerce .bSe h2 {font-weight: bold;}.bSe h3,.tve-woocommerce .bSe h3{font-family:Roboto,sans-serif;}.bSe h3,.tve-woocommerce .bSe h3 {font-weight: bold;}.bSe h4{font-family:Roboto,sans-serif;}.bSe h4 {font-weight: bold;}.bSe h5{font-family:Roboto,sans-serif;}.bSe h5 {font-weight: bold;}.bSe h6{font-family:Roboto,sans-serif;}.bSe h6 {font-weight: bold;}#text_logo{font-family:Roboto,sans-serif;}#text_logo {font-weight: bold;}.cnt h1 a { font-weight:700; }.bSe h1 { font-weight:700; }.bSe h2 { font-weight:700; }.bSe h3 { font-weight:700; }.bSe h4 { font-weight:700; }.bSe h5 { font-weight:700; }.bSe h6 { font-weight:700; }.cnt{font-family:Roboto,sans-serif;font-weight:300;}article strong {font-weight: bold;}.cnt p, .tve-woocommerce .product p, .tve-woocommerce .products p, .brd ul li, header nav ul li a, header nav ul li > ul li a, .has-extended.has-heading .colch, footer, footer .fmm p, .aut-f{font-family:Roboto,sans-serif;font-weight:300;}article strong {font-weight: bold;}.bSe h1, .bSe .entry-title { font-size:49px; }.cnt { font-size:21px; }.thrivecb { font-size:21px; }.out { font-size:21px; }.aut p { font-size:21px; }.cnt p { line-height:1.7em; }.thrivecb { line-height:1.7em; }.bSe a, .cnt a { color:#ce043a; }.bSe .faq h4{font-family:Roboto,sans-serif;font-weight:300;}article strong {font-weight: bold;}header nav > ul.menu > li > a { color:#ffffff; }header nav > ul.menu > li >  a:hover { color:#ffadad; }header nav > ul > li.current_page_item > a:hover { color:#ffadad; }header nav > ul > li.current_menu_item > a:hover { color:#ffadad; }header nav > ul > li.current_menu_item > a:hover { color:#ffadad; }header nav > ul > li > a:active { color:#ffadad; }header #logo > a > img { max-width:120px; }header ul.menu > li.h-cta > a { color:#FFFFFF!important; }header ul.menu > li.h-cta > a { background:#4c4141; }header ul.menu > li.h-cta > a { border-color:#4c4141; }header ul.menu > li.h-cta > a:hover { color:#e27a6a!important; }header ul.menu > li.h-cta > a:hover { background:transparent; }</style>
+		<style type="text/css" id="thrive-default-styles"></style><noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>			<style type="text/css">.h-bi header {
+  border: 0 !important;
+}
+
+header.center {
+    padding-top: 5px;
+    padding-bottom: 1px;
+}
+
+.enlighter-t-wpcustom div.enlighter>div {
+  background-color: inherit;
+}
+
+header.side nav>ul>li {
+    padding: 15px 15px 5px 15px;
+}
+
+.sAsCont section .scn:before {
+  background: #ff795d;
+}
+
+.bSe ul li:before {
+  content: ""
+}
+
+.bSe ul {
+  list-style-type: disc;
+  margin-left: 35px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.bSe ul li {
+  padding-left: 5px;
+}
+
+ul.meta {
+  margin-left: 2px;
+}
+
+.meta li a {
+  color: #b4b4b4;
+  cursor: text;
+}
+
+.meta li {
+  color: #b4b4b4;
+}
+
+.meta li:first-child {
+  display: none;
+}
+
+select {
+  padding: 2px;
+}
+
+code {
+  background-color: #dbdbdb;
+  padding: 3px;
+  border-radius: 2px;
+}
+
+ol.EnlighterJS, ul.EnlighterJS {
+  display: block;
+  font-size: 10px;
+  background-color: #050505 !important;
+  color: #939393;
+  margin: 0 0 20px;
+  padding: 20px;
+  text-indent: 0;
+  border-radius: 10px;
+  list-style: none;
+}
+
+ol.wpcustomEnlighterJS li, ul.wpcustomEnlighterJS li {
+  border: none !important;
+}
+
+ol.EnlighterJS li {
+  list-style: none;
+  margin-left: 5px;
+  padding-left: 5px;
+}
+
+ol.wpcustomEnlighterJS li, ul.wpcustomEnlighterJS li {
+  background-color: #050505;
+}
+
+.bSe ul ul {
+  list-style-type: circle;
+}
+
+h2 {
+  margin: 25px 0 25px 0;
+}
+
+table {
+  margin-bottom: 15px;
+}
+
+blockquote cite {
+  color: #a1a1a1;
+  font-size: 14px;
+  display: block;
+  margin-top: 5px;
+}
+
+blockquote cite:before {
+  content: "\2014 \2009";
+}
+
+
+.bSe blockquote p {
+  color: #474747;
+}
+
+blockquote {
+  font-size:18px;
+  background-color:#fbf6f0;
+  border: 0px  !important;
+  border-left:3px dashed #d5bc8c  !important;
+  border-right:3px dashed #d5bc8c  !important;
+  text-align:center;
+} 
+
+.bSe blockquote:before {
+  font-size: 65px;
+}
+
+h3 { margin-bottom: 20px; }
+
+.enlighter-default {
+  padding: 17px;
+  border-radius: 5px;
+}
+</style>
+		
+</head>
+<body class="post-template-default single single-post postid-2561 single-format-standard custom-background">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="rocketlazyloadscript" async src="https://www.googletagmanager.com/gtag/js?id=UA-41373099-7"></script>
+<script type="rocketlazyloadscript">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-41373099-7');
+</script><div class="theme-wrapper">
+	
+	
+	
+	
+	<div class="h-bi">
+		<div id="floating_menu" data-float="default"
+		     data-social='0'>
+			<header class="center"
+			        style="">
+								<div class="h-i">
+					<div class="wrp">
+														<div id="logo" style='background-color:#6d161e'>
+									<a href="https://www.rubyguides.com/">
+										<img width="150" height="104" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20150%20104'%3E%3C/svg%3E"
+										     alt="RubyGuides" data-lazy-src="/wp-content/uploads/2018/10/logo-white-border.png"><noscript><img width="150" height="104" src="/wp-content/uploads/2018/10/logo-white-border.png"
+										     alt="RubyGuides"></noscript></a>
+								</div>
+																					<div class="m-s">
+								<div class="hsm"></div>
+								<div class="m-si">
+																												<nav class="menu-main-menu-container"><ul id="menu-main-menu" class="menu"><li  id="menu-item-7110" class="menu-item menu-item-type-post_type menu-item-object-page toplvl"><a  title="Newsletter" target="_blank" rel="nofollow" href="https://www.rubyguides.com/better-developer-new-offer/">Become a Better Developer</a></li>
+<li  id="menu-item-7310" class="menu-item menu-item-type-custom menu-item-object-custom toplvl"><a  title="Awesome Ruby Book" target="_blank" href="https://www.rubyguides.com/ruby-book/">Ruby Deep Dive (BOOK)</a></li>
+<li  id="menu-item-14365" class="menu-item menu-item-type-post_type menu-item-object-page toplvl"><a  title="Index of articles on RubyGuides" target="_blank" href="https://www.rubyguides.com/ruby-post-index/">All Articles</a></li>
+<li  id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page toplvl"><a  title="About Page" target="_blank" href="https://www.rubyguides.com/about/">About</a></li>
+</ul></nav>										<!-- Cart Dropdown -->
+									
+																	</div>
+							</div>
+						
+					</div>
+				</div>
+
+			</header>
+		</div>
+	</div>
+
+	
+	
+	
+	
+			
+		
+		<div class="wrp cnt">
+
+
+			<section class="bSe bpd">
+				
+<div class="awr">
+
+	
+	
+	
+				<h1 class="entry-title">The Ultimate Guide to Blocks, Procs &#038; Lambdas</h1>
+			<div class="met">
+		<ul class="meta">
+							<li>
+											6 years ago									</li>
+													<li>
+											/
+										By					<a href="https://www.rubyguides.com/author/admin/">
+						Jesus Castello					</a>
+				</li>
+													<li>
+											/
+										<a href="https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/#comments">
+						11						COMMENTS					</a>
+				</li>
+					</ul>
+
+			</div>
+
+	
+	
+		<div class="awr-i">
+		<div class="tve-tl-cnt-wrap"><p>Ruby blocks, procs &amp; lambdas.</p>
+<p>What are they?</p>
+<p><strong>How do they work?</strong></p>
+<p>How are they different from each other?</p>
+<p>You will learn that &amp; a lot more by reading this post!</p>
+<div id="toc_container" class="no_bullets"><p class="toc_title">Contents</p><ul class="toc_list"><li><a href="#Understanding_Ruby_Blocks"><span class="toc_number toc_depth_1">1</span> Understanding Ruby Blocks</a></li><li><a href="#Ruby_Yield_Keyword"><span class="toc_number toc_depth_1">2</span> Ruby Yield Keyword</a></li><li><a href="#Implicit_vs_Explicit_Blocks"><span class="toc_number toc_depth_1">3</span> Implicit vs Explicit Blocks</a></li><li><a href="#How_To_Check_If_A_Block_Was_Given"><span class="toc_number toc_depth_1">4</span> How To Check If A Block Was Given</a></li><li><a href="#What_is_a_Lambda"><span class="toc_number toc_depth_1">5</span> What is a Lambda?</a></li><li><a href="#Lambdas_vs_Procs"><span class="toc_number toc_depth_1">6</span> Lambdas vs Procs</a></li><li><a href="#Closures"><span class="toc_number toc_depth_1">7</span> Closures</a></li><li><a href="#The_Binding_Class"><span class="toc_number toc_depth_1">8</span> The Binding Class</a></li><li><a href="#Video_Tutorial"><span class="toc_number toc_depth_1">9</span> Video Tutorial</a></li><li><a href="#Wrapping_Up"><span class="toc_number toc_depth_1">10</span> Wrapping Up</a><ul><li><a href="#Related"><span class="toc_number toc_depth_2">10.1</span> Related</a></li></ul></li></ul></div>
+
+<h2><span id="Understanding_Ruby_Blocks">Understanding Ruby Blocks</span></h2>
+<p>Ruby blocks are little anonymous functions that can be passed into methods.</p>
+<p>Blocks are enclosed in a <code>do / end</code> statement or between brackets <code>{}</code>, and they can have multiple arguments.</p>
+<p>The argument names are defined between two pipe <code>|</code> characters.</p>
+<p>If you have used <code>each</code> before, then you have used blocks!</p>
+<p><strong>Here is an example</strong>:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+# Form 1: recommended for single line blocks
+[1, 2, 3].each { |num| puts num }
+                 ^^^^^ ^^^^^^^^
+                 block   block
+               arguments body
+</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+# Form 2: recommended for multi-line blocks
+[1, 2, 3].each do |num|
+  puts num
+end
+</pre>
+<p>A Ruby block is useful because it allows you to save a bit of logic (code) &amp; use it later.</p>
+<p>This could be something like writing data to a file, comparing if one element is equal to another, or even printing an error message.</p>
+<h2><span id="Ruby_Yield_Keyword">Ruby Yield Keyword</span></h2>
+<p>What does <code>yield</code> mean in Ruby?</p>
+<p>Yield is a <strong>Ruby keyword</strong> that calls a block when you use it.</p>
+<p>It&#8217;s how methods USE blocks!</p>
+<p>When you use the <code>yield</code> keyword, <strong>the code inside the block will run</strong> &amp; do its work.</p>
+<p>Just like when you call a regular Ruby method.</p>
+<p><strong>Here&#8217;s an example</strong>:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+def print_once
+  yield
+end
+
+print_once { puts "Block is being run" }
+</pre>
+<p>This runs any block passed to <code>print_once</code>, as a result, <code>"Block is being run"</code> will be printed on the screen.</p>
+<p>Did you know&#8230;</p>
+<p>That <code>yield</code> can be used multiple times?</p>
+<p>Every time you call <code>yield</code>, the block will run, so this is like calling the same method again.</p>
+<p><strong>Example</strong>:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+def print_twice
+  yield
+  yield
+end
+
+print_twice { puts "Hello" }
+
+# "Hello"
+# "Hello"
+</pre>
+<p>And just like methods&#8230;</p>
+<p>You can pass any number of arguments to <code>yield</code> .</p>
+<p><strong>Example</strong>:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+def one_two_three
+  yield 1
+  yield 2
+  yield 3
+end
+
+one_two_three { |number| puts number * 10 }
+# 10, 20, 30
+</pre>
+<p>These arguments then become the block&#8217;s arguments.</p>
+<p>In this example <code>number</code>.</p>
+<h2><span id="Implicit_vs_Explicit_Blocks">Implicit vs Explicit Blocks</span></h2>
+<p>Blocks can be &#8220;explicit&#8221; or &#8220;implicit&#8221;.</p>
+<p>Explicit means that you give it a name in your parameter list.</p>
+<p>You can pass an explicit block to another method or save it into a variable to use later.</p>
+<p><strong>Here is an example</strong>:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+def explicit_block(&block)
+  block.call # same as yield
+end
+
+explicit_block { puts "Explicit block called" }
+</pre>
+<p>Notice the <code>&amp;block</code> parameter&#8230;</p>
+<p>That&#8217;s how you define the block&#8217;s name!</p>
+<h2><span id="How_To_Check_If_A_Block_Was_Given">How To Check If A Block Was Given</span></h2>
+<p>If you try to <code>yield</code> without a block you will get a <code>no block given (yield)</code> error.</p>
+<p>You can check if a block has been passed in with the <code>block_given?</code> method.</p>
+<p><strong>Example</strong>:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+def do_something_with_block
+  return "No block given" unless block_given?
+  yield
+end
+</pre>
+<p>This prevents the error if someone calls your method without a block.</p>
+<h2><span id="What_is_a_Lambda">What is a Lambda?</span></h2>
+<p>A lambda is a way to define a block &amp; its parameters with some special syntax.</p>
+<p>You can save this lambda into a variable for later use.</p>
+<p>The <strong>syntax for defining a Ruby lambda</strong> looks like this:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+say_something = -> { puts "This is a lambda" }
+</pre>
+<blockquote><p>
+  You can also use the alternative syntax: <code>lambda</code> instead of <code>-&gt;</code>.
+</p></blockquote>
+<p>Defining a lambda won&#8217;t run the code inside it, just like defining a method won&#8217;t run the method, you need to use the <code>call</code> method for that.</p>
+<p><strong>Example</strong>:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+say_something = -> { puts "This is a lambda" }
+say_something.call
+
+# "This is a lambda"
+</pre>
+<p>There are other ways to <code>call</code> a <code>lambda</code>, it&#8217;s good to know they exist, however, I recommend sticking with <code>call</code> for clarity.</p>
+<p><strong>Here&#8217;s the list</strong>:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+my_lambda = -> { puts "Lambda called" }
+
+my_lambda.call
+my_lambda.()
+my_lambda[]
+my_lambda.===
+</pre>
+<p>Lambdas can also take arguments, here is an example:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+times_two = ->(x) { x * 2 }
+times_two.call(10)
+# 20
+</pre>
+<p>If you pass the wrong number of arguments to a <code>lambda</code>, it will raise an exception, just like a regular method.</p>
+<h2><span id="Lambdas_vs_Procs">Lambdas vs Procs</span></h2>
+<p>Procs are a very similar concept&#8230;</p>
+<p>One of the differences is how you create them.</p>
+<p><strong>Example</strong>:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+my_proc = Proc.new { |x| puts x }
+</pre>
+<p>There is no dedicated <code>Lambda</code> class. A <code>lambda</code> is just a special <code>Proc</code> object. If you take a look at the instance methods from <code>Proc</code>, you will notice there is a <code>lambda?</code> method.</p>
+<p><strong>Now</strong>:</p>
+<p>A proc behaves differently than a lambda, specially when it comes to arguments:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+t = Proc.new { |x,y| puts "I don't care about arguments!" }
+t.call
+# "I don't care about arguments!"
+</pre>
+<p>Another difference between <code>procs</code> &amp; <code>lambdas</code> is how they react to a <code>return</code> statement.</p>
+<p>A <code>lambda</code> will <code>return</code> normally, like a regular method.</p>
+<p>But a <code>proc</code> will try to <code>return</code> from the current context.</p>
+<p><strong>Here&#8217;s what I mean</strong>:</p>
+<p>If you run the following code, you will notice how the <code>proc</code> raises a <code>LocalJumpError</code> exception.</p>
+<p>The reason is that you can&#8217;t <code>return</code> from the top-level context.</p>
+<p><strong>Try this</strong>:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+# Should work
+my_lambda = -> { return 1 }
+puts "Lambda result: #{my_lambda.call}"
+
+# Should raise exception
+my_proc = Proc.new { return 1 }
+puts "Proc result: #{my_proc.call}"
+</pre>
+<p>If the <code>proc</code> was inside a method, then calling <code>return</code> would be equivalent to returning from that method.</p>
+<p>This is demonstrated in the following example.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+def call_proc
+  puts "Before proc"
+  my_proc = Proc.new { return 2 }
+  my_proc.call
+  puts "After proc"
+end
+
+p call_proc
+# Prints "Before proc" but not "After proc"
+</pre>
+<p>Here is a summary of how <code>procs</code> and <code>lambdas</code> are different:</p>
+<ul>
+<li>Lambdas are defined with <code>-&gt; {}</code> and procs with <code>Proc.new {}</code>.</li>
+<li>Procs return from the current method, while lambdas return from the lambda itself.</li>
+<li>Procs don&#8217;t care about the correct number of arguments, while lambdas will raise an exception.</li>
+</ul>
+<p>Taking a look at this list, we can see that <code>lambdas</code> are a lot closer to a regular method than <code>procs</code> are.</p>
+<h2><span id="Closures">Closures</span></h2>
+<p>Ruby procs &amp; lambdas also have another special attribute. When you create a Ruby proc, it captures the current execution scope with it.</p>
+<p>This concept, which is sometimes called <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)" target="_blank">closure</a>, means that a <code>proc</code> will carry with it values like local variables and methods from the context where it was defined.</p>
+<p>They don&#8217;t carry the actual values, but a reference to them, so if the variables change after the proc is created, the proc will always have the latest version.</p>
+<p><strong>Let&#8217;s see an example</strong>:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+def call_proc(my_proc)
+  count = 500
+  my_proc.call
+end
+
+count   = 1
+my_proc = Proc.new { puts count }
+
+p call_proc(my_proc) # What does this print?
+</pre>
+<p>In this example we have a local <code>count</code> variable, which is set to <code>1</code>.</p>
+<p>We also have a proc named <code>my_proc</code>, and a <code>call_proc</code> method which runs (via the <code>call</code> method) any proc or lambda that is passed in as an argument.</p>
+<p>What do you think this program will print?</p>
+<p>It would seem like <code>500</code> is the most logical conclusion, but because of the &#8216;closure&#8217; effect this will print <code>1</code>.</p>
+<p>This happens because the proc is using the value of <code>count</code> from the place where the proc was defined, and that&#8217;s outside of the method definition.</p>
+<h2><span id="The_Binding_Class">The Binding Class</span></h2>
+<p>Where do Ruby procs &amp; lambdas store this scope information?</p>
+<p>Let me tell you about the <code>Binding</code> class&#8230;</p>
+<p>When you create a <code>Binding</code> object via the <code>binding</code> method, you are creating an &#8216;anchor&#8217; to this point in the code.</p>
+<p>Every variable, method &amp; class defined at this point will be available later via this object, even if you are in a completely different scope.</p>
+<p><strong>Example</strong>:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="ruby">
+def return_binding
+  foo = 100
+  binding
+end
+
+# Foo is available thanks to the binding,
+# even though we are outside of the method
+# where it was defined.
+puts return_binding.class
+puts return_binding.eval('foo')
+
+# If you try to print foo directly you will get an error.
+# The reason is that foo was never defined outside of the method.
+puts foo
+</pre>
+<p>In other words, executing something under the context of a <code>binding</code> object is the same as if that code was in the same place where that <code>binding</code> was defined (remember the &#8216;anchor&#8217; metaphor).</p>
+<p>You don&#8217;t need to use <code>binding</code> objects directly, but it&#8217;s still good to know this is a thing 🙂</p>
+<h2><span id="Video_Tutorial">Video Tutorial</span></h2>
+<div class='rve'><iframe loading="lazy" id='player356' src='about:blank' height='400' width='100%' frameborder='0' allowfullscreen  data-rocket-lazyload="fitvidscompatible" data-lazy-src="//www.youtube.com/embed/92yuNm6Ts0c?not_used=1"></iframe><noscript><iframe id='player356' src='//www.youtube.com/embed/92yuNm6Ts0c?not_used=1' height='400' width='100%' frameborder='0' allowfullscreen ></iframe></noscript></div>
+<h2><span id="Wrapping_Up">Wrapping Up</span></h2>
+<p>In this post you learned how blocks work, the differences between Ruby procs &amp; lambdas and you also learned about the &#8220;closure&#8221; effect that happens whenever you create a block.</p>
+<p>One thing I didn&#8217;t cover is the <a href="https://ruby-doc.org/core-2.5.0/Proc.html#method-i-curry" target="_blank">curry</a> method.</p>
+<p>This method allows you to pass in some or all of the required arguments.</p>
+<p>If you only pass in a partial number of arguments you will get a new proc with these arguments already &#8216;pre-loaded&#8217;, when all the arguments are supplied then the proc will be executed.</p>
+<p>I hope you enjoyed this post!</p>
+<p>Don&#8217;t forget to subscribe in the form below and <u>share this with your friends</u> 🙂</p>
+<span id="tve_leads_end_content" style="display: block; visibility: hidden; border: 1px solid transparent;"></span><span style="display:none" class="tl-placeholder-f-type-post_footer"></span></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><span id="Related"><em>Related</em></span></h3>
+</div><aside class="mashsb-container mashsb-main mashsb-stretched"><div class="mashsb_above_buttons"><div style="font-size: 16px;  margin-bottom: 5px;  font-family: cursive;">Share this post!</div></div><div class="mashsb-box"><div class="mashsb-buttons"><a class="mashicon-twitter mash-large mash-center mashsb-noshadow" href="https://twitter.com/intent/tweet?text=The%20Ultimate%20Guide%20to%20Blocks%2C%20Procs%20%26%20Lambdas&url=https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/&via=matugm" target="_top" rel="nofollow"><span class="icon"></span><span class="text">Tweet</span></a><a class="mashicon-facebook mash-large mash-center mashsb-noshadow" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.rubyguides.com%2F2016%2F02%2Fruby-procs-and-lambdas%2F" target="_top" rel="nofollow"><span class="icon"></span><span class="text">Share</span></a><a class="mashicon-subscribe mash-large mash-center mashsb-noshadow" href="#" target="_top" rel="nofollow"><span class="icon"></span><span class="text">Subscribe</span></a><div class="onoffswitch2 mash-large mashsb-noshadow" style="display:none;"></div></div>
+            </div>
+                <div style="clear:both;"></div></aside>
+            <!-- Share buttons by mashshare.net - Version: 3.8.1-->	</div>
+	<div class="clear"></div>
+	
+	
+	
+		</div>
+
+	
+	<article id="comments">
+		
+					<div class="awr cmm">
+								<h6>11 comments</h6>
+			</div>
+				<!-- /comments nr -->
+
+		
+		<div class="cmb" style="margin-left: 0;" id="thrive_container_list_comments">
+											                <div class="cmb" id="comment-458">
+                    <div class="cmc">
+                        <div class="left">
+							                        </div>
+
+                        <div class="ccr right">
+                                <span class="nam">
+                                                                            <span
+                                                class="uNM">Gagan</span> says                                                                    </span>
+                            <span class="uDt">
+                                   	                                   		                                   6 years ago	                                                                                                      </span>
+
+							                                <p><p>Well explained!</p>
+</p>
+							
+							                            <div class="clear"></div>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="lrp" id="respond-container-458" style="display: none;">
+                        <div class="clear"></div>
+                        <form action="https://www.rubyguides.com/wp-comments-post.php" method="post">
+							                                <div class="llw">
+                                    <label
+                                            for="author">Name*</label>
+                                    <input type="text" id="author"
+                                           placeholder="" name="author"/>
+                                </div>
+                                <div class="llw">
+                                    <label
+                                            for="email">Email*</label>
+
+                                    <input type="text" id="email"
+                                           placeholder="" name="email"/>
+                                </div>
+                                <label
+                                        for="website">Website</label>
+                                <input type="text" id="website"
+                                       placeholder="" name="website"/>
+							                            <label for="comment">Comment</label>
+                            <textarea id="comment" name="comment" class="textarea"></textarea>
+
+                            <div class="btn red small">
+                                <input type="submit" value="Post Comment">
+                            </div>
+
+                            <input id="comment_post_ID" type="hidden" value="2561"
+                                   name="comment_post_ID">
+                            <input id="comment_parent" type="hidden" value="458"
+                                   name="comment_parent">
+                        </form>
+                        <a href="#" class="rpl right cancel_reply" cid="458">
+							Cancel                        </a>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="lrp" style="display: none;" id="respond-container-458">
+                </div>
+							<ul class="children">
+				                <div class="cmb" id="comment-459">
+                    <div class="cmc">
+                        <div class="left">
+							                        </div>
+
+                        <div class="ccr right">
+                                <span class="nam">
+                                                                            <span
+                                                class="uNM">Jesus Castello</span> says                                                                    </span>
+                            <span class="uDt">
+                                   	                                   		                                   6 years ago	                                                                                                      </span>
+
+							                                <p><p>Thank you 🙂</p>
+</p>
+							
+							                            <div class="clear"></div>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="lrp" id="respond-container-459" style="display: none;">
+                        <div class="clear"></div>
+                        <form action="https://www.rubyguides.com/wp-comments-post.php" method="post">
+							                                <div class="llw">
+                                    <label
+                                            for="author">Name*</label>
+                                    <input type="text" id="author"
+                                           placeholder="" name="author"/>
+                                </div>
+                                <div class="llw">
+                                    <label
+                                            for="email">Email*</label>
+
+                                    <input type="text" id="email"
+                                           placeholder="" name="email"/>
+                                </div>
+                                <label
+                                        for="website">Website</label>
+                                <input type="text" id="website"
+                                       placeholder="" name="website"/>
+							                            <label for="comment">Comment</label>
+                            <textarea id="comment" name="comment" class="textarea"></textarea>
+
+                            <div class="btn red small">
+                                <input type="submit" value="Post Comment">
+                            </div>
+
+                            <input id="comment_post_ID" type="hidden" value="2561"
+                                   name="comment_post_ID">
+                            <input id="comment_parent" type="hidden" value="459"
+                                   name="comment_parent">
+                        </form>
+                        <a href="#" class="rpl right cancel_reply" cid="459">
+							Cancel                        </a>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="lrp" style="display: none;" id="respond-container-459">
+                </div>
+							</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+				                <div class="cmb" id="comment-460">
+                    <div class="cmc">
+                        <div class="left">
+							                        </div>
+
+                        <div class="ccr right">
+                                <span class="nam">
+                                                                            <span
+                                                class="uNM">Kaloyan Yordanov</span> says                                                                    </span>
+                            <span class="uDt">
+                                   	                                   		                                   6 years ago	                                                                                                      </span>
+
+							                                <p><p>A wonderful article, Jesus, so nicely written!</p>
+</p>
+							
+							                            <div class="clear"></div>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="lrp" id="respond-container-460" style="display: none;">
+                        <div class="clear"></div>
+                        <form action="https://www.rubyguides.com/wp-comments-post.php" method="post">
+							                                <div class="llw">
+                                    <label
+                                            for="author">Name*</label>
+                                    <input type="text" id="author"
+                                           placeholder="" name="author"/>
+                                </div>
+                                <div class="llw">
+                                    <label
+                                            for="email">Email*</label>
+
+                                    <input type="text" id="email"
+                                           placeholder="" name="email"/>
+                                </div>
+                                <label
+                                        for="website">Website</label>
+                                <input type="text" id="website"
+                                       placeholder="" name="website"/>
+							                            <label for="comment">Comment</label>
+                            <textarea id="comment" name="comment" class="textarea"></textarea>
+
+                            <div class="btn red small">
+                                <input type="submit" value="Post Comment">
+                            </div>
+
+                            <input id="comment_post_ID" type="hidden" value="2561"
+                                   name="comment_post_ID">
+                            <input id="comment_parent" type="hidden" value="460"
+                                   name="comment_parent">
+                        </form>
+                        <a href="#" class="rpl right cancel_reply" cid="460">
+							Cancel                        </a>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="lrp" style="display: none;" id="respond-container-460">
+                </div>
+							<ul class="children">
+				                <div class="cmb" id="comment-461">
+                    <div class="cmc">
+                        <div class="left">
+							                        </div>
+
+                        <div class="ccr right">
+                                <span class="nam">
+                                                                            <span
+                                                class="uNM">Jesus Castello</span> says                                                                    </span>
+                            <span class="uDt">
+                                   	                                   		                                   6 years ago	                                                                                                      </span>
+
+							                                <p><p>Thanks for reading 🙂</p>
+</p>
+							
+							                            <div class="clear"></div>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="lrp" id="respond-container-461" style="display: none;">
+                        <div class="clear"></div>
+                        <form action="https://www.rubyguides.com/wp-comments-post.php" method="post">
+							                                <div class="llw">
+                                    <label
+                                            for="author">Name*</label>
+                                    <input type="text" id="author"
+                                           placeholder="" name="author"/>
+                                </div>
+                                <div class="llw">
+                                    <label
+                                            for="email">Email*</label>
+
+                                    <input type="text" id="email"
+                                           placeholder="" name="email"/>
+                                </div>
+                                <label
+                                        for="website">Website</label>
+                                <input type="text" id="website"
+                                       placeholder="" name="website"/>
+							                            <label for="comment">Comment</label>
+                            <textarea id="comment" name="comment" class="textarea"></textarea>
+
+                            <div class="btn red small">
+                                <input type="submit" value="Post Comment">
+                            </div>
+
+                            <input id="comment_post_ID" type="hidden" value="2561"
+                                   name="comment_post_ID">
+                            <input id="comment_parent" type="hidden" value="461"
+                                   name="comment_parent">
+                        </form>
+                        <a href="#" class="rpl right cancel_reply" cid="461">
+							Cancel                        </a>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="lrp" style="display: none;" id="respond-container-461">
+                </div>
+							</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+				                <div class="cmb" id="comment-462">
+                    <div class="cmc">
+                        <div class="left">
+							                        </div>
+
+                        <div class="ccr right">
+                                <span class="nam">
+                                                                            <span
+                                                class="uNM">ttw (@ttwo32)</span> says                                                                    </span>
+                            <span class="uDt">
+                                   	                                   		                                   6 years ago	                                                                                                      </span>
+
+							                                <p><p>Good article, Jesus. I think that it is important to understand differences between lambda and proc. This article describe differences politely by coding example, so readers easily understand.<br />
+And block is a feature to incarnate Closure.</p>
+</p>
+							
+							                            <div class="clear"></div>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="lrp" id="respond-container-462" style="display: none;">
+                        <div class="clear"></div>
+                        <form action="https://www.rubyguides.com/wp-comments-post.php" method="post">
+							                                <div class="llw">
+                                    <label
+                                            for="author">Name*</label>
+                                    <input type="text" id="author"
+                                           placeholder="" name="author"/>
+                                </div>
+                                <div class="llw">
+                                    <label
+                                            for="email">Email*</label>
+
+                                    <input type="text" id="email"
+                                           placeholder="" name="email"/>
+                                </div>
+                                <label
+                                        for="website">Website</label>
+                                <input type="text" id="website"
+                                       placeholder="" name="website"/>
+							                            <label for="comment">Comment</label>
+                            <textarea id="comment" name="comment" class="textarea"></textarea>
+
+                            <div class="btn red small">
+                                <input type="submit" value="Post Comment">
+                            </div>
+
+                            <input id="comment_post_ID" type="hidden" value="2561"
+                                   name="comment_post_ID">
+                            <input id="comment_parent" type="hidden" value="462"
+                                   name="comment_parent">
+                        </form>
+                        <a href="#" class="rpl right cancel_reply" cid="462">
+							Cancel                        </a>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="lrp" style="display: none;" id="respond-container-462">
+                </div>
+							<ul class="children">
+				                <div class="cmb" id="comment-464">
+                    <div class="cmc">
+                        <div class="left">
+							                        </div>
+
+                        <div class="ccr right">
+                                <span class="nam">
+                                                                            <span
+                                                class="uNM">Jesus Castello</span> says                                                                    </span>
+                            <span class="uDt">
+                                   	                                   		                                   6 years ago	                                                                                                      </span>
+
+							                                <p><p>Thanks for your comment 🙂</p>
+</p>
+							
+							                            <div class="clear"></div>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="lrp" id="respond-container-464" style="display: none;">
+                        <div class="clear"></div>
+                        <form action="https://www.rubyguides.com/wp-comments-post.php" method="post">
+							                                <div class="llw">
+                                    <label
+                                            for="author">Name*</label>
+                                    <input type="text" id="author"
+                                           placeholder="" name="author"/>
+                                </div>
+                                <div class="llw">
+                                    <label
+                                            for="email">Email*</label>
+
+                                    <input type="text" id="email"
+                                           placeholder="" name="email"/>
+                                </div>
+                                <label
+                                        for="website">Website</label>
+                                <input type="text" id="website"
+                                       placeholder="" name="website"/>
+							                            <label for="comment">Comment</label>
+                            <textarea id="comment" name="comment" class="textarea"></textarea>
+
+                            <div class="btn red small">
+                                <input type="submit" value="Post Comment">
+                            </div>
+
+                            <input id="comment_post_ID" type="hidden" value="2561"
+                                   name="comment_post_ID">
+                            <input id="comment_parent" type="hidden" value="464"
+                                   name="comment_parent">
+                        </form>
+                        <a href="#" class="rpl right cancel_reply" cid="464">
+							Cancel                        </a>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="lrp" style="display: none;" id="respond-container-464">
+                </div>
+							</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+				                <div class="cmb" id="comment-463">
+                    <div class="cmc">
+                        <div class="left">
+							                        </div>
+
+                        <div class="ccr right">
+                                <span class="nam">
+                                                                            <span
+                                                class="uNM">vizvamitra</span> says                                                                    </span>
+                            <span class="uDt">
+                                   	                                   		                                   6 years ago	                                                                                                      </span>
+
+							                                <p><p>There is also another interesting behavior of procs:</p>
+<p>def proc_from<br />
+  Proc.new<br />
+end</p>
+<p>proc = proc_from { &#8220;hello&#8221; }<br />
+proc.call   #=&gt; &#8220;hello&#8221;</p>
+<p>If Proc.new is called within a method with an attached block, that block is converted to the Proc object.<br />
+(example from <a href="http://ruby-doc.org/core-2.2.0/Proc.html" rel="nofollow ugc">http://ruby-doc.org/core-2.2.0/Proc.html</a>)</p>
+</p>
+							
+							                            <div class="clear"></div>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="lrp" id="respond-container-463" style="display: none;">
+                        <div class="clear"></div>
+                        <form action="https://www.rubyguides.com/wp-comments-post.php" method="post">
+							                                <div class="llw">
+                                    <label
+                                            for="author">Name*</label>
+                                    <input type="text" id="author"
+                                           placeholder="" name="author"/>
+                                </div>
+                                <div class="llw">
+                                    <label
+                                            for="email">Email*</label>
+
+                                    <input type="text" id="email"
+                                           placeholder="" name="email"/>
+                                </div>
+                                <label
+                                        for="website">Website</label>
+                                <input type="text" id="website"
+                                       placeholder="" name="website"/>
+							                            <label for="comment">Comment</label>
+                            <textarea id="comment" name="comment" class="textarea"></textarea>
+
+                            <div class="btn red small">
+                                <input type="submit" value="Post Comment">
+                            </div>
+
+                            <input id="comment_post_ID" type="hidden" value="2561"
+                                   name="comment_post_ID">
+                            <input id="comment_parent" type="hidden" value="463"
+                                   name="comment_parent">
+                        </form>
+                        <a href="#" class="rpl right cancel_reply" cid="463">
+							Cancel                        </a>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="lrp" style="display: none;" id="respond-container-463">
+                </div>
+							</li><!-- #comment-## -->
+				                <div class="cmb" id="comment-468">
+                    <div class="cmc">
+                        <div class="left">
+							                        </div>
+
+                        <div class="ccr right">
+                                <span class="nam">
+                                                                            <a href="https://in.linkedin.com/in/sangamgupta" target="_blank" rel="nofollow">
+		                                    Sangam Gupta	                                    </a>
+	                                    says                                                                    </span>
+                            <span class="uDt">
+                                   	                                   		                                   6 years ago	                                                                                                      </span>
+
+							                                <p><p>Very helpful, thank you. However there is one think confusing, I checked Kernel module and I see lambda method which is creating Proc object but you mentioned, lambda is a special object of Proc class. Your thoughts?</p>
+</p>
+							
+							                            <div class="clear"></div>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="lrp" id="respond-container-468" style="display: none;">
+                        <div class="clear"></div>
+                        <form action="https://www.rubyguides.com/wp-comments-post.php" method="post">
+							                                <div class="llw">
+                                    <label
+                                            for="author">Name*</label>
+                                    <input type="text" id="author"
+                                           placeholder="" name="author"/>
+                                </div>
+                                <div class="llw">
+                                    <label
+                                            for="email">Email*</label>
+
+                                    <input type="text" id="email"
+                                           placeholder="" name="email"/>
+                                </div>
+                                <label
+                                        for="website">Website</label>
+                                <input type="text" id="website"
+                                       placeholder="" name="website"/>
+							                            <label for="comment">Comment</label>
+                            <textarea id="comment" name="comment" class="textarea"></textarea>
+
+                            <div class="btn red small">
+                                <input type="submit" value="Post Comment">
+                            </div>
+
+                            <input id="comment_post_ID" type="hidden" value="2561"
+                                   name="comment_post_ID">
+                            <input id="comment_parent" type="hidden" value="468"
+                                   name="comment_parent">
+                        </form>
+                        <a href="#" class="rpl right cancel_reply" cid="468">
+							Cancel                        </a>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="lrp" style="display: none;" id="respond-container-468">
+                </div>
+							<ul class="children">
+				                <div class="cmb" id="comment-469">
+                    <div class="cmc">
+                        <div class="left">
+							                        </div>
+
+                        <div class="ccr right">
+                                <span class="nam">
+                                                                            <span
+                                                class="uNM">Jesus Castello</span> says                                                                    </span>
+                            <span class="uDt">
+                                   	                                   		                                   6 years ago	                                                                                                      </span>
+
+							                                <p><p>The <code>lambda</code> method on <code>Kernel</code> is the same as using the <code>-&gt;</code> syntax for defining a lambda.</p>
+</p>
+							
+							                            <div class="clear"></div>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="lrp" id="respond-container-469" style="display: none;">
+                        <div class="clear"></div>
+                        <form action="https://www.rubyguides.com/wp-comments-post.php" method="post">
+							                                <div class="llw">
+                                    <label
+                                            for="author">Name*</label>
+                                    <input type="text" id="author"
+                                           placeholder="" name="author"/>
+                                </div>
+                                <div class="llw">
+                                    <label
+                                            for="email">Email*</label>
+
+                                    <input type="text" id="email"
+                                           placeholder="" name="email"/>
+                                </div>
+                                <label
+                                        for="website">Website</label>
+                                <input type="text" id="website"
+                                       placeholder="" name="website"/>
+							                            <label for="comment">Comment</label>
+                            <textarea id="comment" name="comment" class="textarea"></textarea>
+
+                            <div class="btn red small">
+                                <input type="submit" value="Post Comment">
+                            </div>
+
+                            <input id="comment_post_ID" type="hidden" value="2561"
+                                   name="comment_post_ID">
+                            <input id="comment_parent" type="hidden" value="469"
+                                   name="comment_parent">
+                        </form>
+                        <a href="#" class="rpl right cancel_reply" cid="469">
+							Cancel                        </a>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="lrp" style="display: none;" id="respond-container-469">
+                </div>
+							</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+				                <div class="cmb" id="comment-470">
+                    <div class="cmc">
+                        <div class="left">
+							                        </div>
+
+                        <div class="ccr right">
+                                <span class="nam">
+                                                                            <span
+                                                class="uNM">Sangam Gupta</span> says                                                                    </span>
+                            <span class="uDt">
+                                   	                                   		                                   6 years ago	                                                                                                      </span>
+
+							                                <p><p>Thank you, I had the same assumption 🙂</p>
+</p>
+							
+							                            <div class="clear"></div>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="lrp" id="respond-container-470" style="display: none;">
+                        <div class="clear"></div>
+                        <form action="https://www.rubyguides.com/wp-comments-post.php" method="post">
+							                                <div class="llw">
+                                    <label
+                                            for="author">Name*</label>
+                                    <input type="text" id="author"
+                                           placeholder="" name="author"/>
+                                </div>
+                                <div class="llw">
+                                    <label
+                                            for="email">Email*</label>
+
+                                    <input type="text" id="email"
+                                           placeholder="" name="email"/>
+                                </div>
+                                <label
+                                        for="website">Website</label>
+                                <input type="text" id="website"
+                                       placeholder="" name="website"/>
+							                            <label for="comment">Comment</label>
+                            <textarea id="comment" name="comment" class="textarea"></textarea>
+
+                            <div class="btn red small">
+                                <input type="submit" value="Post Comment">
+                            </div>
+
+                            <input id="comment_post_ID" type="hidden" value="2561"
+                                   name="comment_post_ID">
+                            <input id="comment_parent" type="hidden" value="470"
+                                   name="comment_parent">
+                        </form>
+                        <a href="#" class="rpl right cancel_reply" cid="470">
+							Cancel                        </a>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="lrp" style="display: none;" id="respond-container-470">
+                </div>
+							</li><!-- #comment-## -->
+				                <div class="cmb" id="comment-471">
+                    <div class="cmc">
+                        <div class="left">
+							                        </div>
+
+                        <div class="ccr right">
+                                <span class="nam">
+                                                                            <span
+                                                class="uNM">Robert</span> says                                                                    </span>
+                            <span class="uDt">
+                                   	                                   		                                   6 years ago	                                                                                                      </span>
+
+							                                <p><p>Good article: clear and gives a good overview!</p>
+<p>Some minor nitpicking:<br />
+&#8211; Blocks <em>are</em> anonymous functions.<br />
+&#8211; Usually the alternative delimiters to do&#8230;end are called &#8220;curly braces&#8221; or &#8220;curly brackets&#8221; &#8211; &#8220;brackets&#8221; are (&#8230;) if I&#8217;m not mistaken.<br />
+&#8211; There is another, older and thus potentially more compatible syntax to create lambdas: lambda {|arg| &#8230;} and lambda do |arg| &#8230; end</p>
+</p>
+							
+							                            <div class="clear"></div>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="lrp" id="respond-container-471" style="display: none;">
+                        <div class="clear"></div>
+                        <form action="https://www.rubyguides.com/wp-comments-post.php" method="post">
+							                                <div class="llw">
+                                    <label
+                                            for="author">Name*</label>
+                                    <input type="text" id="author"
+                                           placeholder="" name="author"/>
+                                </div>
+                                <div class="llw">
+                                    <label
+                                            for="email">Email*</label>
+
+                                    <input type="text" id="email"
+                                           placeholder="" name="email"/>
+                                </div>
+                                <label
+                                        for="website">Website</label>
+                                <input type="text" id="website"
+                                       placeholder="" name="website"/>
+							                            <label for="comment">Comment</label>
+                            <textarea id="comment" name="comment" class="textarea"></textarea>
+
+                            <div class="btn red small">
+                                <input type="submit" value="Post Comment">
+                            </div>
+
+                            <input id="comment_post_ID" type="hidden" value="2561"
+                                   name="comment_post_ID">
+                            <input id="comment_parent" type="hidden" value="471"
+                                   name="comment_parent">
+                        </form>
+                        <a href="#" class="rpl right cancel_reply" cid="471">
+							Cancel                        </a>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="lrp" style="display: none;" id="respond-container-471">
+                </div>
+							</li><!-- #comment-## -->
+					</div><!-- /comment_list -->
+
+		
+					<div class="no_comm">
+				<h4 class="ctr">
+					Comments are closed				</h4>
+			</div>
+				<div class="clear"></div>
+	</article>
+	<div id="comment-bottom"></div>
+
+			</section>
+
+
+		</div>
+		<div class="clear"></div>
+	
+
+
+<footer>
+			<div class="fmm">
+		<div class="wrp">
+			<div class="ft-m">
+							</div>
+		</div>
+		<div class="wrp">
+			<div class="ft-c">
+				<p>
+											<a href="https://www.rubyguides.com/better-developer-new-offer/" target="blank_" style="color:white; text-decoration: underline; float:left" rel="nofollow">Sign-up to my newsletter & improve your Ruby skills!</a>
+
+<div style="float:right;  font-size: 14.5px; margin-top: 1px">Copyright 2022 by <a href="https://www.rubyguides.com/about/" rel="nofollow" target="blank_" style="color:white; text-decoration: underline;">Jesus Castello</a>.</div>														</p>
+			</div>
+			<div class="ft-s">
+												<ul>
+																																		</ul>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	</footer>
+
+
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript'>/**
+ * Displays toast message from storage, it is used when the user is redirected after login
+ */
+if ( window.sessionStorage ) {
+	window.addEventListener( 'load', function () {
+		var message = sessionStorage.getItem( 'tcb_toast_message' );
+
+		if ( message ) {
+			tcbToast( sessionStorage.getItem( 'tcb_toast_message' ), false );
+			sessionStorage.removeItem( 'tcb_toast_message' );
+		}
+	} );
+}
+
+/**
+ * Displays toast message
+ */
+function tcbToast( message, error, callback ) {
+	/* Also allow "message" objects */
+	if ( typeof message !== 'string' ) {
+		message = message.message || message.error || message.success;
+	}
+	if ( ! error ) {
+		error = false;
+	}
+
+	let _icon = 'checkmark',
+		_extra_class = '';
+	if ( error ) {
+		_icon = 'cross';
+		_extra_class = ' tve-toast-error';
+	}
+
+	jQuery( 'body' ).slideDown( 'fast', function () {
+		jQuery( 'body' ).prepend( '<div class="tvd-toast tve-fe-message"><div class="tve-toast-message"><div class="tve-toast-icon-container' + _extra_class + '"><span class="tve_tick thrv-svg-icon"><svg xmlns="http://www.w3.org/2000/svg" class="tcb-checkmark" style="width: 100%; height: 1em; stroke-width: 0; fill: #ffffff; stroke: #ffffff;" viewBox="0 0 32 32"><path d="M27 4l-15 15-7-7-5 5 12 12 20-20z"></path></svg></span></div><div class="tve-toast-message-container">' + message + '</div></div></div>' );
+	} );
+
+	setTimeout( function () {
+		jQuery( '.tvd-toast' ).hide();
+
+		if ( typeof callback === 'function' ) {
+			callback();
+		}
+
+	}, 3000 );
+}
+</script><span style="display:none" class="tl-placeholder-f-type-lightbox"></span><span style="display:none" class="tl-placeholder-f-type-slide_in"></span><script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://c0.wp.com/p/jetpack/6.9.2/_inc/build/photon/photon.min.js' id='jetpack-photon-js'></script>
+<script type='text/javascript' id='pt-cv-content-views-script-js-extra'>
+/* <![CDATA[ */
+var PT_CV_PUBLIC = {"_prefix":"pt-cv-","page_to_show":"5","_nonce":"27d231cb36","is_admin":"","is_mobile":"","ajaxurl":"https:\/\/www.rubyguides.com\/wp-admin\/admin-ajax.php","lang":"","loading_image_src":"data:image\/gif;base64,R0lGODlhDwAPALMPAMrKygwMDJOTkz09PZWVla+vr3p6euTk5M7OzuXl5TMzMwAAAJmZmWZmZszMzP\/\/\/yH\/C05FVFNDQVBFMi4wAwEAAAAh+QQFCgAPACwAAAAADwAPAAAEQvDJaZaZOIcV8iQK8VRX4iTYoAwZ4iCYoAjZ4RxejhVNoT+mRGP4cyF4Pp0N98sBGIBMEMOotl6YZ3S61Bmbkm4mAgAh+QQFCgAPACwAAAAADQANAAAENPDJSRSZeA418itN8QiK8BiLITVsFiyBBIoYqnoewAD4xPw9iY4XLGYSjkQR4UAUD45DLwIAIfkEBQoADwAsAAAAAA8ACQAABC\/wyVlamTi3nSdgwFNdhEJgTJoNyoB9ISYoQmdjiZPcj7EYCAeCF1gEDo4Dz2eIAAAh+QQFCgAPACwCAAAADQANAAAEM\/DJBxiYeLKdX3IJZT1FU0iIg2RNKx3OkZVnZ98ToRD4MyiDnkAh6BkNC0MvsAj0kMpHBAAh+QQFCgAPACwGAAAACQAPAAAEMDC59KpFDll73HkAA2wVY5KgiK5b0RRoI6MuzG6EQqCDMlSGheEhUAgqgUUAFRySIgAh+QQFCgAPACwCAAIADQANAAAEM\/DJKZNLND\/kkKaHc3xk+QAMYDKsiaqmZCxGVjSFFCxB1vwy2oOgIDxuucxAMTAJFAJNBAAh+QQFCgAPACwAAAYADwAJAAAEMNAs86q1yaWwwv2Ig0jUZx3OYa4XoRAfwADXoAwfo1+CIjyFRuEho60aSNYlOPxEAAAh+QQFCgAPACwAAAIADQANAAAENPA9s4y8+IUVcqaWJ4qEQozSoAzoIyhCK2NFU2SJk0hNnyEOhKR2AzAAj4Pj4GE4W0bkJQIAOw=="};
+var PT_CV_PAGINATION = {"first":"\u00ab","prev":"\u2039","next":"\u203a","last":"\u00bb","goto_first":"Go to first page","goto_prev":"Go to previous page","goto_next":"Go to next page","goto_last":"Go to last page","current_page":"Current page is","goto_page":"Go to page"};
+var PT_CV_PUBLIC = {"_prefix":"pt-cv-","page_to_show":"5","_nonce":"27d231cb36","is_admin":"","is_mobile":"","ajaxurl":"https:\/\/www.rubyguides.com\/wp-admin\/admin-ajax.php","lang":"","loading_image_src":"data:image\/gif;base64,R0lGODlhDwAPALMPAMrKygwMDJOTkz09PZWVla+vr3p6euTk5M7OzuXl5TMzMwAAAJmZmWZmZszMzP\/\/\/yH\/C05FVFNDQVBFMi4wAwEAAAAh+QQFCgAPACwAAAAADwAPAAAEQvDJaZaZOIcV8iQK8VRX4iTYoAwZ4iCYoAjZ4RxejhVNoT+mRGP4cyF4Pp0N98sBGIBMEMOotl6YZ3S61Bmbkm4mAgAh+QQFCgAPACwAAAAADQANAAAENPDJSRSZeA418itN8QiK8BiLITVsFiyBBIoYqnoewAD4xPw9iY4XLGYSjkQR4UAUD45DLwIAIfkEBQoADwAsAAAAAA8ACQAABC\/wyVlamTi3nSdgwFNdhEJgTJoNyoB9ISYoQmdjiZPcj7EYCAeCF1gEDo4Dz2eIAAAh+QQFCgAPACwCAAAADQANAAAEM\/DJBxiYeLKdX3IJZT1FU0iIg2RNKx3OkZVnZ98ToRD4MyiDnkAh6BkNC0MvsAj0kMpHBAAh+QQFCgAPACwGAAAACQAPAAAEMDC59KpFDll73HkAA2wVY5KgiK5b0RRoI6MuzG6EQqCDMlSGheEhUAgqgUUAFRySIgAh+QQFCgAPACwCAAIADQANAAAEM\/DJKZNLND\/kkKaHc3xk+QAMYDKsiaqmZCxGVjSFFCxB1vwy2oOgIDxuucxAMTAJFAJNBAAh+QQFCgAPACwAAAYADwAJAAAEMNAs86q1yaWwwv2Ig0jUZx3OYa4XoRAfwADXoAwfo1+CIjyFRuEho60aSNYlOPxEAAAh+QQFCgAPACwAAAIADQANAAAENPA9s4y8+IUVcqaWJ4qEQozSoAzoIyhCK2NFU2SJk0hNnyEOhKR2AzAAj4Pj4GE4W0bkJQIAOw=="};
+var PT_CV_PAGINATION = {"first":"\u00ab","prev":"\u2039","next":"\u203a","last":"\u00bb","goto_first":"Go to first page","goto_prev":"Go to previous page","goto_next":"Go to next page","goto_last":"Go to last page","current_page":"Current page is","goto_page":"Go to page"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.rubyguides.com/wp-content/plugins/content-views-query-and-display-post-page/public/assets/js/cv.js?ver=2.4.0.5' id='pt-cv-content-views-script-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=202231' id='devicepx-js'></script>
+<script type='text/javascript' id='mashsb-js-extra'>
+/* <![CDATA[ */
+var mashsb = {"shares":"1","round_shares":"1","animate_shares":"0","dynamic_buttons":"0","share_url":"https:\/\/www.rubyguides.com\/2016\/02\/ruby-procs-and-lambdas\/","title":"The+Ultimate+Guide+to+Blocks%2C+Procs+%26+Lambdas","image":"https:\/\/www.rubyguides.com\/wp-content\/uploads\/2016\/02\/ultimate-guide-header-1.png","desc":"Ruby blocks, procs & lambdas.\n\nWhat are they?\n\nHow do they work?\n\nHow are they different from each other?\n\nYou will learn that & a lot more by reading this post!\n\n\n\nUnderstanding Ruby Blocks\n\nRuby blocks are little anonymous functions that \u2026","hashtag":"matugm","subscribe":"link","subscribe_url":"https:\/\/www.rubyguides.com\/better-developer-new-offer\/","activestatus":"1","singular":"1","twitter_popup":"1","refresh":"0","nonce":"1ee1097d63","postid":"2561","servertime":"1659512238","ajaxurl":"https:\/\/www.rubyguides.com\/wp-admin\/admin-ajax.php"};
+var mashsb = {"shares":"1","round_shares":"1","animate_shares":"0","dynamic_buttons":"0","share_url":"https:\/\/www.rubyguides.com\/2016\/02\/ruby-procs-and-lambdas\/","title":"The+Ultimate+Guide+to+Blocks%2C+Procs+%26+Lambdas","image":"https:\/\/www.rubyguides.com\/wp-content\/uploads\/2016\/02\/ultimate-guide-header-1.png","desc":"Ruby blocks, procs & lambdas.\n\nWhat are they?\n\nHow do they work?\n\nHow are they different from each other?\n\nYou will learn that & a lot more by reading this post!\n\n\n\nUnderstanding Ruby Blocks\n\nRuby blocks are little anonymous functions that \u2026","hashtag":"matugm","subscribe":"link","subscribe_url":"https:\/\/www.rubyguides.com\/better-developer-new-offer\/","activestatus":"1","singular":"1","twitter_popup":"1","refresh":"0","nonce":"1ee1097d63","postid":"2561","servertime":"1659512238","ajaxurl":"https:\/\/www.rubyguides.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.rubyguides.com/wp-content/plugins/mashsharer/assets/js/mashsb.min.js?ver=3.8.1' id='mashsb-js'></script>
+<script type='text/javascript' id='toc-front-js-extra'>
+/* <![CDATA[ */
+var tocplus = {"visibility_show":"show","visibility_hide":"hide","width":"Auto"};
+var tocplus = {"visibility_show":"show","visibility_hide":"hide","width":"Auto"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.rubyguides.com/wp-content/plugins/table-of-contents-plus/front.min.js?ver=2106' id='toc-front-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://c0.wp.com/c/5.6.8/wp-includes/js/imagesloaded.min.js' id='imagesloaded-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://c0.wp.com/c/5.6.8/wp-includes/js/masonry.min.js' id='masonry-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://c0.wp.com/c/5.6.8/wp-includes/js/jquery/jquery.masonry.min.js?v=1.300.06' id='jquery-masonry-js'></script>
+<script type='text/javascript' id='tve_frontend-js-extra'>
+/* <![CDATA[ */
+var tve_frontend_options = {"is_editor_page":"","page_events":[],"is_single":"1","ajaxurl":"https:\/\/www.rubyguides.com\/wp-admin\/admin-ajax.php","social_fb_app_id":"","dash_url":"https:\/\/www.rubyguides.com\/wp-content\/plugins\/thrive-visual-editor\/thrive-dashboard","translations":{"Copy":"Copy"},"post_id":"2561","ip":"185.14.187.159","current_user":[],"post_title":"The Ultimate Guide to Blocks, Procs & Lambdas","post_type":"post","post_url":"https:\/\/www.rubyguides.com\/2016\/02\/ruby-procs-and-lambdas\/","is_lp":"","post_request_data":[]};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.rubyguides.com/wp-content/plugins/thrive-visual-editor/editor/js/dist/frontend.min.js?ver=2.6.9.1' id='tve_frontend-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='//www.rubyguides.com/wp-content/plugins/thrive-leads/js/frontend.min.js?ver=2.4.1.1' id='tve_leads_frontend-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-browser-checker-js-after'>
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type='text/javascript' id='rocket-preload-links-js-extra'>
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/wp-admin\/|\/logout\/|\/wp-login.php","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/www.rubyguides.com","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-preload-links-js-after'>
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type='text/javascript' id='thrive-main-script-js-extra'>
+/* <![CDATA[ */
+var ThriveApp = {"ajax_url":"https:\/\/www.rubyguides.com\/wp-admin\/admin-ajax.php","is_singular":"1","post_type":"post","lazy_load_comments":"0","comments_loaded":"0","theme_uri":"https:\/\/www.rubyguides.com\/wp-content\/themes\/rise","translations":{"ProductDetails":"Product Details"}};
+var ThriveApp = {"ajax_url":"https:\/\/www.rubyguides.com\/wp-admin\/admin-ajax.php","is_singular":"1","post_type":"post","lazy_load_comments":"0","comments_loaded":"0","theme_uri":"https:\/\/www.rubyguides.com\/wp-content\/themes\/rise","translations":{"ProductDetails":"Product Details"}};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.rubyguides.com/wp-content/themes/rise/js/script.js?v=1.300.06' id='thrive-main-script-js'></script>
+<script type='text/javascript' id='tve-dash-frontend-js-extra'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"https:\/\/www.rubyguides.com\/wp-admin\/admin-ajax.php","force_ajax_send":"1","is_crawler":"","recaptcha":[]};
+var tve_dash_front = {"ajaxurl":"https:\/\/www.rubyguides.com\/wp-admin\/admin-ajax.php","force_ajax_send":"1","is_crawler":"","recaptcha":[]};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.rubyguides.com/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.4.2' id='tve-dash-frontend-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.rubyguides.com/wp-content/plugins/enlighter/cache/enlighterjs.min.js?ver=pOCPCFiNhO67QP1' id='enlighterjs-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":2,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"wpcustom","language":"ruby","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":2,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"wpcustom","language":"ruby","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script type='text/javascript' src='https://c0.wp.com/c/5.6.8/wp-includes/js/wp-embed.min.js' id='wp-embed-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">var tcb_post_lists=JSON.parse('[]');</script><script type="rocketlazyloadscript" data-rocket-type="text/javascript">/*<![CDATA[*/if ( !window.TL_Const ) {var TL_Const={"security":"81368234bd","ajax_url":"https:\/\/www.rubyguides.com\/wp-admin\/admin-ajax.php","forms":[],"action_conversion":"tve_leads_ajax_conversion","action_impression":"tve_leads_ajax_impression","ajax_load":1,"main_group_id":2957,"display_options":{"allowed_post_types":[],"flag_url_match":false},"custom_post_data":{"http_referrer":"https:\/\/www.rubyguides.com\/2016\/02\/ruby-procs-and-lambdas\/"},"current_screen":{"screen_type":4,"screen_id":2561},"ignored_fields":["email","_captcha_size","_captcha_theme","_captcha_type","_submit_option","_use_captcha","g-recaptcha-response","__tcb_lg_fc","__tcb_lg_msg","_state","_form_type","_error_message_option","_back_url","_submit_option","url","_asset_group","_asset_option","mailchimp_optin","tcb_token","tve_labels","tve_mapping","_api_custom_fields","_sendParams","_autofill"]};} else {ThriveGlobal.$j.extend(true, TL_Const, {"security":"81368234bd","ajax_url":"https:\/\/www.rubyguides.com\/wp-admin\/admin-ajax.php","forms":[],"action_conversion":"tve_leads_ajax_conversion","action_impression":"tve_leads_ajax_impression","ajax_load":1,"main_group_id":2957,"display_options":{"allowed_post_types":[],"flag_url_match":false},"custom_post_data":{"http_referrer":"https:\/\/www.rubyguides.com\/2016\/02\/ruby-procs-and-lambdas\/"},"current_screen":{"screen_type":4,"screen_id":2561},"ignored_fields":["email","_captcha_size","_captcha_theme","_captcha_type","_submit_option","_use_captcha","g-recaptcha-response","__tcb_lg_fc","__tcb_lg_msg","_state","_form_type","_error_message_option","_back_url","_submit_option","url","_asset_group","_asset_option","mailchimp_optin","tcb_token","tve_labels","tve_mapping","_api_custom_fields","_sendParams","_autofill"]})} /*]]> */</script><script type='text/javascript' src='https://stats.wp.com/e-202231.js' async='async' defer='defer'></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:6.9.2',blog:'136159382',post:'2561',tz:'1',srv:'www.rubyguides.com'} ]);
+	_stq.push([ 'clickTrackerInit', '136159382', '2561' ]);
+</script>
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(var i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://www.rubyguides.com/wp-content/plugins/wp-rocket/assets/js/lazyload/17.5/lazyload.min.js"></script></div>
+</body>
+</html>
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1659512238 -->

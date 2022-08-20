@@ -2,7 +2,7 @@
 
 # A Ruby block is just a bit of code that can be executed. Block syntax uses either do..end or curly braces ({}), like so:
 
-[1, 2, 3].each do |num|
+[1, 2, 3].each do |num|   # num - в вертикальных скобках это переменная блока
   puts num
 end
 # ==> Prints 1, 2, 3 on separate lines
