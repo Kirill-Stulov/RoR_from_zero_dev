@@ -24,3 +24,24 @@ p a ? b : c  #если a true то верни b иначе верни с
 
 # Еще это называется тернарным оператором
 # простой и доходчивый пример  https://youtu.be/xyDoP5a_dvo?t=1037
+
+# Вот еще отличный разбор на примере вместе с each
+  # https://riptutorial.com/ruby/example/3742/each#undefined
+  (1..10).each { |i| puts i.even? ? 'even' : 'odd' }
+
+  # This is a very compressed and ruby way to solve this. Let's break this down piece by piece.
+
+  #     (1..10) is a range from 1 to 10 inclusive. If we wanted it to be 1 to 10 exclusive, we would write (1...10).
+  #     .each is an enumerator that enumerates over each element in the object it is acting on. In this case, it acts on each number in the range.
+  #     { |i| puts i.even? ? 'even' : 'odd' } is the block for the each statement, which itself can be broken down further.
+  #         |i| this means that each element in the range is represented within the block by the identifier i.
+  #         puts is an output method in Ruby that has an automatic line break after each time it prints. (We can use print if we don't want the automatic line break)
+  #         i.even? checks if i is even. We could have also used i % 2 == 0; however, it is preferable to use built in methods.
+  #         ? "even" : "odd" this is ruby's ternary operator. The way a ternary operator is constructed is expression ? a : b. This is short for
+
+  #     if expression
+  #       a
+  #     else
+  #       b
+  #     end
+
