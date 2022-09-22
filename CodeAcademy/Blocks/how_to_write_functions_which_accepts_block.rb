@@ -129,3 +129,61 @@
       # соответственно управление передается в блок, блок исполняется, завершается, испольнение опять передается в тот метод
       # в который мы передавали этот блок.
       # !!Нужно отработать на практике написание методов, которые принимают блок.
+
+      # *********************************************************************************************************
+      # ПРИМЕРЫ!
+      # Примеры использования блоков: PROGS\tmp\oop_basics\Task_7\depot\interface and station.rb and train.rb
+                # Закоментированный вариант метода all_stations_details принимает массив и блок, оставляю как пример.  
+          # # метод перебирает последовательно все станции и для каждой станции выводит список поездов в формате:
+          #   # - Номер поезда, тип, кол-во вагонов 
+          #   # Это как пункт 8 (метод show_stations_and_trains) - но вместо выбора станции - выдает сразу все существующие станции
+          #   def all_stations_details        
+          #     puts '######## All stations with trains in details: ########' 
+          #     # !!ниже - правильный вариант записи блока согласно стилю оформления кода   
+          #     trains_block = lambda do |stats|                                                                           # создаем переменную, которая содержит блок, например через lambda (метод короткой однострочной записи лямбды смотри в how_to_write_functions_which_accepts_block.rb и в примере ниже). В блоке передаем переменную stats, которая содержит массив станций, перебираем его и для каждой станции 
+          #       stats.each do |stat|                                                                                         # перебираем его (stats) и для каждой станции
+          #         puts "Station:#{stat.name}"                                                                                                            # выводим имя станции в первой строке
+          #         stat.trains.map { |train| puts "-> Train ##{train.number}; Type:#{train.type}; Vagons:#{train.wagons.length}" }                          # и во второй строке - список поездов в формате: Номер поезда, тип, кол-во вагонов
+          #       end
+          #     end
+          #     Station.stations_details(@stations, trains_block)                                                                       # вызываем метод класса station_details и передаем ему массив станций и блок для вывода данных о поездах на станции
+          #   end 
+
+          # def all_stations_details        
+          #   puts '######## All stations with trains in details: ########'    
+          #   !!ниже - неправильный вариант записи блока согласно стилю оформления кода, но более лаконичный, оставлю закоментированным
+          #   trains_block = ->(stats) {                                                                                                # создаем переменную, которая содержит блок, например через lambda (метод такой записи лямбды смотри в how_to_write_functions_which_accepts_block.rb На самом деле - это однострочный вариант, но можно использовать и для многострочности). В блоке передаем переменную stats, которая содержит массив станций, перебираем его и для каждой станции
+          #     stats.each do |stat|                                                                                       
+          #       puts "Station:#{stat.name}"                                                                                                            # выводим имя станции в первой строке
+          #       stat.trains.map { |train| puts "-> Train ##{train.number}; Type:#{train.type}; Vagons:#{train.wagons.length}" }                          # и во второй строке - список поездов в формате: Номер поезда, тип, кол-во вагонов
+          #     end
+          #    }
+          #   Station.stations_details(@stations, trains_block)                                                                       # вызываем метод класса station_details и передаем ему массив станций и блок для вывода данных о поездах на станции
+          # end
+
+
+                  # Закоментированный вариант метода all_trains_details принимает массив и блок, оставляю как пример.
+          # #  метод для каждого поезда на станции выводит список вагонов в формате:
+          #   # номер вагона, тип вагона, кол-во свободных и занятых мест (для пассажирского вагона) или кол-во свободного и занятого объема (для грузовых вагонов).
+          # def all_trains_details  
+          #   puts '######## Wagons of each train in details: ########'
+          #   vagons_block = lambda do |vags|                                         # создаем блок через lambda. тот-же вариант что и trains_block
+          #     vags.each do |vag|
+          #       case vag.type
+          #       when :passenger                          
+          #         puts "--> Wagon number:#{vag.number}; type:#{vag.type}; occupied_seats:#{vag.show_occupied_seats}; free_seats:#{vag.show_free_seats} "
+          #       when :cargo
+          #         puts "--> Wagon number:#{vag.number}; type:#{vag.type}; occupied_volume:#{vag.show_occupied_volume}; free_volume:#{vag.show_free_volume} "                      
+          #       end
+          #     end
+          #   end
+
+          #   Station.stations.each do |st|                                         # проходим по каждой станции
+          #     puts "Station:#{st.name}"
+          #     st.trains.each do |tr|                                                  # внутри каждой станции проходим по каждому поезду
+          #       puts "-> Train ##{tr.number}"
+          #       tr.train_details(@wagons, vagons_block)                                 # и на каждом поезде вызываем метод train_details, передаем ему вагоны и блок vagons_block
+          #     # st.trains.each { |tr| tr.train_details(@wagons, vagons_block) }         # однострочный вариант- внутри каждой станции проходим по каждому поезду и на каждом поезде вызываем метод train_details, передаем ему вагоны и блок vagons_block
+          #     end
+          #   end
+          # end
