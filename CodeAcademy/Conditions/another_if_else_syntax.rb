@@ -4,6 +4,11 @@
 puts 3<4 ? "3 is less than 4!" : "3 is not less than 4"  # если 3<4 true, то выводим 3 is less than 4, else выводим 3 is not less than 4
 puts 5>=6 ? "Honey is Boney!" : "Honey is Evil!!!"
 
+# best example
+  # bad
+  result = if some_condition then something else something_else end
+  # good
+  result = some_condition ? something : something_else
 
 # another example
 puts 1<2 ? "One is less than two!" : "One is not less than two."
@@ -45,3 +50,10 @@ p a ? b : c  #если a true то верни b иначе верни с
   #       b
   #     end
 
+  # \PROGS\tmp\oop_basics\Task_8\depot\depot\interface.rb
+  # nested ternary operator
+    # If input equals 1, call 'create_route_menu'
+    #  if not, check if equals 2, if so, call 'add_or_del_from_route'
+    #  if none of conditions met, assign 'Wrong input' to result.
+    result = input == 1 ? create_route_menu : (input == 2 ? add_or_del_from_route : 'Wrong input')
+    puts result

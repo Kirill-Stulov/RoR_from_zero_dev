@@ -21,3 +21,15 @@ block_test { puts ">>> We're in the block!" }
 # ==> Yielding to the block...
 # ==> >>> We're in the block!
 # ==> We're back in the method!
+
+###########
+Пример yield попроще:
+    
+  def three_times      # определяем метод под названием three_times
+    yield               # выполняет блок кода, который будет передан в метод three_times
+    yield                 # еще раз выполняет
+    yield                   # еще раз...
+  end
+
+   > three_times {puts ‘Hello’}    # вызываем метод three_times и передаем ему код puts ‘Hello’ в блоке { }.
+       Выводит: Hello 3 раза.
