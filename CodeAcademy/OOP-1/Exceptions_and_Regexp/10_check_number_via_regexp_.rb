@@ -32,3 +32,32 @@ p 'а333Мк' =~ regexp1
 regexp2 = /^[а-я]{1}\d{3}[а-я]{2}/i      # i после скобки делает выражение нечувствительным к регистру
 
 p 'с444См' =~ regexp2
+
+# ********************
+# Ranges bigger than 9
+#  If you want to match any number from 2 to 9 or the numbers 10 to 23 (inclusive),
+#  you can use the regular expression  `/^(?:[2-9]|1[0-9]|2[0-3])$/` . Here's how it works:
+ -  `^`  asserts the start of the string.
+-  `(?: ... )`  is a non-capturing group that allows us to group multiple options together.
+-  `[2-9]`  matches any digit from 2 to 9.
+-  `1[0-9]`  matches any number from 10 to 19.
+-  `2[0-3]`  matches any number from 20 to 23.
+-  `$`  asserts the end of the string.
+#  So, the revised regular expression  `/^(?:[2-9]|1[0-9]|2[0-3])$/`  will match any number from 2 to 9 or the numbers 10 to 23 (inclusive) at the beginning of a string.
+
+# ******************
+# Есть еще такой вариант, когда нужно проверить от 0 до 10
+  # шаблон регулярки, котор соответствует картам с цифрами от 2 до 10 включительно. 
+  # Проверяется, что первый символ карты - число в диапозоне от 0 до 9 или 10 
+  NUM_CARD = /^[2-9]|10/
+  # шаблон регулярки, котор соответствует всем тузам 
+  # Проверяется, что первый символ карты - A
+  A_CARD = /^A/
+  # шаблон регулярки, котор соответствует картам с картинками 
+  # Проверяется, что первый символ карты - J или Q или K 
+  PIC_CARD = /^J|Q|K/
+
+  cards = %w(A^ 2^ 3^ 4^ 5^ 6^ 7^ 8^ 9^ 10^ J^ Q^ K^
+            A<3 2<3 3<3 4<3 5<3 6<3 7<3 8<3 9<3 10<3 J<3 Q<3 K<3
+            A<> 2<> 3<> 4<> 5<> 6<> 7<> 8<> 9<> 10<> J<> Q<> K<>
+            A+ 2+ 3+ 4+ 5+ 6+ 7+ 8+ 9+ 10+ J+ Q+ K+)
