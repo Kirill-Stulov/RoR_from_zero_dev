@@ -126,4 +126,4 @@ puts 'Enter method'
 method = gets.chomp.to_sym
 # вызываем send у строки и передаем имя метода
 puts str.send(method)
-#  файл send_method.rb
+#  файл send.rb

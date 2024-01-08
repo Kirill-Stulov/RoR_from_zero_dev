@@ -29,25 +29,22 @@ class Glider
   end
 end
 
-class Nomad
-  def initialize(glider)
-    @glider = glider
-  end
+# было
+# class Nomad
+#   def initialize(glider)
+#     @glider = glider
+#   end
 
-  def do(action)
-    if action == 'lift'
-      @glider.lift
-    elsif action == 'bank'
-      @glider.bank
-    else
-      raise NoMethodError.new(action)
-    end
-  end
-end
-
-nomad = Nomad.new(Glider.new)
-nomad.do("lift")
-nomad.do("bank")
+#   def do(action)
+#     if action == 'lift'
+#       @glider.lift
+#     elsif action == 'bank'
+#       @glider.bank
+#     else
+#       raise NoMethodError.new(action)
+#     end
+#   end
+# end
 
 # перепишем класс Nomad так
 class Nomad
@@ -75,6 +72,11 @@ class Nomad
   end
 end
 
+nomad = Nomad.new(Glider.new)
+nomad.do("lift")
+nomad.do("bank")
+
+##################################################
 # еще пример
 # method converts array of data to exact data type
 def relay(array, data_type)
@@ -85,4 +87,4 @@ a = [1, 2, 3]
 dt = 's'
 
 result = relay(a, dt)
-print result
+print result # в итоге каждый элемент массива будет приведен к строке
